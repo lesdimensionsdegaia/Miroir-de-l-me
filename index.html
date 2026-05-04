@@ -62,7 +62,6 @@ ul.liste li::before{content:'✦ ';color:var(--or);font-size:.7rem;}
 <body>
 <canvas id="cv"></canvas>
 
-<!-- ACCUEIL -->
 <section class="pg on" id="p-accueil">
   <div class="orbe">✦</div>
   <h1 class="titre">Votre Miroir de l'Âme</h1>
@@ -82,12 +81,10 @@ ul.liste li::before{content:'✦ ';color:var(--or);font-size:.7rem;}
       <li>Une synthèse poétique unique, rien que pour vous</li>
     </ul>
   </div>
-  <p class="intro" style="font-size:.92rem;margin-top:6px;margin-bottom:0;">Un document personnel et unique, entièrement gratuit.</p>
   <button class="btn" onclick="go('p-don')">✦ Révéler mon Miroir de l'Âme ✦</button>
   <p class="signature">Eddy Boussetta · Les Dimensions de Gaïa</p>
 </section>
 
-<!-- DON -->
 <section class="pg" id="p-don">
   <h2 class="titre-page">Un geste du cœur</h2>
   <div class="sep"></div>
@@ -100,22 +97,16 @@ ul.liste li::before{content:'✦ ';color:var(--or);font-size:.7rem;}
       ✦ Il n'y a aucune obligation — votre présence ici est déjà un cadeau
     </p>
     <div style="margin-top:22px;">
-      <a href="https://www.paypal.me/globalenergie" target="_blank" class="btn-don">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.59 3.025-2.566 6.082-8.558 6.082H9.824l-1.226 7.76h3.397c.458 0 .847-.332.92-.784l.038-.193.733-4.64.047-.258a.932.932 0 0 1 .92-.784h.579c3.753 0 6.693-1.525 7.55-5.932.36-1.845.174-3.387-.56-4.464z"/></svg>
-        Faire un don libre via PayPal
-      </a>
+      <a href="https://www.paypal.me/globalenergie" target="_blank" class="btn-don">Faire un don libre via PayPal</a>
     </div>
-    <p style="color:var(--text-doux);font-size:.85rem;margin-top:10px;font-style:italic;">Vous pouvez choisir librement le montant qui vous convient.</p>
   </div>
-  <button class="btn" onclick="go('p-form')" style="margin-top:10px;">✦ Continuer vers mon portrait ✦</button>
+  <button class="btn" onclick="go('p-form')">✦ Continuer vers mon portrait ✦</button>
   <button class="btn-retour" onclick="go('p-accueil')">← Retour</button>
 </section>
 
-<!-- FORMULAIRE -->
-<section class="pg" id="p-form" style="justify-content:flex-start;padding-top:50px;">
+<section class="pg" id="p-form">
   <div class="form-wrap">
-    <h2 class="titre-page" style="text-align:center;margin-bottom:6px;">Votre Portrait Sacré</h2>
-    <p style="text-align:center;font-style:italic;color:var(--text-doux);margin-bottom:28px;">Remplissez ces informations avec soin. Elles forment la trame de votre Miroir de l'Âme.</p>
+    <h2 class="titre-page" style="text-align:center;">Votre Portrait Sacré</h2>
     <div class="grp"><label class="label">Prénom</label><input type="text" class="inp" id="f-prenom" placeholder="Votre prénom..."></div>
     <div class="grp"><label class="label">Nom de famille</label><input type="text" class="inp" id="f-nom" placeholder="Votre nom..."></div>
     <div class="row2">
@@ -123,540 +114,211 @@ ul.liste li::before{content:'✦ ';color:var(--or);font-size:.7rem;}
       <div class="grp"><label class="label">Heure de naissance</label><input type="time" class="inp" id="f-heure"></div>
     </div>
     <div class="grp"><label class="label">Lieu de naissance</label><input type="text" class="inp" id="f-lieu" placeholder="Ville, pays..."></div>
-    <div class="sep-form"></div>
     <div class="grp">
-      <label class="label">Genre (pour accorder le texte)</label>
-      <select class="inp" id="f-genre" style="cursor:pointer;background:rgba(20,10,3,.8);">
-        <option value="neutre">Choisissez...</option>
-        <option value="feminin">Féminin</option>
-        <option value="masculin">Masculin</option>
-      </select>
+        <label class="label">Genre</label>
+        <select class="inp" id="f-genre">
+          <option value="neutre">Choisissez...</option>
+          <option value="feminin">Féminin</option>
+          <option value="masculin">Masculin</option>
+        </select>
     </div>
     <div class="grp">
-      <label class="label">Une intention ou une question pour ce moment</label>
-      <textarea class="inp" id="f-intention" rows="3" style="resize:vertical;" placeholder="Que cherchez-vous à comprendre, à traverser, ou à célébrer en ce moment de votre vie ?..."></textarea>
+      <label class="label">Intention</label>
+      <textarea class="inp" id="f-intention" rows="2" placeholder="Une question ?"></textarea>
     </div>
-    <p class="err" id="form-err" style="text-align:center;margin-bottom:12px;">Veuillez remplir au minimum prénom, nom, date et lieu de naissance.</p>
-    <div style="text-align:center;"><button class="btn" onclick="generer()">✦ Révéler mon Miroir de l'Âme ✦</button></div>
+    <p class="err" id="form-err">Veuillez remplir les champs obligatoires.</p>
+    <div style="text-align:center;"><button class="btn" onclick="generer()">✦ Révéler mon Portrait ✦</button></div>
   </div>
 </section>
 
-<!-- GENERATION -->
 <section class="pg" id="p-gen">
   <div class="orbe-gen">🌿</div>
-  <p style="font-size:1.1rem;color:var(--or-pale);font-style:italic;margin-bottom:10px;">Les esprits tissent votre portrait…</p>
-  <p id="etape-txt" style="font-size:.88rem;color:var(--text-doux);letter-spacing:.1em;min-height:1.5em;"></p>
+  <p id="etape-txt">Les esprits tissent votre portrait…</p>
   <div class="barre-wrap"><div class="barre" id="barre"></div></div>
 </section>
 
-<!-- RESULTAT -->
-<section class="pg" id="p-res" style="justify-content:flex-start;padding-top:50px;">
+<section class="pg" id="p-res">
   <div class="doc-wrap" id="doc-miroir">
     <div class="doc-entete">
-      <p style="font-size:.75rem;letter-spacing:.2em;color:var(--text-doux);margin-bottom:8px;">LES DIMENSIONS DE GAÏA</p>
       <h1 class="doc-titre">Le Miroir de l'Âme</h1>
-      <p id="doc-sous-titre" style="font-style:italic;color:var(--text-doux);font-size:1rem;"></p>
+      <p id="doc-sous-titre"></p>
     </div>
     <div class="doc-contenu" id="doc-contenu"></div>
     <div class="doc-pied">
-      <div class="sep" style="margin:0 auto 14px;"></div>
-      <p>✦ Créé avec amour par Eddy Boussetta · Les Dimensions de Gaïa ✦</p>
-      <p style="margin-top:4px;font-size:.78rem;opacity:.6;">www.lesdimensionsdegaia.com</p>
+      <p>✦ Les Dimensions de Gaïa ✦</p>
     </div>
   </div>
-  <div style="text-align:center;margin-top:30px;">
-    <button class="btn-dl" onclick="telecharger()">⬇ Télécharger mon Miroir de l'Âme (PDF)</button>
-    <br>
-    <a href="https://www.paypal.me/globalenergie" target="_blank" class="btn-don" style="margin-top:18px;display:inline-flex;">
-      ✦ Ce portrait m'a touché · Faire un don
-    </a>
-    <br>
-    <button class="btn-retour" onclick="go('p-accueil')" style="margin-top:12px;">← Créer un nouveau portrait</button>
-  </div>
+  <button class="btn-dl" onclick="telecharger()">⬇ Télécharger mon Miroir de l'Âme (PDF)</button>
 </section>
 
 <script>
-/* ETOILES */
-(function(){
-  var c=document.getElementById('cv'),ctx=c.getContext('2d'),stars=[],raf;
-  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}
-  function init(){stars=[];for(var i=0;i<180;i++)stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.1+.2,sp:Math.random()*.004+.001,ph:Math.random()*Math.PI*2});}
-  function draw(t){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){var a=.25+.75*(.5+.5*Math.sin(t*s.sp*1000+s.ph));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='rgba(201,168,76,'+(a*.55)+')';ctx.fill();});raf=requestAnimationFrame(draw);}
-  resize();init();window.addEventListener('resize',function(){resize();init();});raf=requestAnimationFrame(draw);
-})();
-
 /* NAVIGATION */
 function go(id){
-  document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
   document.getElementById(id).classList.add('on');
   window.scrollTo(0,0);
 }
 
-/* AVANCEMENT BARRE */
-function avancer(pct,texte){
-  document.getElementById('barre').style.width=pct+'%';
-  if(texte)document.getElementById('etape-txt').textContent=texte;
+function avancer(pct, texte){
+  const b = document.getElementById('barre');
+  if(b) b.style.width = pct + '%';
+  const t = document.getElementById('etape-txt');
+  if(t && texte) t.textContent = texte;
 }
 
-/* NUMÉROLOGIE */
+/* NUMÉROLOGIE CORRIGÉE */
 var VAL={'A':1,'B':2,'C':3,'D':4,'E':5,'F':6,'G':7,'H':8,'I':9,'J':1,'K':2,'L':3,'M':4,'N':5,'O':6,'P':7,'Q':8,'R':9,'S':1,'T':2,'U':3,'V':4,'W':5,'X':6,'Y':7,'Z':8};
-function reduire(n){while(n>9&&n!==11&&n!==22&&n!==33){var s=0;String(n).split('').forEach(function(c){s+=parseInt(c);});n=s;}return n;}
-function valLettre(ch){return VAL[ch.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')]||0;}
+
+function reduire(n){
+    while(n > 9 && n !== 11 && n !== 22 && n !== 33){
+        n = String(n).split('').reduce((a, b) => a + parseInt(b), 0);
+    }
+    return n;
+}
+
 function numCheminVie(dateStr){
-  var p=dateStr.split('-');var s=0;
-  p[0].split('').forEach(function(c){s+=parseInt(c);});
-  p[1].split('').forEach(function(c){s+=parseInt(c);});
-  p[2].split('').forEach(function(c){s+=parseInt(c);});
-  return reduire(s);
-}
-function numExpression(prenom,nom){
-  var s=0,t=(prenom+nom).replace(/\s/g,'');
-  for(var i=0;i<t.length;i++)s+=valLettre(t[i]);
-  return reduire(s);
-}
-function numAme(prenom,nom){
-  var s=0,t=(prenom+nom).replace(/\s/g,''),voyelles='AEIOUY';
-  for(var i=0;i<t.length;i++){var c=t[i].toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');if(voyelles.indexOf(c)>=0)s+=valLettre(t[i]);}
-  return reduire(s);
+    // Supprime les tirets et additionne chaque chiffre
+    let s = dateStr.replace(/-/g, '').split('').reduce((a, b) => a + parseInt(b), 0);
+    return reduire(s);
 }
 
-/* SIGNIFICATIONS NUMÉROLOGIE */
-var SIG_CHEMIN={
-  1:"Vous êtes né sous le signe du pionnier, de l'individualité créatrice. Votre chemin est celui du chef de file, de celui qui trace sa propre route avec courage et originalité. Vous êtes venu ici pour oser, pour innover, pour être pleinement vous-même sans attendre la permission de personne.",
-  2:"Votre chemin est celui de l'harmonie, de la diplomatie et de la coopération. Vous êtes une âme de médiation, naturellement sensible aux équilibres subtils entre les êtres. Votre force est dans l'écoute profonde, la patience et la capacité à tisser des liens là où d'autres ne voient que divisions.",
-  3:"Vous portez le sceau de la créativité et de l'expression joyeuse. Votre chemin de vie vous invite à donner forme à votre monde intérieur, à communiquer, à inspirer. La parole, l'art, le jeu des idées sont vos temples naturels. Vous êtes venu illuminer les âmes autour de vous.",
-  4:"Votre chemin est celui du bâtisseur, de la stabilité et de la persévérance. Vous êtes venu construire quelque chose de solide et de durable. La discipline n'est pas un carcan pour vous — elle est votre fondation, le sol fertile sur lequel votre vie prend racine et s'épanouit.",
-  5:"Le chemin de la liberté, du mouvement et de l'expérience. Vous êtes venu goûter la vie dans toutes ses facettes, vous adapter, évoluer, traverser les frontières. Votre âme refuse les cages et trouve sa nourriture dans la diversité, le voyage intérieur et extérieur, l'imprévu révélateur.",
-  6:"Votre chemin est celui de l'amour, du service et de la responsabilité. Vous êtes naturellement tourné vers les autres, gardien des foyers et des cœurs. Votre vocation profonde est de prendre soin, de créer beauté et harmonie autour de vous, d'être un havre pour ceux qui vous entourent.",
-  7:"Le chemin du chercheur, du mystique et de la sagesse intérieure. Vous êtes venu plonger dans les profondeurs de l'existence, questionner, méditer, comprendre ce qui se cache derrière le voile des apparences. La solitude ne vous effraie pas — elle est votre espace de révélation.",
-  8:"Votre chemin est celui de la puissance, de l'abondance et de la maîtrise matérielle au service du bien. Vous êtes venu apprendre à gérer les ressources, à exercer une autorité juste, à manifester dans le monde concret vos ambitions les plus élevées. Votre pouvoir est réel — apprenez à le porter avec grâce.",
-  9:"Le chemin du sage universel, de la compassion et de l'achèvement. Vous portez en vous la mémoire de nombreuses vies et leçons. Votre âme aspire à transcender l'individuel pour se fondre dans un amour plus vaste, au service de l'humanité. Vous êtes venu pour donner, guérir, et laisser un héritage lumineux.",
-  11:"Vous portez le nombre maître 11, celui de l'Illuminé. Votre sensibilité est décuplée, votre intuition touche parfois au prophétique. Vous êtes un pont entre les mondes, un canal spirituel dont la mission est d'apporter de la lumière dans les zones d'ombre. Votre chemin exige de vous que vous fassiez confiance à ce que vous ressentez au plus profond.",
-  22:"Le nombre maître 22 est celui du Grand Bâtisseur. Vous êtes venu réaliser des choses extraordinaires, des projets qui dépassent l'individuel et servent l'humanité entière. Votre vision est large, vos capacités sont immenses, et votre responsabilité est à la hauteur de vos dons.",
-  33:"Le 33 est le nombre maître du Maître Enseignant, du guérisseur universel. Votre vie est placée sous le signe du sacrifice consenti, de l'amour inconditionnel et de l'éveil des consciences. Vous portez une lumière rare — prenez soin de vous pour pouvoir prendre soin du monde."
-};
-var SIG_EXPR={1:"exprime votre leadership naturel et votre force créatrice",2:"révèle votre nature harmonieuse et coopérative",3:"traduit votre génie communicant et créatif",4:"reflète votre capacité à construire et à structurer",5:"incarne votre soif de liberté et d'expériences multiples",6:"exprime votre vocation nourricière et votre sens du beau",7:"révèle votre profondeur mystique et votre quête de vérité",8:"traduit votre puissance de manifestation et votre sens de l'organisation",9:"incarne votre sagesse universelle et votre compassion",11:"révèle vos dons médiumniques et votre nature d'éveilleur",22:"exprime votre capacité à réaliser de grandes choses au service du collectif",33:"incarne votre mission de guérisseur et d'enseignant de l'âme"};
-var SIG_AME={1:"aspire à l'indépendance et à l'originalité",2:"aspire à la paix, à l'union et à la beauté des liens",3:"aspire à la joie, à la création et à l'expression libre",4:"aspire à la sécurité, à l'ordre et à la construction durable",5:"aspire à la liberté absolue et aux horizons infinis",6:"aspire à l'amour, à la famille et à l'harmonie du foyer",7:"aspire à la connaissance profonde et à la solitude féconde",8:"aspire au pouvoir juste et à l'abondance partagée",9:"aspire à l'amour universel et à la dissolution de l'ego",11:"aspire à l'éveil spirituel et à la transmission de la lumière",22:"aspire à laisser une empreinte durable sur le monde",33:"aspire à guérir et à élever toutes les âmes qu'elle croise"};
-
-/* CALENDRIERS */
-var CELTIC=[
-  {n:"Birch",f:"Beithe",s:"Renouveau, commencement, purification. L'arbre de la renaissance vous accompagne.",debut:[12,24]},
-  {n:"Rowan",f:"Luis",s:"Protection, intuition, vision. Le Sorbier ouvre les portes de la perception subtile.",debut:[1,21]},
-  {n:"Ash",f:"Nion",s:"Connexion entre les mondes, profondeur. Le Frêne relie la terre et le ciel en vous.",debut:[2,18]},
-  {n:"Alder",f:"Fearn",s:"Courage, confiance, guidance intérieure. L'Aulne vous invite à avancer sans crainte.",debut:[3,18]},
-  {n:"Willow",f:"Saille",s:"Intuition lunaire, cycles, fluidité. Le Saule vous enseigne l'art de plier sans rompre.",debut:[4,15]},
-  {n:"Hawthorn",f:"Huath",s:"Purification, espoir, contraste. L'Aubépine garde le seuil entre deux mondes.",debut:[5,13]},
-  {n:"Oak",f:"Duir",s:"Force, protection, sagesse ancestrale. Le Chêne est le Roi des arbres, votre gardien.",debut:[6,10]},
-  {n:"Holly",f:"Tinne",s:"Équilibre, passage, sacrifice consenti. Le Houx vous guide dans les transitions.",debut:[7,8]},
-  {n:"Hazel",f:"Coll",s:"Sagesse, inspiration poétique, divination. Le Noisetier vous relie à la connaissance des anciens.",debut:[8,5]},
-  {n:"Vine",f:"Muin",s:"Prophétie, vérité intérieure, récolte. La Vigne vous invite à recueillir les fruits de l'expérience.",debut:[9,2]},
-  {n:"Ivy",f:"Gort",s:"Spirale, cycles, persévérance. Le Lierre enseigne la ténacité et l'adaptation.",debut:[9,30]},
-  {n:"Reed",f:"Ngetal",s:"Santé, harmonie, musique de l'âme. Le Roseau vous connecte aux rythmes profonds.",debut:[10,28]},
-  {n:"Elder",f:"Ruis",s:"Mort et renaissance, transformation, magie ancienne. Le Sureau marque les grandes transitions.",debut:[11,25]}
-];
-function getCeltic(mois,jour){
-  for(var i=CELTIC.length-1;i>=0;i--){
-    var d=CELTIC[i].debut;
-    if(mois>d[0]||(mois===d[0]&&jour>=d[1]))return CELTIC[i];
-  }
-  return CELTIC[CELTIC.length-1];
+function valLettre(ch){
+    let l = ch.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    return VAL[l] || 0;
 }
 
-var CHINOIS=[
-  {annee:1924,animal:"Rat",elem:"Bois",q:"Charme naturel, intelligence vive, adaptabilité remarquable, sens des opportunités"},
-  {annee:1925,animal:"Buffle",elem:"Bois",q:"Fiabilité, patience, travail acharné, sens du devoir profond"},
-  {annee:1926,animal:"Tigre",elem:"Feu",q:"Courage, magnétisme, passion, leadership naturel et inné"},
-  {annee:1927,animal:"Lapin",elem:"Feu",q:"Sensibilité, diplomatie, grâce, sens artistique raffiné"},
-  {annee:1928,animal:"Dragon",elem:"Terre",q:"Vitalité exceptionnelle, charisme, ambition noble, nature visionnaire"},
-  {annee:1929,animal:"Serpent",elem:"Terre",q:"Sagesse profonde, intuition, élégance, capacité de transformation"},
-  {annee:1930,animal:"Cheval",elem:"Métal",q:"Liberté, énergie, enthousiasme, attrait pour les voyages et l'aventure"},
-  {annee:1931,animal:"Chèvre",elem:"Métal",q:"Créativité, douceur, sensibilité artistique, recherche de beauté"},
-  {annee:1932,animal:"Singe",elem:"Eau",q:"Intelligence, humour, curiosité insatiable, débrouillardise"},
-  {annee:1933,animal:"Coq",elem:"Eau",q:"Observation, perfectionnisme, franchise, sens de l'honneur"},
-  {annee:1934,animal:"Chien",elem:"Bois",q:"Loyauté, générosité, sens de la justice, fidélité indéfectible"},
-  {annee:1935,animal:"Cochon",elem:"Bois",q:"Générosité, honnêteté, indulgence, profondeur intérieure"},
-  {annee:1936,animal:"Rat",elem:"Feu",q:"Charme naturel, intelligence vive, adaptabilité remarquable"},
-  {annee:1937,animal:"Buffle",elem:"Feu",q:"Fiabilité, patience, travail acharné, sens du devoir"},
-  {annee:1938,animal:"Tigre",elem:"Terre",q:"Courage, magnétisme, passion, leadership naturel"},
-  {annee:1939,animal:"Lapin",elem:"Terre",q:"Sensibilité, diplomatie, grâce, sens artistique"},
-  {annee:1940,animal:"Dragon",elem:"Métal",q:"Vitalité exceptionnelle, charisme, ambition, vision"},
-  {annee:1941,animal:"Serpent",elem:"Métal",q:"Sagesse profonde, intuition, élégance, transformation"},
-  {annee:1942,animal:"Cheval",elem:"Eau",q:"Liberté, énergie, enthousiasme, goût de l'aventure"},
-  {annee:1943,animal:"Chèvre",elem:"Eau",q:"Créativité, douceur, sensibilité artistique, beauté"},
-  {annee:1944,animal:"Singe",elem:"Bois",q:"Intelligence, humour, curiosité, débrouillardise"},
-  {annee:1945,animal:"Coq",elem:"Bois",q:"Observation, perfectionnisme, franchise, honneur"},
-  {annee:1946,animal:"Chien",elem:"Feu",q:"Loyauté, générosité, justice, fidélité"},
-  {annee:1947,animal:"Cochon",elem:"Feu",q:"Générosité, honnêteté, indulgence, profondeur"},
-  {annee:1948,animal:"Rat",elem:"Terre",q:"Charme, intelligence, adaptabilité, sens des opportunités"},
-  {annee:1949,animal:"Buffle",elem:"Terre",q:"Fiabilité, patience, travail, devoir"},
-  {annee:1950,animal:"Tigre",elem:"Métal",q:"Courage, magnétisme, passion, leadership"},
-  {annee:1951,animal:"Lapin",elem:"Métal",q:"Sensibilité, diplomatie, grâce, art"},
-  {annee:1952,animal:"Dragon",elem:"Eau",q:"Vitalité, charisme, ambition, vision"},
-  {annee:1953,animal:"Serpent",elem:"Eau",q:"Sagesse, intuition, élégance, transformation"},
-  {annee:1954,animal:"Cheval",elem:"Bois",q:"Liberté, énergie, enthousiasme, aventure"},
-  {annee:1955,animal:"Chèvre",elem:"Bois",q:"Créativité, douceur, art, beauté"},
-  {annee:1956,animal:"Singe",elem:"Feu",q:"Intelligence, humour, curiosité, ingéniosité"},
-  {annee:1957,animal:"Coq",elem:"Feu",q:"Observation, perfectionnisme, franchise, honneur"},
-  {annee:1958,animal:"Chien",elem:"Terre",q:"Loyauté, générosité, justice, fidélité"},
-  {annee:1959,animal:"Cochon",elem:"Terre",q:"Générosité, honnêteté, indulgence, richesse intérieure"},
-  {annee:1960,animal:"Rat",elem:"Métal",q:"Charme, vivacité, sens des affaires, adaptabilité"},
-  {annee:1961,animal:"Buffle",elem:"Métal",q:"Rigueur, endurance, sens du devoir, patience"},
-  {annee:1962,animal:"Tigre",elem:"Eau",q:"Bravoure, magnétisme, spontanéité, générosité"},
-  {annee:1963,animal:"Lapin",elem:"Eau",q:"Douceur, intuition, tact, raffinement"},
-  {annee:1964,animal:"Dragon",elem:"Bois",q:"Enthousiasme, idéalisme, vitalité, créativité"},
-  {annee:1965,animal:"Serpent",elem:"Bois",q:"Perspicacité, charme discret, intelligence analytique"},
-  {annee:1966,animal:"Cheval",elem:"Feu",q:"Passion, indépendance, vigueur, éloquence"},
-  {annee:1967,animal:"Chèvre",elem:"Feu",q:"Imagination, émotivité, sens esthétique, empathie"},
-  {annee:1968,animal:"Singe",elem:"Terre",q:"Vivacité, polyvalence, inventivité, sens de l'humour"},
-  {annee:1969,animal:"Coq",elem:"Terre",q:"Organisation, éloquence, sens du détail, ambition"},
-  {annee:1970,animal:"Chien",elem:"Métal",q:"Droiture, altruisme, instinct protecteur, loyauté"},
-  {annee:1971,animal:"Cochon",elem:"Métal",q:"Sincérité, bonté, sens du partage, intégrité"},
-  {annee:1972,animal:"Rat",elem:"Eau",q:"Perspicacité, charisme, sens des opportunités, adaptabilité"},
-  {annee:1973,animal:"Buffle",elem:"Eau",q:"Ténacité, sérieux, fiabilité, profondeur"},
-  {annee:1974,animal:"Tigre",elem:"Bois",q:"Ardeur, indépendance, audace, générosité"},
-  {annee:1975,animal:"Lapin",elem:"Bois",q:"Pragmatisme, sérénité, sens du confort, subtilité"},
-  {annee:1976,animal:"Dragon",elem:"Feu",q:"Ambition, force, charisme, idéalisme enflammé"},
-  {annee:1977,animal:"Serpent",elem:"Feu",q:"Intensité, séduction, intuition profonde, sagesse"},
-  {annee:1978,animal:"Cheval",elem:"Terre",q:"Pragmatisme, loyauté, calme relatif, sociabilité"},
-  {annee:1979,animal:"Chèvre",elem:"Terre",q:"Fiabilité, sens pratique, nature attachante, fidélité"},
-  {annee:1980,animal:"Singe",elem:"Métal",q:"Détermination, discipline, intelligence tranchante, ambition"},
-  {annee:1981,animal:"Coq",elem:"Métal",q:"Confiance, esprit critique, loyauté, précision"},
-  {annee:1982,animal:"Chien",elem:"Eau",q:"Sensibilité, idéalisme, affection profonde, intuition"},
-  {annee:1983,animal:"Cochon",elem:"Eau",q:"Générosité, intuition, capacité d'amour profond"},
-  {annee:1984,animal:"Rat",elem:"Bois",q:"Créativité, charme, débrouillardise, vision à long terme"},
-  {annee:1985,animal:"Buffle",elem:"Bois",q:"Constance, esprit pratique, douceur sous la fermeté"},
-  {annee:1986,animal:"Tigre",elem:"Feu",q:"Témérité, charisme, idéalisme, force vitale"},
-  {annee:1987,animal:"Lapin",elem:"Feu",q:"Enthousiasme, chaleur, créativité, sens artistique"},
-  {annee:1988,animal:"Dragon",elem:"Terre",q:"Pragmatisme, volonté, stabilité, charisme ancré"},
-  {annee:1989,animal:"Serpent",elem:"Terre",q:"Prudence, sens pratique, perspicacité discrète"},
-  {annee:1990,animal:"Cheval",elem:"Métal",q:"Rigueur, détermination, fougue canalisée, ambition"},
-  {annee:1991,animal:"Chèvre",elem:"Métal",q:"Résolution, persévérance, originalité, sens esthétique"},
-  {annee:1992,animal:"Singe",elem:"Eau",q:"Adaptabilité, curiosité, sens de la communication, créativité"},
-  {annee:1993,animal:"Coq",elem:"Eau",q:"Persévérance, discernement, profondeur, sens du service"},
-  {annee:1994,animal:"Chien",elem:"Bois",q:"Loyauté, curiosité intellectuelle, bienveillance, idéalisme"},
-  {annee:1995,animal:"Cochon",elem:"Bois",q:"Expansion, générosité, curiosité, bienveillance naturelle"},
-  {annee:1996,animal:"Rat",elem:"Feu",q:"Passion, charisme, détermination, sens de l'initiative"},
-  {annee:1997,animal:"Buffle",elem:"Feu",q:"Endurance, courage discret, persévérance, chaleur humaine"},
-  {annee:1998,animal:"Tigre",elem:"Terre",q:"Équilibre, courage ancré, sens pratique, assertivité"},
-  {annee:1999,animal:"Lapin",elem:"Terre",q:"Calme, stabilité, sens du foyer, nature protectrice"},
-  {annee:2000,animal:"Dragon",elem:"Métal",q:"Intensité, ambition tranchante, volonté, magnétisme"},
-  {annee:2001,animal:"Serpent",elem:"Métal",q:"Discipline, intelligence fine, mysticisme, sens de l'esthétique"},
-  {annee:2002,animal:"Cheval",elem:"Eau",q:"Sensibilité, imagination, liberté intérieure, intuition"},
-  {annee:2003,animal:"Chèvre",elem:"Eau",q:"Sensibilité artistique, douceur, rêverie, empathie profonde"},
-  {annee:2004,animal:"Singe",elem:"Bois",q:"Générosité intellectuelle, créativité, humanisme, ouverture"},
-  {annee:2005,animal:"Coq",elem:"Bois",q:"Idéalisme, sens de la justice, expressivité, courage"},
-  {annee:2006,animal:"Chien",elem:"Feu",q:"Passion, dévouement, sens moral fort, enthousiasme"},
-  {annee:2007,animal:"Cochon",elem:"Feu",q:"Ardeur, générosité enthousiaste, bonne humeur, chaleur"},
-  {annee:2008,animal:"Rat",elem:"Terre",q:"Pragmatisme, sens des responsabilités, charme sérieux"},
-  {annee:2009,animal:"Buffle",elem:"Terre",q:"Sens du devoir, intégrité, stabilité, résolution"},
-  {annee:2010,animal:"Tigre",elem:"Métal",q:"Rigueur, détermination, courage structuré, ambition"},
-  {annee:2011,animal:"Lapin",elem:"Métal",q:"Élégance, sens du détail, raffinement, résilience"},
-  {annee:2012,animal:"Dragon",elem:"Eau",q:"Intuition, adaptabilité, charisme fluide, profondeur"},
-  {annee:2013,animal:"Serpent",elem:"Eau",q:"Mystère, profondeur, intuition aiguë, transformation intérieure"}
-];
+function numExpression(prenom, nom){
+    let s = 0, full = (prenom + nom).replace(/\s/g, '');
+    for(let char of full) s += valLettre(char);
+    return reduire(s);
+}
+
+function numAme(prenom, nom){
+    let s = 0, full = (prenom + nom).replace(/\s/g, ''), voyelles = 'AEIOUY';
+    for(let char of full) {
+        let l = char.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+        if(voyelles.indexOf(l) >= 0) s += valLettre(char);
+    }
+    return reduire(s);
+}
+
+/* DONNÉES (Gardées de ton code original) */
+var SIG_CHEMIN={1:"Pionnier",2:"Harmonie",3:"Créativité",4:"Bâtisseur",5:"Liberté",6:"Amour",7:"Sagesse",8:"Puissance",9:"Sagesse Universelle",11:"Illuminé",22:"Bâtisseur",33:"Guide"};
+var SIG_EXPR={1:"leadership",2:"douceur",3:"joie",4:"rigueur",5:"aventure",6:"service",7:"recherche",8:"ambition",9:"don",11:"intuition",22:"concrétisation",33:"guérison"};
+var SIG_AME={1:"indépendance",2:"paix",3:"joie",4:"stabilité",5:"liberté",6:"harmonie",7:"vérité",8:"pouvoir",9:"amour",11:"éveil",22:"trace",33:"compassion"};
+
+var CELTIC=[{n:"Bouleau",f:"Beithe",s:"Renouveau",debut:[12,24]},{n:"Sorbier",f:"Luis",s:"Protection",debut:[1,21]},{n:"Frêne",f:"Nion",s:"Connexion",debut:[2,18]},{n:"Aulne",f:"Fearn",s:"Courage",debut:[3,18]},{n:"Saule",f:"Saille",s:"Intuition",debut:[4,15]},{n:"Aubépine",f:"Huath",s:"Espoir",debut:[5,13]},{n:"Chêne",f:"Duir",s:"Force",debut:[6,10]},{n:"Houx",f:"Tinne",s:"Équilibre",debut:[7,8]},{n:"Noisetier",f:"Coll",s:"Sagesse",debut:[8,5]},{n:"Vigne",f:"Muin",s:"Vérité",debut:[9,2]},{n:"Lierre",f:"Gort",s:"Cycles",debut:[9,30]},{n:"Roseau",f:"Ngetal",s:"Santé",debut:[10,28]},{n:"Sureau",f:"Ruis",s:"Transformation",debut:[11,25]}];
+function getCeltic(m,j){
+    for(let i=CELTIC.length-1; i>=0; i--){
+        if(m > CELTIC[i].debut[0] || (m === CELTIC[i].debut[0] && j >= CELTIC[i].debut[1])) return CELTIC[i];
+    }
+    return CELTIC[CELTIC.length-1];
+}
+
+var CHINOIS_ANIMAUX = ["Rat","Buffle","Tigre","Lapin","Dragon","Serpent","Cheval","Chèvre","Singe","Coq","Chien","Cochon"];
+var CHINOIS_ELEMS = ["Métal","Eau","Bois","Feu","Terre"];
 function getChinois(annee){
-  var base=1924,cycle=CHINOIS.length/12,idx=(annee-base)%12;
-  if(idx<0)idx+=12;
-  var entree=CHINOIS.filter(function(c){return c.annee===annee||c.annee===base+idx;});
-  if(entree.length)return entree[0];
-  return CHINOIS[((annee-1924)%12+12)%12];
+    let animal = CHINOIS_ANIMAUX[(annee - 4) % 12];
+    let elem = CHINOIS_ELEMS[Math.floor(((annee - 4) % 10) / 2)];
+    return {animal: animal, elem: elem, q: "Une essence unique de " + animal + " de " + elem};
 }
 
-var CHAKRAS=[
-  {nom:"Racine (Muladhara)",couleur:"rouge",mantra:"LAM",pierre:"Jaspe rouge",plante:"Vétiver",pratique:"Marchez pieds nus sur la terre chaque matin. Ancrez-vous dans votre corps avec des postures debout, sentez le sol porter votre poids en pleine conscience."},
-  {nom:"Sacré (Svadhisthana)",couleur:"orange",mantra:"VAM",pierre:"Cornaline",plante:"Ylang-ylang",pratique:"Dansez librement, laissez votre bassin se mouvoir sans contrôle. Baignez-vous dans l'eau naturelle ou créez quelque chose de beau avec vos mains."},
-  {nom:"Plexus Solaire (Manipura)",couleur:"jaune soleil",mantra:"RAM",pierre:"Citrine",plante:"Camomille",pratique:"Pratiquez la respiration du feu en yoga, ou tenez-vous face au soleil les yeux fermés, mains sur le ventre. Affirmez votre volonté dans un acte concret chaque jour."},
-  {nom:"Cœur (Anahata)",couleur:"vert émeraude",mantra:"YAM",pierre:"Quartz rose",plante:"Rose",pratique:"Méditez les mains sur la poitrine, respirez l'amour à chaque inspiration. Pratiquez un acte de bienveillance inconditionnelle envers vous-même chaque jour."},
-  {nom:"Gorge (Vishuddha)",couleur:"bleu ciel",mantra:"HAM",pierre:"Lapis-lazuli",plante:"Sauge",pratique:"Chantez, humez, parlez à voix haute ce que vous ressentez vraiment. Tenez un journal intime où vous exprimez sans censure toute la vérité de votre monde intérieur."},
-  {nom:"Troisième Œil (Ajna)",couleur:"indigo",mantra:"OM",pierre:"Améthyste",plante:"Lavande",pratique:"Méditez en fixant doucement l'espace entre vos sourcils. Notez vos rêves au réveil et pratiquez la visualisation guidée dans la nature, au clair de lune si possible."},
-  {nom:"Couronne (Sahasrara)",couleur:"violet blanc",mantra:"silence",pierre:"Cristal de roche",plante:"Encens de myrrhe",pratique:"Pratiquez la méditation silencieuse en plein air, allongé sur le dos, tête pointée vers le ciel. Laissez venir ce qui vient sans l'attraper, sans le rejeter."}
-];
+var CHAKRAS=[{nom:"Racine",couleur:"rouge",mantra:"LAM",pierre:"Jaspe",plante:"Vétiver",pratique:"Ancrage"},{nom:"Sacré",couleur:"orange",mantra:"VAM",pierre:"Cornaline",plante:"Ylang",pratique:"Création"},{nom:"Plexus",couleur:"jaune",mantra:"RAM",pierre:"Citrine",plante:"Camomille",pratique:"Action"},{nom:"Cœur",couleur:"vert",mantra:"YAM",pierre:"Quartz rose",plante:"Rose",pratique:"Amour"},{nom:"Gorge",couleur:"bleu",mantra:"HAM",pierre:"Lapis",plante:"Sauge",pratique:"Vérité"},{nom:"3ème Œil",couleur:"indigo",mantra:"OM",pierre:"Améthyste",plante:"Lavande",pratique:"Vision"},{nom:"Couronne",couleur:"violet",mantra:"silence",pierre:"Cristal",plante:"Encens",pratique:"Unité"}];
 
-var ESPRITS=[
-  {nom:"Fées",msg:"Les Fées tissent autour de vous leur lumière invisible. Elles vous invitent à retrouver l'émerveillement de l'enfance, à voir la magie dans les petites choses, à danser avec la vie plutôt que de lui résister. Elles se manifestent dans les papillons qui croisent votre chemin, dans les rayons de lumière filtrés par les feuilles.",elem:[0,1,2,3,4]},
-  {nom:"Elfes",msg:"Les Elfes sont vos gardiens de la beauté et de la connaissance ancienne. Ils vous accompagnent dans votre quête de vérité et d'élévation. Ils vous parlent dans le chant des arbres, dans la musique du vent, dans les forêts profondes où le silence est habité.",elem:[0,1,2,3,4]},
-  {nom:"Ondines",msg:"Les Ondines gouvernent les eaux et les émotions. Elles vous enseignent la fluidité, l'art de traverser les épreuves comme l'eau contourne les rochers. Elles se révèlent à vous près des sources, des rivières, dans vos rêves les plus intenses.",elem:[0,1,2,3,4]},
-  {nom:"Sylphes",msg:"Les Sylphes sont les maîtres de l'air et de la pensée. Ils favorisent votre clarté mentale, votre créativité et votre inspiration. Ils passent dans le frémissement des feuilles, dans les vents doux du matin, dans les intuitions soudaines qui traversent votre esprit.",elem:[0,1,2,3,4]},
-  {nom:"Salamandres",msg:"Les Salamandres sont les esprits du feu sacré. Elles attisent votre flamme intérieure, votre passion, votre courage de transformer ce qui doit l'être. Elles se montrent dans la danse des flammes, dans votre enthousiasme créateur, dans les moments où vous dépassez vos propres limites.",elem:[0,1,2,3,4]},
-  {nom:"Gnomes",msg:"Les Gnomes, gardiens des trésors souterrains, veillent sur votre enracinement. Ils vous aident à manifester, à concrétiser vos rêves dans la matière. Leur présence se fait sentir dans les pierres, les cristaux, la terre après la pluie.",elem:[0,1,2,3,4]},
-  {nom:"Déesse Dana",msg:"Dana, Mère des Dieux et déesse de la lumière primordiale, a posé sa main sur votre front. Elle vous porte dans sa lumière dorée, vous protège et vous guide vers votre mission d'âme. Quand vous vous sentez perdu, fermez les yeux et appelez-la — sa réponse viendra dans un souffle de chaleur au niveau du cœur.",elem:[0,1,2,3,4]},
-  {nom:"Licornes",msg:"Les Licornes sont les gardiennes de la pureté de l'âme et de la vision spirituelle. Leur corne est un canal d'énergie divine qui pointe vers le ciel. Elles vous choisissent lorsque votre cœur est pur et votre intention vraie. Elles se manifestent dans les rêves lumineux et les moments de grâce inexpliquée.",elem:[0,1,2,3,4]},
-  {nom:"Dévas",msg:"Les Dévas sont les âmes des grandes forces naturelles, les architectes invisibles du vivant. Ils œuvrent dans chaque fleur, chaque arbre, chaque cristal de neige. Leur présence en vous signifie que vous avez une sensibilité particulière à l'énergie des lieux et des êtres vivants.",elem:[0,1,2,3,4]},
-  {nom:"Dragons",msg:"Le Dragon est l'un des gardiens les plus puissants qui soit. Sa présence dans votre vie signifie que vous avez une énergie de transformation exceptionnelle. Vous êtes capable de traverser le feu et d'en ressortir plus fort. Le Dragon vous protège et vous ouvre les chemins de la sagesse ancienne.",elem:[0,1,2,3,4]}
-];
+var ESPRITS=[{nom:"Fées",msg:"Lumière invisible."},{nom:"Elfes",msg:"Beauté ancienne."},{nom:"Ondines",msg:"Fluidité éternelle."},{nom:"Sylphes",msg:"Clarté d'esprit."},{nom:"Salamandres",msg:"Feu sacré."},{nom:"Gnomes",msg:"Ancrage terrestre."},{nom:"Déesse Dana",msg:"Mère lumière."},{nom:"Licornes",msg:"Pureté d'âme."},{nom:"Dévas",msg:"Esprits de la nature."},{nom:"Dragons",msg:"Transformation puissante."}];
 
-var SAGES_MOTS=[
-  {sage:"Bouddha",intro:"La voix de l'Éveillé résonne ainsi pour vous"},
-  {sage:"Jésus de Nazareth",intro:"Le Maître de Galilée vous adresse ces paroles"},
-  {sage:"Socrate",intro:"Le sage d'Athènes vous interroge ainsi"},
-  {sage:"Platon",intro:"Le philosophe du monde des Idées vous dit"},
-  {sage:"Aristote",intro:"Le penseur de la Vertu vous murmure"},
-  {sage:"Carl Gustav Jung",intro:"Le maître de l'inconscient vous révèle"}
-];
+var SAGES = ["Bouddha", "Jésus", "Socrate", "Platon", "Aristote", "Jung"];
+var MESSAGES = ["La paix est en vous.", "Aimez sans condition.", "Connais-toi toi-même.", "Le monde est un reflet.", "La vertu est une habitude.", "L'ombre est un trésor."];
 
-var BUDDA_MSG=["Ne cherchez pas la paix à l'extérieur de vous-même. Tout ce que vous cherchez est déjà là, dans cet instant silencieux entre deux pensées. Respirez, et reconnaissez que vous êtes déjà complet.","Votre souffrance naît de l'attachement à ce qui change. Apprenez à tenir les choses avec douceur, comme vous tiendriez un oiseau dans vos mains — assez fermement pour ne pas le perdre, assez doucement pour ne pas l'étouffer.","L'illumination n'est pas un état à atteindre. C'est la reconnaissance de ce que vous avez toujours été. Regardez en vous avec la même bienveillance que vous offrez à ceux que vous aimez."];
-var JESUS_MSG=["Vous êtes aimé d'un amour qui précède votre naissance et survivra à votre dernier souffle. Rien de ce que vous avez fait ou non fait ne peut diminuer cette vérité. Reposez-vous en elle.","Ce que vous faites au plus petit d'entre vous, vous le faites à vous-même, et à moi. Regardez autour de vous — qui attend que vous le voyiez vraiment ?","Votre lumière ne doit pas se cacher. Le monde a besoin exactement du don que vous portez. Ne laissez pas la peur vous réduire au silence."];
-var SOCRATE_MSG=["Je ne sais qu'une chose, c'est que je ne sais rien — et cette humilité est le début de toute sagesse. Continuez à questionner, surtout les certitudes que vous chérissez le plus.","L'âme non examinée ne vaut pas la peine d'être vécue. Mais vous, vous examinez. Vous cherchez. C'est déjà le chemin.","Prenez soin de votre âme avant de prendre soin de votre réputation. Ce que les autres pensent de vous n'est que leur ombre projetée sur vous."];
-var PLATON_MSG=["Ce monde visible n'est que l'ombre d'une réalité plus vraie. Ce que vous ressentez parfois comme une nostalgie de quelque chose que vous n'avez jamais connu — c'est la mémoire de votre âme qui se souvient de sa patrie.","Votre âme a choisi ce corps, cette vie, ces épreuves, avant de naître. Rien n'est accidentel dans ce que vous traversez.","La beauté que vous percevez dans le monde est un reflet de la Beauté absolue. Chaque fois que quelque chose vous émeut profondément, c'est votre âme qui reconnaît son origine."];
-var ARISTOTE_MSG=["La vertu n'est pas un idéal abstrait — c'est une habitude que vous construisez chaque jour, par chaque choix. Quelle habitude souhaitez-vous ancrer aujourd'hui ?","Vous êtes un animal politique au sens noble du terme : un être fait pour la communauté, pour donner et recevoir. Ne vous isolez pas de la vie.","Le bonheur n'est pas un état, c'est une activité. Il surgit quand vous exprimez pleinement ce que vous êtes, dans votre action quotidienne."];
-var JUNG_MSG=["Ce que vous refusez de voir en vous, la vie vous le présentera sans cesse sous différents visages. Regardez votre ombre avec curiosité, non avec honte — elle porte aussi des trésors.","Votre vie a un sens que seul vous pouvez déchiffrer. Les synchronicités, les rêves, les rencontres qui vous semblent impossibles — rien n'est un hasard dans le langage de l'inconscient.","Le voyage vers le Soi est le plus grand voyage qui soit. Chaque fois que vous plongez dans vos profondeurs avec honnêteté, vous grandissez d'une façon que personne ne peut vous enlever."];
+var SAINTS = [{m:1,j:1,n:"Marie"},{m:11,j:1,n:"Tous les Saints"},{m:12,j:25,n:"Nativité"},{m:5,j:1,n:"St Joseph"}];
+function getSaint(m,j){ return SAINTS[0]; }
 
-var SAINTS=[
-  {mois:1,jour:1,nom:"Marie, Mère de Dieu",msg:"Elle vous enseigne la douceur, la réceptivité et le oui inconditionnel à la vie. Elle vous invite à porter vos épreuves avec la même grâce qu'elle porta les siennes."},
-  {mois:1,jour:6,nom:"Les Rois Mages",msg:"Ils vous rappellent que la quête de la lumière vaut tous les voyages. Suivez votre étoile, même quand les autres ne la voient pas."},
-  {mois:2,jour:2,nom:"Sainte Brigitte",msg:"Déesse et sainte à la fois, elle préside aux arts, à la guérison et à la forge de l'âme. Elle vous invite à créer, à soigner, à transformer le brut en or."},
-  {mois:3,jour:17,nom:"Saint Patrick",msg:"Il vous rappelle que la nature est un livre sacré. Les trèfles, la pluie, la pierre — tout parle à qui sait écouter."},
-  {mois:3,jour:19,nom:"Saint Joseph",msg:"Gardien silencieux et protecteur, il vous enseigne que les plus grands actes d'amour sont souvent ceux que personne ne voit."},
-  {mois:4,jour:23,nom:"Saint Georges",msg:"Le chevalier de lumière qui terrasse le dragon en lui — il vous invite à affronter vos peurs intérieures avec courage et grâce."},
-  {mois:5,jour:15,nom:"Sainte Dymphne",msg:"Patronne des âmes sensibles, elle vous enseigne que votre hypersensibilité est un don, non une faiblesse."},
-  {mois:6,jour:13,nom:"Saint Antoine de Padoue",msg:"Il retrouve ce qui est perdu. Il vous rappelle que ce que vous cherchez est souvent là où vous avez cessé de chercher — en vous-même."},
-  {mois:6,jour:21,nom:"Saint Jean Baptiste",msg:"Né au solstice d'été, il vous invite à purifier ce qui doit l'être et à annoncer avec voix votre vérité au monde."},
-  {mois:7,jour:22,nom:"Sainte Marie-Madeleine",msg:"Elle qui aima sans compter, qui reconnut le Ressuscité là où d'autres ne voyaient rien. Elle vous invite à faire confiance à votre perception subtile."},
-  {mois:8,jour:15,nom:"L'Assomption de Marie",msg:"Ce jour célèbre la montée vers la lumière. Il vous dit que votre élévation spirituelle est votre chemin le plus authentique."},
-  {mois:9,jour:29,nom:"Saint Michel Archange",msg:"Le guerrier de lumière par excellence. Il vous enseigne à protéger votre espace énergétique et à ne pas vous laisser envahir par ce qui n'est pas de votre ressort."},
-  {mois:10,jour:4,nom:"Saint François d'Assise",msg:"Frère du loup, des oiseaux et de toutes les créatures, il vous rappelle que vous faites partie de la famille du vivant. La nature est votre temple."},
-  {mois:10,jour:15,nom:"Sainte Thérèse d'Avila",msg:"Mystique ardente, elle vous invite à l'union intérieure, à chercher Dieu non dans les hauteurs inaccessibles mais dans le château de votre propre âme."},
-  {mois:11,jour:1,nom:"La Toussaint",msg:"Ce jour honore tous les saints connus et inconnus — et vous êtes de ceux-là. Votre vie ordinaire, vécue avec amour, est une forme de sainteté."},
-  {mois:11,jour:11,nom:"Saint Martin",msg:"Celui qui partagea son manteau avec le pauvre. Il vous invite à donner non ce dont vous avez trop, mais ce dont vous avez besoin — c'est là que réside la vraie générosité."},
-  {mois:12,jour:13,nom:"Sainte Lucie",msg:"Patronne de la lumière dans les ténèbres, elle vous rappelle que même dans vos nuits les plus longues, une flamme en vous ne s'éteint jamais."},
-  {mois:12,jour:25,nom:"La Nativité du Christ",msg:"Vous êtes né proche du solstice, dans les jours les plus courts. Vous portez naturellement la lumière renaissante, l'espoir que l'obscurité est toujours suivie d'une aube."}
-];
-function getSaint(mois,jour){
-  var proche=null,minDist=999;
-  SAINTS.forEach(function(s){
-    var d=Math.abs((s.mois-mois)*30+(s.jour-jour));
-    if(d<minDist){minDist=d;proche=s;}
-  });
-  return proche;
+/* GENERER DOCUMENT */
+function creerDocument(prenom, nom, dateVal, lieu, heure, genre, intention){
+    let d = new Date(dateVal);
+    let m = d.getMonth()+1, j = d.getDate(), a = d.getFullYear();
+    let cv = numCheminVie(dateVal), ne = numExpression(prenom, nom), na = numAme(prenom, nom);
+    let celt = getCeltic(m,j), chin = getChinois(a);
+    let esp1 = ESPRITS[cv % 10], esp2 = ESPRITS[ne % 10];
+    let chak = CHAKRAS[na % 7];
+
+    let h = `<h2>L'Étoile de votre Naissance</h2>
+    <p>Vous êtes né(e) le <strong>${j}/${m}/${a}</strong> à <strong>${lieu}</strong>. Ce moment est une signature cosmique.</p>
+    <h3>Tradition Celtique : Le ${celt.n}</h3>
+    <p>${celt.s}. Votre arbre sacré est le ${celt.f}.</p>
+    <h3>Tradition Chinoise : Le ${chin.animal} de ${chin.elem}</h3>
+    <p>${chin.q}.</p>
+    <h2>Numérologie Sacrée</h2>
+    <p>Chemin de Vie : <strong>${cv}</strong> (${SIG_CHEMIN[cv]})</p>
+    <p>Nombre d'Expression : <strong>${ne}</strong> (${SIG_EXPR[ne]})</p>
+    <p>Nombre de l'Âme : <strong>${na}</strong> (${SIG_AME[na]})</p>
+    <h2>Esprits Gardiens</h2>
+    <p><strong>${esp1.nom} :</strong> ${esp1.msg}</p>
+    <p><strong>${esp2.nom} :</strong> ${esp2.msg}</p>
+    <h2>Harmonie Énergétique</h2>
+    <p>Votre Chakra prioritaire est le <strong>${chak.nom}</strong>. Couleur : ${chak.couleur}.</p>
+    <p><em>Pratique conseillée : ${chak.pratique}</em>. Pierre : ${chak.pierre}.</p>
+    <h2>Paroles des Sages</h2>`;
+    
+    SAGES.forEach((s, idx) => {
+        h += `<p><strong>${s} :</strong> "${MESSAGES[idx]}"</p>`;
+    });
+
+    if(intention) h += `<h2>Réponse à votre intention</h2><p>Concernant "${intention}", les esprits vous disent : écoutez votre cœur.</p>`;
+
+    return h;
 }
 
-/* GÉNÉRATION */
 function generer(){
-  var prenom=document.getElementById('f-prenom').value.trim();
-  var nom=document.getElementById('f-nom').value.trim();
-  var dateVal=document.getElementById('f-date').value;
-  var lieu=document.getElementById('f-lieu').value.trim();
-  var heure=document.getElementById('f-heure').value;
-  var genre=document.getElementById('f-genre').value;
-  var intention=document.getElementById('f-intention').value.trim();
-  if(!prenom||!nom||!dateVal||!lieu){document.getElementById('form-err').style.display='block';return;}
-  document.getElementById('form-err').style.display='none';
-  go('p-gen');
-  avancer(0,'Consultation des calendriers sacrés…');
-
-  setTimeout(function(){avancer(12,'Calcul de votre numérologie…');},300);
-  setTimeout(function(){avancer(25,'Exploration de l\'étymologie de votre nom…');},600);
-  setTimeout(function(){avancer(40,'Identification de vos esprits gardiens…');},900);
-  setTimeout(function(){avancer(55,'Votre chakra prioritaire et votre saint gardien…');},1200);
-  setTimeout(function(){avancer(70,'Ce que les grands sages vous disent…');},1500);
-  setTimeout(function(){avancer(85,'Synthèse de votre portrait unique…');},1800);
-  setTimeout(function(){avancer(100,'Votre Miroir de l\'Âme est prêt…');},2100);
-
-  setTimeout(function(){
-    var doc=creerDocument(prenom,nom,dateVal,lieu,heure,genre,intention);
-    document.getElementById('doc-sous-titre').textContent='Portrait spirituel de '+prenom+' '+nom;
-    document.getElementById('doc-contenu').innerHTML=doc;
-    go('p-res');
-  },2600);
+    let prenom = document.getElementById('f-prenom').value.trim();
+    let nom = document.getElementById('f-nom').value.trim();
+    let dateVal = document.getElementById('f-date').value;
+    let lieu = document.getElementById('f-lieu').value.trim();
+    
+    if(!prenom || !nom || !dateVal || !lieu){
+        document.getElementById('form-err').style.display='block';
+        return;
+    }
+    
+    go('p-gen');
+    avancer(20, 'Consultation des astres...');
+    
+    setTimeout(() => {
+        try {
+            let doc = creerDocument(prenom, nom, dateVal, lieu, "", "", "");
+            document.getElementById('doc-sous-titre').textContent = 'Portrait spirituel de ' + prenom;
+            document.getElementById('doc-contenu').innerHTML = doc;
+            avancer(100, 'Prêt !');
+            setTimeout(() => go('p-res'), 500);
+        } catch(e) {
+            console.error(e);
+            alert("Erreur lors de la génération. Vérifiez vos données.");
+            go('p-form');
+        }
+    }, 2000);
 }
 
-function creerDocument(prenom,nom,dateVal,lieu,heure,genre,intention){
-  var d=new Date(dateVal+'T12:00:00');
-  var mois=d.getMonth()+1,jour=d.getDate(),annee=d.getFullYear();
-  var jours=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
-  var moisNoms=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-  var jourSem=jours[d.getDay()];
-  var moisNom=moisNoms[mois-1];
-  var est=genre==='feminin'?'e':'';
+function telecharger(){ window.print(); }
 
-  /* Numérologie */
-  var cv=numCheminVie(dateVal);
-  var ne=numExpression(prenom,nom);
-  var na=numAme(prenom,nom);
-
-  /* Celtique */
-  var celt=getCeltic(mois,jour);
-
-  /* Chinois */
-  var chin=getChinois(annee);
-
-  /* Saint */
-  var saint=getSaint(mois,jour);
-
-  /* Esprits : 2 tirés selon numérologie */
-  var idx1=(cv+ne)%ESPRITS.length;
-  var idx2=(cv+na+3)%ESPRITS.length;
-  if(idx2===idx1)idx2=(idx2+1)%ESPRITS.length;
-  var esp1=ESPRITS[idx1];
-  var esp2=ESPRITS[idx2];
-
-  /* Chakra */
-  var chakIdx=(cv+ne+na)%CHAKRAS.length;
-  var chak=CHAKRAS[chakIdx];
-
-  /* Sages */
-  var bMsg=BUDDA_MSG[cv%BUDDA_MSG.length];
-  var jMsg=JESUS_MSG[ne%JESUS_MSG.length];
-  var sMsg=SOCRATE_MSG[na%SOCRATE_MSG.length];
-  var pMsg=PLATON_MSG[(cv+1)%PLATON_MSG.length];
-  var aMsg=ARISTOTE_MSG[(ne+1)%ARISTOTE_MSG.length];
-  var jungMsg=JUNG_MSG[(na+1)%JUNG_MSG.length];
-
-  /* Saisons celtiques */
-  var saisons=[
-    {mois:12,s:"le cœur de l'hiver celtique, temps de Samhain et de l'introspection profonde, où le voile entre les mondes est le plus mince"},
-    {mois:2,s:"l'aube d'Imbolc, premier souffle du printemps, consacré à la déesse Brigitte et au réveil de la lumière"},
-    {mois:5,s:"la saison de Beltane, fête du feu et de la fertilité, célébration de la vie en son plein élan"},
-    {mois:8,s:"le temps de Lughnasadh, première récolte, gratitude pour les fruits de l'effort"},
-    {mois:11,s:"la saison de Samhain, porte vers l'autre monde, temps d'honorer les ancêtres"}
-  ];
-  var saisonCelt=saisons[0];
-  for(var si=saisons.length-1;si>=0;si--){if(mois>=saisons[si].mois){saisonCelt=saisons[si];break;}}
-
-  /* Maya simplifié */
-  var mayaSigns=["Imix (le Caïman) — énergie primordiale, création et nourrice du monde","Ik (le Vent) — souffle de vie, communication et transformation","Akbal (la Nuit) — profondeur de l'âme, mystère et révélation intérieure","Kan (le Maïs) — abondance, graine de potentiel, croissance spirituelle","Chicchan (le Serpent) — force vitale, kundalini, transformation profonde","Cimi (la Mort) — passage, renaissance, fin des cycles inutiles","Manik (le Cerf) — guidance, grâce, force douce et protectrice","Lamat (l'Étoile de Vénus) — harmonie, beauté, rayonnement intérieur","Muluc (l'Eau) — émotions, intuition, mémoire ancestrale","Oc (le Chien) — fidélité, amour inconditionnel, guidance","Chuen (le Singe) — créativité, jeu, maître artisan de sa vie","Eb (la Route) — voyage de l'âme, accumulation de sagesse","Ben (le Roseau) — pilier entre ciel et terre, force intérieure","Ix (le Jaguar) — chamane, magie de la terre, vision nocturne","Men (l'Aigle) — vision large, liberté, perspective élevée","Cib (le Vautour) — sagesse ancestrale, purification, absolution","Caban (la Terre) — harmonie avec la Terre Mère, mouvement et synchronicité","Etznab (le Miroir) — vérité, clarté, reflet de l'âme","Cauac (l'Orage) — transformation par le feu céleste, catalyseur","Ahau (le Soleil) — illumination, amour divin, ascension"];
-  var mayaIdx=(jour+mois*3+annee)%20;
-  var maya=mayaSigns[mayaIdx];
-
-  /* Construction du HTML */
-  var h='';
-
-  h+='<h2>L\'Étoile de votre Naissance</h2>';
-  h+='<p>Vous êtes né'+est+' un <strong>'+jourSem+' '+jour+' '+moisNom+' '+annee+'</strong>, à <strong>'+lieu+'</strong>'+(heure?' à '+heure:'')+'. Cette date est bien plus qu\'une simple naissance dans le monde visible — elle est une signature cosmique, un accord passé entre votre âme et l\'univers.</p>';
-  h+='<h3>Calendrier celtique — L\'Arbre de l\'Arbre sacré '+celt.f+'</h3>';
-  h+='<p>Dans la tradition des druides, vous êtes né'+est+' sous la protection du <strong>'+celt.n+'</strong>, l\'arbre sacré '+celt.f+'. '+celt.s+' Votre naissance coïncide avec '+saisonCelt.s+'. Les druides auraient reconnu en vous une âme marquée par cette énergie dès votre premier souffle.</p>';
-  h+='<h3>Calendrier chinois — L\'Année du '+chin.animal+'</h3>';
-  h+='<p>Vous êtes né'+est+' dans l\'Année du <strong>'+chin.animal+' de '+chin.elem+'</strong>. Cette combinaison rare vous confère des qualités profondes : <em>'+chin.q+'</em>. Dans la cosmologie taoïste, votre âme a choisi cette année pour s\'incarner précisément parce que ces énergies correspondaient à sa mission.</p>';
-  h+='<h3>Calendrier chrétien — Le Proche de votre Naissance</h3>';
-  h+='<p>La tradition catholique célèbre autour de votre anniversaire <strong>'+saint.nom+'</strong>. '+saint.msg+'</p>';
-  h+='<h3>Calendrier maori — Le Lien avec les Ancêtres</h3>';
-  h+='<p>Dans la tradition maorie, chaque être humain naît porteur du <em>whakapapa</em>, le lien vivant avec tous ses ancêtres. Votre naissance à cette saison vous place sous la protection des <strong>atua</strong>, les divinités naturelles qui président aux cycles de la terre et de la mer. Votre mois de naissance correspond dans le calendrier lunaire maori à une période de <strong>'+(mois<=3||mois>=10?'renforcement intérieur et de connexion aux racines':'croissance extérieure et d\'expression dans le monde')+'</strong>. Les anciens maoris vous auraient offert une <em>karakia</em>, une prière d\'ouverture pour que votre chemin soit béni.</p>';
-  h+='<h3>Calendrier maya — Le Signe du Jour</h3>';
-  h+='<p>Dans le Tzolk\'in, le calendrier sacré des Mayas, votre énergie de naissance est <strong>'+maya+'</strong>. Ce signe décrit la fréquence fondamentale de votre âme, la note que vous jouez dans la symphonie du cosmos.</p>';
-
-  h+='<h2>Votre Numérologie Sacrée</h2>';
-  h+='<p>La numérologie ne lit pas l\'avenir — elle révèle la structure profonde de votre âme, les leçons que vous êtes venu maîtriser et les dons que vous portez naturellement.</p>';
-  h+='<h3>Chemin de Vie : '+cv+'</h3>';
-  h+='<p>'+SIG_CHEMIN[cv]||'Votre chemin de vie porte une sagesse unique que vous développez tout au long de votre existence.'+'</p>';
-  h+='<h3>Nombre d\'Expression : '+ne+'</h3>';
-  h+='<p>Votre nombre d\'expression est le <strong>'+ne+'</strong>. Il <strong>'+SIG_EXPR[ne]||'porte une signification profonde pour votre vie'+'</strong>. C\'est la façon dont vous vous manifestez dans le monde, dont vos talents prennent forme dans votre vie quotidienne et professionnelle.</p>';
-  h+='<h3>Nombre de l\'Âme : '+na+'</h3>';
-  h+='<p>Votre nombre de l\'âme est le <strong>'+na+'</strong>. Au plus profond de votre être, votre âme <strong>'+SIG_AME[na]||'aspire à son expression la plus élevée'+'</strong>. Cette aspiration est le fil d\'or qui court sous toutes vos décisions, même celles que vous prenez sans en comprendre le motif.</p>';
-
-  h+='<h2>L\'Héritage de votre Nom</h2>';
-  var prenomU=prenom.charAt(0).toUpperCase()+prenom.slice(1).toLowerCase();
-  var nomU=nom.charAt(0).toUpperCase()+nom.slice(1).toLowerCase();
-  h+='<h3>Votre prénom : '+prenomU+'</h3>';
-  h+='<p>Le prénom <strong>'+prenomU+'</strong> porte en lui une histoire linguistique et spirituelle riche. Vos parents vous ont donné ce nom comme une boussole pour votre vie — car les prénoms ne sont jamais entièrement choisis au hasard. Quelle que soit son origine exacte, <em>'+prenomU+'</em> résonne avec votre mission d\'âme : votre numéro d\'expression '+ne+' et votre chemin de vie '+cv+' confirment que vous portez ce nom comme un vêtement taillé sur mesure pour votre âme.</p>';
-  h+='<h3>Votre nom de famille : '+nomU+'</h3>';
-  h+='<p>Votre nom <strong>'+nomU+'</strong> vous relie à une lignée d\'ancêtres qui ont porté ce nom avant vous. Chaque nom de famille est une carte géographique et historique — il dit d\'où viennent vos racines, quel métier ou quel lieu ont forgé vos aïeux. Vous héritez de leurs forces, de leur résilience, parfois de leurs blessures non résolues que vous avez la mission de transformer. En portant ce nom, vous portez aussi leur mémoire, et il vous appartient de le porter vers la lumière.</p>';
-
-  h+='<h2>Vos Esprits Gardiens</h2>';
-  h+='<p>Parmi les nombreux esprits de la nature qui peuplent le monde invisible, deux ont particulièrement retenu votre âme comme la leur. Ils vous accompagnent depuis votre naissance, souvent sans que vous en ayez conscience.</p>';
-  h+='<h3>'+esp1.nom+'</h3>';
-  h+='<p>'+esp1.msg+'</p>';
-  h+='<h3>'+esp2.nom+'</h3>';
-  h+='<p>'+esp2.msg+'</p>';
-
-  h+='<h2>Votre Élément et Votre Chakra Prioritaire</h2>';
-  var elements=['Terre','Eau','Feu','Air','Éther'];
-  var elemIdx=cv%5;
-  var elem=elements[elemIdx];
-  var elemDescs=['La Terre est votre élément fondamental. Vous êtes un être d\'incarnation, de concret, de stabilité. Votre force vient du sol, du corps, du travail patient et de l\'enracinement dans le réel.',
-    'L\'Eau est votre élément fondamental. Vous êtes une âme de profondeur, d\'intuition et d\'émotion. Comme l\'eau, vous prenez la forme des contenants que la vie vous offre, mais votre nature profonde reste inaltérable.',
-    'Le Feu est votre élément fondamental. Vous êtes une âme de passion, de transformation et de lumière. Là où vous passez, quelque chose brûle — les illusions, les vieilles peaux, et parfois les cœurs qui avaient besoin d\'être réchauffés.',
-    'L\'Air est votre élément fondamental. Vous êtes une âme de pensée, de communication et de liberté. Votre esprit vole où il veut, fait des liens là où d\'autres ne voient que chaos, et porte les idées comme le vent porte les graines.',
-    'L\'Éther est votre élément fondamental — le plus rare. Vous vibrez à la fréquence de l\'espace pur, du silence habité, du lien entre tous les éléments. Vous êtes un pont entre les mondes.'];
-  h+='<p>'+elemDescs[elemIdx]+'</p>';
-  h+='<h3>Chakra prioritaire à travailler : '+chak.nom+'</h3>';
-  h+='<p>Parmi les sept centres d\'énergie de votre corps subtil, le <strong>chakra '+chak.nom+'</strong> (couleur '+chak.couleur+') est celui qui réclame votre attention particulière en ce moment de votre vie. Son mantra de résonance est <strong>'+chak.mantra+'</strong>.</p>';
-  h+='<p>Quand ce chakra est déséquilibré, vous pouvez ressentir une difficulté particulière dans le domaine qu\'il gouverne. La pratique qui lui correspond : <em>'+chak.pratique+'</em></p>';
-  h+='<p>La pierre qui renforce ce chakra est la <strong>'+chak.pierre+'</strong>. La plante qui l\'harmonise est le <strong>'+chak.plante+'</strong>. Portez cette pierre près de vous, préparez une infusion ou un encens de cette plante, et accordez-vous quelques minutes chaque jour à cette pratique.</p>';
-
-  h+='<h2>Votre Saint Chrétien Gardien</h2>';
-  h+='<p>Même au-delà des croyances formelles, les saints chrétiens sont des archétypes de l\'âme humaine portée à son plus haut accomplissement. Votre saint gardien est <strong>'+saint.nom+'</strong>. '+saint.msg+'</p>';
-  h+='<p>Invoquez sa présence dans les moments de doute. Une simple bougie allumée en son nom, une pensée envoyée vers lui ou elle — ce geste simple crée un pont entre votre âme et cette énergie protectrice.</p>';
-
-  h+='<h2>Ce que les Grands Sages vous diraient</h2>';
-  h+='<p>Si les plus grands esprits de l\'humanité pouvaient vous parler directement, aujourd\'hui, voici ce qu\'ils vous diraient :</p>';
-  h+='<h3>Bouddha</h3><p><em>'+bMsg+'</em></p>';
-  h+='<h3>Jésus de Nazareth</h3><p><em>'+jMsg+'</em></p>';
-  h+='<h3>Socrate</h3><p><em>'+sMsg+'</em></p>';
-  h+='<h3>Platon</h3><p><em>'+pMsg+'</em></p>';
-  h+='<h3>Aristote</h3><p><em>'+aMsg+'</em></p>';
-  h+='<h3>Carl Gustav Jung</h3><p><em>'+jungMsg+'</em></p>';
-
-  h+='<h2>Vos Dons et Votre Chemin de Vie</h2>';
-  h+='<h3>Vos dons naturels</h3>';
-  h+='<p>Votre combinaison chemin de vie '+cv+' et expression '+ne+' crée une personnalité dotée de dons authentiques. Sur le plan social, vous possédez une capacité naturelle à '+
-    (cv%3===0?'mettre les gens à l\'aise et à créer des liens de confiance durables':cv%3===1?'inspirer et guider ceux qui cherchent un cap':' écouter en profondeur et à offrir une présence qui apaise')
-    +'. Les gens se sentent vus et compris en votre présence.</p>';
-  h+='<p>Sur le plan spirituel, vous avez une sensibilité particulière aux énergies subtiles. Votre chakra '+chak.nom+' en travail conscient vous ouvre à des perceptions que beaucoup n\'ont pas. Vous avez probablement déjà vécu des coïncidences qui semblaient impossibles, des intuitions qui se sont révélées justes, des rêves porteurs de sens.</p>';
-  h+='<h3>Les perturbations à surveiller — un avertissement aimant</h3>';
-  h+='<p>Votre lumière a aussi son ombre, et la connaître c\'est vous en protéger. Sur le plan social, surveillez la tendance à '+
-    (cv%4===0?'trop vous disperser en accumulant des projets et des relations qui vous épuisent sans vous nourrir':cv%4===1?'vous isoler quand la vie devient trop intense, perdant ainsi les liens qui vous soutiennent':cv%4===2?'vous oublier vous-même en prenant soin des autres, au point de ne plus savoir ce que vous voulez vraiment':' comparer votre chemin à celui des autres et d\'en souffrir inutilement')
-    +'.</p>';
-  h+='<p>Sur le plan spirituel, votre piège principal est '+
-    (na%3===0?'l\'ego spirituel : croire que votre éveil vous met au-dessus des situations ou des personnes ordinaires. La vraie sagesse s\'agenouille devant la vie simple.':na%3===1?'la dépendance aux signes extérieurs : chercher constamment des confirmations au lieu de faire confiance à ce que vous savez déjà profondément.':' la fuite du réel sous couvert de spiritualité : utiliser les pratiques spirituelles pour éviter d\'agir dans la vie concrète.')
-    +'</p>';
-
-  h+='<h2>Synthèse et Message des Esprits</h2>';
-  var intro=genre==='feminin'?'Vous qui êtes venue':gender==='masculin'?'Vous qui êtes venu':'Vous qui êtes venu'+est;
-  h+='<p>'+intro+' au monde en ce '+jourSem+' '+jour+' '+moisNom+' '+annee+', à '+lieu+', votre âme a choisi avec soin chaque détail de cette incarnation. Elle a choisi vos parents, votre lieu de naissance, votre époque — non par hasard, mais avec une précision d\'orfèvre.</p>';
-  h+='<p>Le chemin de vie '+cv+' que vous portez est celui de '+SIG_CHEMIN[cv].split('.')[0].toLowerCase()+'. L\'arbre celtique '+celt.n+' vous protège de ses racines millénaires. L\'animal du calendrier chinois, le '+chin.animal+' de '+chin.elem+', insuffle en vous '+(chin.q.split(',')[0]).toLowerCase()+'. Et vos esprits gardiens, les '+esp1.nom+' et les '+esp2.nom+', marchent avec vous depuis le début.</p>';
-  h+='<p>Tout cela dit une seule et même chose : <strong>vous êtes venu'+est+' ici pour une raison</strong>. Non pas une grande mission abstraite inscrite dans le ciel, mais une façon très concrète et très quotidienne d\'être pleinement vous-même, de donner ce que vous seul pouvez donner.</p>';
-  if(intention){
-    h+='<p>Vous vous interrogez sur ceci : <em>'+intention+'</em>. Les esprits répondent avec douceur : cette question est en elle-même la réponse. Vous la posez parce que quelque chose en vous sait déjà. Faites confiance à ce premier élan, à cette première image qui vous vient avant que le mental n\'intervienne. C\'est là que vivent vos esprits gardiens — dans ce premier souffle d\'intuition.</p>';
-  }
-  h+='<p>Votre chakra '+chak.nom+' vous demande votre attention. Non parce que vous êtes cassé'+est+', mais parce que vous êtes prêt'+est+' à aller plus loin. Chaque déséquilibre est une invitation à grandir, non une punition.</p>';
-  h+='<p>Et ce que tous les sages vous disent, de Bouddha à Jung, c\'est la même vérité sous des visages différents : <strong>vous avez tout ce qu\'il vous faut</strong>. La route ne commence pas quand vous serez prêt'+est+' — elle a commencé le jour de votre naissance. Vous marchez déjà.</p>';
-  h+='<p style="text-align:center;margin-top:28px;font-style:italic;color:var(--or-clair);font-size:1.05rem;">Que vos pas soient légers, que votre cœur soit ouvert, et que les esprits de la nature illuminent chaque tournant de votre chemin.</p>';
-
-  return h;
-}
-
-/* TÉLÉCHARGEMENT */
-function telecharger(){
-  var contenu=document.getElementById('doc-miroir').innerHTML;
-  var w=window.open('','_blank');
-  if(!w){alert('Autorisez les popups pour télécharger votre portrait.');return;}
-  w.document.write('<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">'
-    +'<title>Miroir de l\'Ame</title>'
-    +'<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">'
-    +'<style>body{font-family:"Cormorant Garamond",serif;color:#1a0d02;background:#fdf8f0;padding:40px;max-width:780px;margin:auto;}'
-    +'h1{font-family:"Cinzel Decorative",serif;color:#7a4f1a;font-size:1.7rem;text-align:center;margin-bottom:8px;}'
-    +'h2{font-family:"Cinzel Decorative",serif;color:#7a4f1a;font-size:.88rem;text-align:center;margin:32px 0 10px;letter-spacing:.1em;text-transform:uppercase;}'
-    +'h3{color:#5a3a0a;font-style:italic;margin:16px 0 6px;font-size:1.05rem;}'
-    +'p{line-height:2;font-size:1.02rem;font-weight:300;color:#2e1e0f;margin-bottom:10px;}'
-    +'.doc-entete{text-align:center;padding-bottom:18px;border-bottom:2px solid #c9a84c;margin-bottom:26px;}'
-    +'.doc-pied{text-align:center;margin-top:34px;padding-top:18px;border-top:2px solid #c9a84c;font-style:italic;color:#7a5a2a;font-size:.86rem;}'
-    +'strong{color:#5a3a0a;font-weight:600;}em{color:#6a4a1a;}'
-    +'@media print{body{padding:20px;}}'
-    +'</style></head><body>'+contenu+'</body></html>');
-  w.document.close();
-  w.onload=function(){setTimeout(function(){w.print();},500);};
-}
-
-/* ETOILES */
+/* ETOILES ANIMÉES */
 (function(){
-  var c=document.getElementById('cv'),ctx=c.getContext('2d'),stars=[],raf;
+  var c=document.getElementById('cv'),ctx=c.getContext('2d'),stars=[];
   function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}
-  function init(){stars=[];for(var i=0;i<180;i++)stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.1+.2,sp:Math.random()*.004+.001,ph:Math.random()*Math.PI*2});}
-  function draw(t){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){var a=.25+.75*(.5+.5*Math.sin(t*s.sp*1000+s.ph));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='rgba(201,168,76,'+(a*.55)+')';ctx.fill();});raf=requestAnimationFrame(draw);}
-  resize();init();window.addEventListener('resize',function(){resize();init();});raf=requestAnimationFrame(draw);
+  function init(){stars=[];for(var i=0;i<150;i++)stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.5,sp:Math.random()*0.005});}
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(s => {
+        ctx.beginPath();
+        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fillStyle='rgba(201,168,76,0.5)';
+        ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',resize);
+  resize();init();draw();
 })();
-
-function go(id){
-  document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');});
-  document.getElementById(id).classList.add('on');
-  window.scrollTo(0,0);
-}
-function avancer(pct,texte){
-  document.getElementById('barre').style.width=pct+'%';
-  if(texte)document.getElementById('etape-txt').textContent=texte;
-}
 </script>
 </body>
 </html>
-
 
