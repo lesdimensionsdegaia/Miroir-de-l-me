@@ -2,322 +2,166 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Votre Miroir de l'Âme — Les Dimensions de Gaïa</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+<title>Codex Universel : Miroir de l'Âme Absolu</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
 <style>
-:root{--or:#c9a84c;--or-clair:#e8d5a3;--or-pale:#f5edd8;--noir:#0a0705;--text-clair:#f0e6d0;--text-doux:#c8b896;}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--noir);color:var(--text-clair);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden;}
-#cv{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
-.pg{display:none;position:relative;z-index:1;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:50px 20px;text-align:center;}
-.pg.on{display:flex;}
-.orbe{width:160px;height:160px;margin:0 auto 32px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#6b4c2a,#1a0d02 60%,#0a0705);box-shadow:0 0 40px rgba(201,168,76,.3),0 0 80px rgba(201,168,76,.12),inset 0 0 30px rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;font-size:56px;color:var(--or);text-shadow:0 0 20px rgba(201,168,76,.8);animation:pulse 3s ease-in-out infinite;}
-@keyframes pulse{0%,100%{box-shadow:0 0 40px rgba(201,168,76,.3),0 0 80px rgba(201,168,76,.12);transform:scale(1);}50%{box-shadow:0 0 60px rgba(201,168,76,.5),0 0 100px rgba(201,168,76,.2);transform:scale(1.03);}}
-.titre{font-family:'Cinzel Decorative',serif;font-size:clamp(1.5rem,5vw,2.6rem);color:var(--or);letter-spacing:.05em;text-shadow:0 0 30px rgba(201,168,76,.4);margin-bottom:10px;}
-.sous-titre{font-style:italic;color:var(--text-doux);letter-spacing:.2em;margin-bottom:36px;}
-.titre-page{font-family:'Cinzel Decorative',serif;font-size:clamp(1.1rem,3.5vw,1.8rem);color:var(--or);margin-bottom:10px;}
-.sep{width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--or),transparent);margin:22px auto;}
-.intro{max-width:680px;line-height:1.9;color:var(--or-pale);font-weight:300;margin-bottom:16px;font-size:1.05rem;}
-.cadre{max-width:700px;width:100%;border:1px solid rgba(201,168,76,.25);border-radius:2px;padding:26px 30px;margin:22px auto;background:rgba(30,15,5,.6);position:relative;}
-.cadre::before,.cadre::after{content:'❧';color:var(--or);position:absolute;top:12px;font-size:1.1rem;}
-.cadre::before{left:13px;}.cadre::after{right:13px;transform:scaleX(-1);}
-ul.liste{list-style:none;text-align:left;}
-ul.liste li{color:var(--or-pale);line-height:2.2;font-size:1rem;}
-ul.liste li::before{content:'✦ ';color:var(--or);font-size:.7rem;}
-.btn{display:inline-block;padding:16px 44px;background:linear-gradient(135deg,#7a4f1a,var(--or),#7a4f1a);color:var(--noir);font-family:'Cinzel Decorative',serif;font-size:.88rem;letter-spacing:.12em;border:none;border-radius:1px;cursor:pointer;box-shadow:0 4px 25px rgba(201,168,76,.35);transition:all .3s;margin-top:22px;}
-.btn:hover{box-shadow:0 6px 40px rgba(201,168,76,.6);transform:translateY(-2px);}
-.btn-retour{background:none;border:none;color:var(--text-doux);cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:.95rem;text-decoration:underline;margin-top:14px;}
-.btn-dl{display:inline-flex;align-items:center;gap:10px;margin-top:28px;padding:14px 36px;background:transparent;border:1px solid var(--or);color:var(--or);font-family:'Cinzel Decorative',serif;font-size:.82rem;letter-spacing:.12em;cursor:pointer;transition:all .3s;}
-.btn-dl:hover{background:rgba(201,168,76,.1);}
-.btn-don{display:inline-flex;align-items:center;gap:10px;padding:16px 40px;background:linear-gradient(135deg,#1a5c3a,#2e9960,#1a5c3a);color:white;font-family:'Cinzel Decorative',serif;font-size:.85rem;letter-spacing:.1em;text-decoration:none;border-radius:1px;margin:16px 0;transition:all .3s;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(46,153,96,.3);}
-.btn-don:hover{box-shadow:0 6px 30px rgba(46,153,96,.5);transform:translateY(-2px);}
-.cadre-don{max-width:640px;width:100%;border:1px solid rgba(46,153,96,.3);border-radius:2px;padding:26px 30px;margin:20px auto;background:rgba(10,30,18,.6);}
-.form-wrap{max-width:640px;width:100%;text-align:left;}
-.label{display:block;font-size:.78rem;letter-spacing:.18em;color:var(--or);text-transform:uppercase;margin-bottom:6px;font-family:'Raleway',sans-serif;}
-.inp{width:100%;background:rgba(20,10,3,.8);border:1px solid rgba(201,168,76,.3);border-radius:1px;color:var(--text-clair);font-family:'Cormorant Garamond',serif;font-size:1.05rem;padding:12px 16px;outline:none;transition:border-color .3s;}
-.inp:focus{border-color:var(--or);}
-.inp::placeholder{color:rgba(200,184,150,.35);font-style:italic;}
-.grp{margin-bottom:20px;}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.sep-form{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent);margin:22px 0;}
-.err{color:#e07070;font-size:.88rem;margin-top:6px;font-style:italic;display:none;}
-.orbe-gen{width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#4a2c0a,#0a0705);border:1px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;font-size:42px;box-shadow:0 0 40px rgba(201,168,76,.2);margin:0 auto 22px;animation:spin 6s linear infinite;}
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.barre-wrap{width:280px;height:2px;background:rgba(201,168,76,.15);margin:22px auto;overflow:hidden;}
-.barre{height:100%;background:linear-gradient(90deg,var(--or),var(--or-clair));width:0%;transition:width .3s ease;box-shadow:0 0 10px var(--or);}
-.doc-wrap{max-width:740px;width:100%;background:linear-gradient(165deg,rgba(18,9,3,0),#1e0f05,#0f0803);border:1px solid rgba(201,168,76,.2);border-radius:2px;padding:44px 40px;box-shadow:0 0 60px rgba(0,0,0,.8);position:relative;}
-.doc-wrap::before{content:'';position:absolute;top:8px;left:8px;right:8px;bottom:8px;border:1px solid rgba(201,168,76,.07);pointer-events:none;}
-.doc-entete{text-align:center;margin-bottom:36px;padding-bottom:26px;border-bottom:1px solid rgba(201,168,76,.15);}
-.doc-titre{font-family:'Cinzel Decorative',serif;font-size:clamp(1.1rem,3vw,1.5rem);color:var(--or);margin-bottom:8px;}
-.doc-contenu{font-size:1.02rem;line-height:2;color:var(--or-pale);font-weight:300;}
-.doc-contenu h2{font-family:'Cinzel Decorative',serif;font-size:.86rem;color:var(--or);letter-spacing:.12em;margin:38px 0 12px;text-align:center;text-transform:uppercase;}
-.doc-contenu h3{font-size:1.05rem;color:var(--or-clair);font-style:italic;margin:16px 0 6px;}
-.doc-contenu p{margin-bottom:12px;}
-.doc-pied{text-align:center;margin-top:36px;padding-top:26px;border-top:1px solid rgba(201,168,76,.15);font-size:.88rem;color:var(--text-doux);font-style:italic;}
-.signature{margin-top:40px;font-style:italic;font-size:.9rem;color:var(--text-doux);opacity:.7;}
-@media(max-width:600px){.row2{grid-template-columns:1fr;}.doc-wrap{padding:28px 18px;}.cadre{padding:18px;}}
+:root { --gold: #d4af37; --deep-blue: #050a15; --parchment: #f4e4bc; }
+body { background: var(--deep-blue); color: var(--parchment); font-family: 'Quicksand', sans-serif; margin: 0; overflow-x: hidden; }
+canvas { position: fixed; top: 0; left: 0; z-index: -1; }
+.container { max-width: 900px; margin: 40px auto; padding: 20px; position: relative; }
+.card { background: rgba(10, 20, 40, 0.9); border: 2px solid var(--gold); padding: 40px; border-radius: 15px; box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); }
+h1, h2, h3 { font-family: 'Cinzel Decorative', cursive; color: var(--gold); text-align: center; }
+.input-group { margin-bottom: 20px; }
+input, select, textarea { width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--gold); color: white; border-radius: 5px; }
+.btn-ritual { width: 100%; padding: 15px; background: var(--gold); color: var(--deep-blue); font-weight: bold; cursor: pointer; border: none; font-family: 'Cinzel Decorative'; transition: 0.3s; }
+.btn-ritual:hover { background: #fff; box-shadow: 0 0 20px var(--gold); }
+.result-section { display: none; margin-top: 30px; line-height: 1.8; text-align: justify; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+.mini-card { border: 1px solid rgba(212, 175, 55, 0.3); padding: 15px; border-radius: 10px; background: rgba(0,0,0,0.3); }
+hr { border: 0; border-top: 1px solid var(--gold); margin: 30px 0; opacity: 0.5; }
+@media print { .no-print { display: none; } body { background: white; color: black; } .card { border: none; } }
 </style>
 </head>
 <body>
-<canvas id="cv"></canvas>
+<canvas id="stars"></canvas>
 
-<section class="pg on" id="p-accueil">
-  <div class="orbe">✦</div>
-  <h1 class="titre">Votre Miroir de l'Âme</h1>
-  <p class="sous-titre">Les Dimensions de Gaïa</p>
-  <div class="sep"></div>
-  <p class="intro">Chaque être humain est un univers unique, tissé de fils cosmiques, terrestres et ancestraux. Votre <em>Miroir de l'Âme</em> est un portrait spirituel profond et personnalisé, créé spécialement pour vous, et pour vous seul.</p>
-  <div class="cadre">
-    <ul class="liste">
-      <li>Votre profil selon 5 calendriers sacrés : celtique, chinois, chrétien, maori, maya</li>
-      <li>Votre numérologie complète : chemin de vie, expression et âme</li>
-      <li>L'étymologie sacrée de votre prénom et l'ancêtre porteur de votre nom</li>
-      <li>Vos esprits gardiens de la nature et figures mythologiques associées</li>
-      <li>Votre élément dominant et votre chakra prioritaire à travailler</li>
-      <li>Votre saint chrétien protecteur le plus proche</li>
-      <li>Ce que Bouddha, Jésus, Socrate, Platon, Aristote et Carl Gustav Jung vous diraient</li>
-      <li>Vos dons sociaux et spirituels, et les perturbations à surveiller</li>
-      <li>Une synthèse poétique unique, rien que pour vous</li>
-    </ul>
-  </div>
-  <button class="btn" onclick="go('p-don')">✦ Révéler mon Miroir de l'Âme ✦</button>
-  <p class="signature">Eddy Boussetta · Les Dimensions de Gaïa</p>
-</section>
+<div class="container">
+    <div class="card no-print" id="input-card">
+        <h1>Le Codex Universel</h1>
+        <p style="text-align:center">Entrez vos coordonnées vibratoires pour décoder votre existence.</p>
+        <div class="grid">
+            <div class="input-group"><input type="text" id="prenom" placeholder="Votre Prénom"></div>
+            <div class="input-group"><input type="text" id="nom" placeholder="Votre Nom"></div>
+        </div>
+        <div class="input-group"><input type="date" id="dob"></div>
+        <div class="input-group">
+            <select id="tradition">
+                <option value="all">Toutes les traditions (Synthèse Globale)</option>
+            </select>
+        </div>
+        <button class="btn-ritual" onclick="analyser()">Lancer l'Analyse Sacrée</button>
+    </div>
 
-<section class="pg" id="p-don">
-  <h2 class="titre-page">Un geste du cœur</h2>
-  <div class="sep"></div>
-  <p class="intro">Ce Miroir de l'Âme vous est offert librement, avec amour.<br>Si ce portrait vous touche, si les mots résonnent en vous et vous apportent de la lumière, un don libre est le bienvenu pour soutenir ce travail spirituel et permettre à d'autres âmes d'en bénéficier.</p>
-  <div class="cadre-don">
-    <p style="color:#a8dfc0;font-size:1.05rem;line-height:1.9;font-weight:300;">
-      ✦ Ce site est entièrement gratuit et sans publicité<br>
-      ✦ Chaque portrait est créé avec soin et bienveillance<br>
-      ✦ Votre don, même modeste, permet à ce travail de continuer<br>
-      ✦ Il n'y a aucune obligation — votre présence ici est déjà un cadeau
-    </p>
-    <div style="margin-top:22px;">
-      <a href="https://www.paypal.me/globalenergie" target="_blank" class="btn-don">Faire un don libre via PayPal</a>
+    <div id="resultat" class="result-section">
+        <div class="card">
+            <div id="output-header"></div>
+            <hr>
+            <div id="output-etymologie"></div>
+            <hr>
+            <div id="output-numerologie"></div>
+            <hr>
+            <div id="output-traditions"></div>
+            <hr>
+            <div id="output-esprits"></div>
+            <hr>
+            <div id="output-conclusion"></div>
+            <button class="btn-ritual no-print" style="margin-top:20px" onclick="window.print()">Sauvegarder mon Codex</button>
+        </div>
     </div>
-  </div>
-  <button class="btn" onclick="go('p-form')">✦ Continuer vers mon portrait ✦</button>
-  <button class="btn-retour" onclick="go('p-accueil')">← Retour</button>
-</section>
-
-<section class="pg" id="p-form">
-  <div class="form-wrap">
-    <h2 class="titre-page" style="text-align:center;">Votre Portrait Sacré</h2>
-    <div class="grp"><label class="label">Prénom</label><input type="text" class="inp" id="f-prenom" placeholder="Votre prénom..."></div>
-    <div class="grp"><label class="label">Nom de famille</label><input type="text" class="inp" id="f-nom" placeholder="Votre nom..."></div>
-    <div class="row2">
-      <div class="grp"><label class="label">Date de naissance</label><input type="date" class="inp" id="f-date"></div>
-      <div class="grp"><label class="label">Heure de naissance</label><input type="time" class="inp" id="f-heure"></div>
-    </div>
-    <div class="grp"><label class="label">Lieu de naissance</label><input type="text" class="inp" id="f-lieu" placeholder="Ville, pays..."></div>
-    <div class="grp">
-        <label class="label">Genre</label>
-        <select class="inp" id="f-genre">
-          <option value="neutre">Choisissez...</option>
-          <option value="feminin">Féminin</option>
-          <option value="masculin">Masculin</option>
-        </select>
-    </div>
-    <div class="grp">
-      <label class="label">Intention</label>
-      <textarea class="inp" id="f-intention" rows="2" placeholder="Une question ?"></textarea>
-    </div>
-    <p class="err" id="form-err">Veuillez remplir les champs obligatoires.</p>
-    <div style="text-align:center;"><button class="btn" onclick="generer()">✦ Révéler mon Portrait ✦</button></div>
-  </div>
-</section>
-
-<section class="pg" id="p-gen">
-  <div class="orbe-gen">🌿</div>
-  <p id="etape-txt">Les esprits tissent votre portrait…</p>
-  <div class="barre-wrap"><div class="barre" id="barre"></div></div>
-</section>
-
-<section class="pg" id="p-res">
-  <div class="doc-wrap" id="doc-miroir">
-    <div class="doc-entete">
-      <h1 class="doc-titre">Le Miroir de l'Âme</h1>
-      <p id="doc-sous-titre"></p>
-    </div>
-    <div class="doc-contenu" id="doc-contenu"></div>
-    <div class="doc-pied">
-      <p>✦ Les Dimensions de Gaïa ✦</p>
-    </div>
-  </div>
-  <button class="btn-dl" onclick="telecharger()">⬇ Télécharger mon Miroir de l'Âme (PDF)</button>
-</section>
+</div>
 
 <script>
-/* NAVIGATION */
-function go(id){
-  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
-  document.getElementById(id).classList.add('on');
-  window.scrollTo(0,0);
+// --- LOGIQUE NUMEROLOGIQUE & ETYMOLOGIQUE ---
+const ALPHA = { a:1, b:2, c:3, d:4, e:5, f:6, g:7, h:8, i:9, j:1, k:2, l:3, m:4, n:5, o:6, p:7, q:8, r:9, s:1, t:2, u:3, v:4, w:5, x:6, y:7, z:8 };
+
+function getNum(str) {
+    let sum = str.toLowerCase().split('').reduce((acc, char) => acc + (ALPHA[char] || 0), 0);
+    return sum;
 }
 
-function avancer(pct, texte){
-  const b = document.getElementById('barre');
-  if(b) b.style.width = pct + '%';
-  const t = document.getElementById('etape-txt');
-  if(t && texte) t.textContent = texte;
-}
-
-/* NUMÉROLOGIE CORRIGÉE */
-var VAL={'A':1,'B':2,'C':3,'D':4,'E':5,'F':6,'G':7,'H':8,'I':9,'J':1,'K':2,'L':3,'M':4,'N':5,'O':6,'P':7,'Q':8,'R':9,'S':1,'T':2,'U':3,'V':4,'W':5,'X':6,'Y':7,'Z':8};
-
-function reduire(n){
-    while(n > 9 && n !== 11 && n !== 22 && n !== 33){
-        n = String(n).split('').reduce((a, b) => a + parseInt(b), 0);
-    }
+function reduire(n, master=true) {
+    if (master && (n === 11 || n === 22 || n === 33)) return n;
+    while (n > 9) { n = n.toString().split('').reduce((a,b) => a + parseInt(b), 0); }
     return n;
 }
 
-function numCheminVie(dateStr){
-    // Supprime les tirets et additionne chaque chiffre
-    let s = dateStr.replace(/-/g, '').split('').reduce((a, b) => a + parseInt(b), 0);
-    return reduire(s);
+function getEtymologie(prenom) {
+    // Simule une base de données étymologique
+    const p = prenom.toLowerCase();
+    if(p.includes('a')) return "Racine Solaire : Signifie la Lumière ou le Commencement. Dans la tradition celte, évoque l'éveil de la nature.";
+    if(p.includes('el')) return "Racine Céleste : 'El' fait référence au Divin (Angélique). Porteur de la parole des messagers.";
+    return "Racine Terrestre : Liée à la stabilité, au nomade qui devient bâtisseur.";
 }
 
-function valLettre(ch){
-    let l = ch.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-    return VAL[l] || 0;
-}
+function analyser() {
+    const prenom = document.getElementById('prenom').value;
+    const nom = document.getElementById('nom').value;
+    const dob = document.getElementById('dob').value;
+    if (!prenom || !dob) return alert("Veuillez remplir les champs.");
 
-function numExpression(prenom, nom){
-    let s = 0, full = (prenom + nom).replace(/\s/g, '');
-    for(let char of full) s += valLettre(char);
-    return reduire(s);
-}
-
-function numAme(prenom, nom){
-    let s = 0, full = (prenom + nom).replace(/\s/g, ''), voyelles = 'AEIOUY';
-    for(let char of full) {
-        let l = char.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-        if(voyelles.indexOf(l) >= 0) s += valLettre(char);
-    }
-    return reduire(s);
-}
-
-/* DONNÉES (Gardées de ton code original) */
-var SIG_CHEMIN={1:"Pionnier",2:"Harmonie",3:"Créativité",4:"Bâtisseur",5:"Liberté",6:"Amour",7:"Sagesse",8:"Puissance",9:"Sagesse Universelle",11:"Illuminé",22:"Bâtisseur",33:"Guide"};
-var SIG_EXPR={1:"leadership",2:"douceur",3:"joie",4:"rigueur",5:"aventure",6:"service",7:"recherche",8:"ambition",9:"don",11:"intuition",22:"concrétisation",33:"guérison"};
-var SIG_AME={1:"indépendance",2:"paix",3:"joie",4:"stabilité",5:"liberté",6:"harmonie",7:"vérité",8:"pouvoir",9:"amour",11:"éveil",22:"trace",33:"compassion"};
-
-var CELTIC=[{n:"Bouleau",f:"Beithe",s:"Renouveau",debut:[12,24]},{n:"Sorbier",f:"Luis",s:"Protection",debut:[1,21]},{n:"Frêne",f:"Nion",s:"Connexion",debut:[2,18]},{n:"Aulne",f:"Fearn",s:"Courage",debut:[3,18]},{n:"Saule",f:"Saille",s:"Intuition",debut:[4,15]},{n:"Aubépine",f:"Huath",s:"Espoir",debut:[5,13]},{n:"Chêne",f:"Duir",s:"Force",debut:[6,10]},{n:"Houx",f:"Tinne",s:"Équilibre",debut:[7,8]},{n:"Noisetier",f:"Coll",s:"Sagesse",debut:[8,5]},{n:"Vigne",f:"Muin",s:"Vérité",debut:[9,2]},{n:"Lierre",f:"Gort",s:"Cycles",debut:[9,30]},{n:"Roseau",f:"Ngetal",s:"Santé",debut:[10,28]},{n:"Sureau",f:"Ruis",s:"Transformation",debut:[11,25]}];
-function getCeltic(m,j){
-    for(let i=CELTIC.length-1; i>=0; i--){
-        if(m > CELTIC[i].debut[0] || (m === CELTIC[i].debut[0] && j >= CELTIC[i].debut[1])) return CELTIC[i];
-    }
-    return CELTIC[CELTIC.length-1];
-}
-
-var CHINOIS_ANIMAUX = ["Rat","Buffle","Tigre","Lapin","Dragon","Serpent","Cheval","Chèvre","Singe","Coq","Chien","Cochon"];
-var CHINOIS_ELEMS = ["Métal","Eau","Bois","Feu","Terre"];
-function getChinois(annee){
-    let animal = CHINOIS_ANIMAUX[(annee - 4) % 12];
-    let elem = CHINOIS_ELEMS[Math.floor(((annee - 4) % 10) / 2)];
-    return {animal: animal, elem: elem, q: "Une essence unique de " + animal + " de " + elem};
-}
-
-var CHAKRAS=[{nom:"Racine",couleur:"rouge",mantra:"LAM",pierre:"Jaspe",plante:"Vétiver",pratique:"Ancrage"},{nom:"Sacré",couleur:"orange",mantra:"VAM",pierre:"Cornaline",plante:"Ylang",pratique:"Création"},{nom:"Plexus",couleur:"jaune",mantra:"RAM",pierre:"Citrine",plante:"Camomille",pratique:"Action"},{nom:"Cœur",couleur:"vert",mantra:"YAM",pierre:"Quartz rose",plante:"Rose",pratique:"Amour"},{nom:"Gorge",couleur:"bleu",mantra:"HAM",pierre:"Lapis",plante:"Sauge",pratique:"Vérité"},{nom:"3ème Œil",couleur:"indigo",mantra:"OM",pierre:"Améthyste",plante:"Lavande",pratique:"Vision"},{nom:"Couronne",couleur:"violet",mantra:"silence",pierre:"Cristal",plante:"Encens",pratique:"Unité"}];
-
-var ESPRITS=[{nom:"Fées",msg:"Lumière invisible."},{nom:"Elfes",msg:"Beauté ancienne."},{nom:"Ondines",msg:"Fluidité éternelle."},{nom:"Sylphes",msg:"Clarté d'esprit."},{nom:"Salamandres",msg:"Feu sacré."},{nom:"Gnomes",msg:"Ancrage terrestre."},{nom:"Déesse Dana",msg:"Mère lumière."},{nom:"Licornes",msg:"Pureté d'âme."},{nom:"Dévas",msg:"Esprits de la nature."},{nom:"Dragons",msg:"Transformation puissante."}];
-
-var SAGES = ["Bouddha", "Jésus", "Socrate", "Platon", "Aristote", "Jung"];
-var MESSAGES = ["La paix est en vous.", "Aimez sans condition.", "Connais-toi toi-même.", "Le monde est un reflet.", "La vertu est une habitude.", "L'ombre est un trésor."];
-
-var SAINTS = [{m:1,j:1,n:"Marie"},{m:11,j:1,n:"Tous les Saints"},{m:12,j:25,n:"Nativité"},{m:5,j:1,n:"St Joseph"}];
-function getSaint(m,j){ return SAINTS[0]; }
-
-/* GENERER DOCUMENT */
-function creerDocument(prenom, nom, dateVal, lieu, heure, genre, intention){
-    let d = new Date(dateVal);
-    let m = d.getMonth()+1, j = d.getDate(), a = d.getFullYear();
-    let cv = numCheminVie(dateVal), ne = numExpression(prenom, nom), na = numAme(prenom, nom);
-    let celt = getCeltic(m,j), chin = getChinois(a);
-    let esp1 = ESPRITS[cv % 10], esp2 = ESPRITS[ne % 10];
-    let chak = CHAKRAS[na % 7];
-
-    let h = `<h2>L'Étoile de votre Naissance</h2>
-    <p>Vous êtes né(e) le <strong>${j}/${m}/${a}</strong> à <strong>${lieu}</strong>. Ce moment est une signature cosmique.</p>
-    <h3>Tradition Celtique : Le ${celt.n}</h3>
-    <p>${celt.s}. Votre arbre sacré est le ${celt.f}.</p>
-    <h3>Tradition Chinoise : Le ${chin.animal} de ${chin.elem}</h3>
-    <p>${chin.q}.</p>
-    <h2>Numérologie Sacrée</h2>
-    <p>Chemin de Vie : <strong>${cv}</strong> (${SIG_CHEMIN[cv]})</p>
-    <p>Nombre d'Expression : <strong>${ne}</strong> (${SIG_EXPR[ne]})</p>
-    <p>Nombre de l'Âme : <strong>${na}</strong> (${SIG_AME[na]})</p>
-    <h2>Esprits Gardiens</h2>
-    <p><strong>${esp1.nom} :</strong> ${esp1.msg}</p>
-    <p><strong>${esp2.nom} :</strong> ${esp2.msg}</p>
-    <h2>Harmonie Énergétique</h2>
-    <p>Votre Chakra prioritaire est le <strong>${chak.nom}</strong>. Couleur : ${chak.couleur}.</p>
-    <p><em>Pratique conseillée : ${chak.pratique}</em>. Pierre : ${chak.pierre}.</p>
-    <h2>Paroles des Sages</h2>`;
+    const date = new Date(dob);
+    const j = date.getDate(), m = date.getMonth()+1, a = date.getFullYear();
     
-    SAGES.forEach((s, idx) => {
-        h += `<p><strong>${s} :</strong> "${MESSAGES[idx]}"</p>`;
-    });
+    // Calculs
+    const cheminVie = reduire(j + m + reduire(a, false));
+    const expression = reduire(getNum(prenom) + getNum(nom));
+    const angeNum = (j * m).toString().padStart(3, '0'); // Code Angélique simplifié
 
-    if(intention) h += `<h2>Réponse à votre intention</h2><p>Concernant "${intention}", les esprits vous disent : écoutez votre cœur.</p>`;
+    // Remplissage HTML
+    document.getElementById('output-header').innerHTML = `
+        <h1>Portrait Sacré de ${prenom} ${nom}</h1>
+        <p style="text-align:center">Né(e) le ${j}/${m}/${a} — Coordonnées Terrestres Actives</p>
+    `;
 
-    return h;
+    document.getElementById('output-etymologie').innerHTML = `
+        <h2>I. Étymologie & Puissance du Nom</h2>
+        <p><strong>Origine du Prénom :</strong> ${getEtymologie(prenom)}</p>
+        <p><strong>Dans les Traditions :</strong> Pour les <strong>Amérindiens</strong>, votre nom vibre comme un écho de votre totem. Chez les <strong>Celtes</strong>, il porte l'Ogham (l'alphabet des arbres) de la protection. Votre nom de famille, <strong>${nom}</strong>, agit comme votre "Ancrage Ancestral", transmettant le Karma des ancêtres vers votre Dharma personnel.</p>
+    `;
+
+    document.getElementById('output-numerologie').innerHTML = `
+        <h2>II. Les Mathématiques de l'Invisible</h2>
+        <div class="grid">
+            <div class="mini-card"><strong>Chemin de Vie : ${cheminVie}</strong><br>Votre destin mathématique. C'est la route tracée dans les étoiles.</div>
+            <div class="mini-card"><strong>Nombre des Anges : ${angeNum}</strong><br>Séquence de protection. Les anges utilisent ce code pour attirer votre attention.</div>
+        </div>
+        <p><em>Note :</em> Votre numérologie 11, 22 ou 33 (si présente) indique une "Âme Maîtresse" venue pour une mission collective.</p>
+    `;
+
+    document.getElementById('output-traditions').innerHTML = `
+        <h2>III. Calendriers du Monde</h2>
+        <div class="grid">
+            <div class="mini-card"><strong>Maya :</strong> Signe du 'Lamat' (L'Étoile) - Porteur de beauté.</div>
+            <div class="mini-card"><strong>Chinois :</strong> Cycle lié à l'élément de votre année de naissance.</div>
+            <div class="mini-card"><strong>Musulman :</strong> Correspondance Lunaire - Votre sensibilité est fluide.</div>
+            <div class="mini-card"><strong>Maori :</strong> Le 'Mana' qui émane de votre nom renforce votre autorité spirituelle.</div>
+        </div>
+    `;
+
+    document.getElementById('output-esprits').innerHTML = `
+        <h2>IV. Esprits & Guides</h2>
+        <p><strong>Esprit de la Nature proche :</strong> Le <strong>Gardien du Seuil</strong> (Esprit celte des forêts). Il vous accompagne dès que vous marchez sur une terre sauvage.</p>
+        <p><strong>Esprit Céleste :</strong> L'Archange de votre rayon de naissance. Il filtre les énergies pour ne laisser passer que ce qui sert votre évolution.</p>
+    `;
+
+    document.getElementById('output-conclusion').innerHTML = `
+        <h2>Conclusion du Codex</h2>
+        <p style="font-style:italic">"L'univers n'est pas fait d'atomes, il est fait d'histoires. ${prenom}, votre histoire est inscrite dans les mathématiques, les mythes et le sang de vos ancêtres. Que ce miroir vous aide à marcher avec la certitude d'un roi/reine sur son propre royaume."</p>
+    `;
+
+    document.getElementById('input-card').style.display = 'none';
+    document.getElementById('resultat').style.display = 'block';
 }
 
-function generer(){
-    let prenom = document.getElementById('f-prenom').value.trim();
-    let nom = document.getElementById('f-nom').value.trim();
-    let dateVal = document.getElementById('f-date').value;
-    let lieu = document.getElementById('f-lieu').value.trim();
-    
-    if(!prenom || !nom || !dateVal || !lieu){
-        document.getElementById('form-err').style.display='block';
-        return;
-    }
-    
-    go('p-gen');
-    avancer(20, 'Consultation des astres...');
-    
-    setTimeout(() => {
-        try {
-            let doc = creerDocument(prenom, nom, dateVal, lieu, "", "", "");
-            document.getElementById('doc-sous-titre').textContent = 'Portrait spirituel de ' + prenom;
-            document.getElementById('doc-contenu').innerHTML = doc;
-            avancer(100, 'Prêt !');
-            setTimeout(() => go('p-res'), 500);
-        } catch(e) {
-            console.error(e);
-            alert("Erreur lors de la génération. Vérifiez vos données.");
-            go('p-form');
-        }
-    }, 2000);
-}
-
-function telecharger(){ window.print(); }
-
-/* ETOILES ANIMÉES */
-(function(){
-  var c=document.getElementById('cv'),ctx=c.getContext('2d'),stars=[];
-  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}
-  function init(){stars=[];for(var i=0;i<150;i++)stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.5,sp:Math.random()*0.005});}
-  function draw(){
-    ctx.clearRect(0,0,c.width,c.height);
-    stars.forEach(s => {
+// Animation étoiles
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const particles = [];
+for(let i=0; i<150; i++) particles.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*2});
+function anim() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = "white";
+    particles.forEach(p => {
         ctx.beginPath();
-        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-        ctx.fillStyle='rgba(201,168,76,0.5)';
+        ctx.arc(p.x, p.y, p.s, 0, Math.PI*2);
         ctx.fill();
+        p.y += 0.3; if(p.y > canvas.height) p.y = 0;
     });
-    requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize',resize);
-  resize();init();draw();
-})();
+    requestAnimationFrame(anim);
+}
+anim();
 </script>
 </body>
 </html>
