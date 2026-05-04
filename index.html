@@ -355,11 +355,9 @@ var CHINOIS=[
   {annee:2013,animal:"Serpent",elem:"Eau",q:"Mystère, profondeur, intuition aiguë, transformation intérieure"}
 ];
 function getChinois(annee){
-  var base=1924,cycle=CHINOIS.length/12,idx=(annee-base)%12;
-  if(idx<0)idx+=12;
-  var entree=CHINOIS.filter(function(c){return c.annee===annee||c.annee===base+idx;});
-  if(entree.length)return entree[0];
-  return CHINOIS[((annee-1924)%12+12)%12];
+  var idx=((annee-1924)%12+12)%12;
+  for(var i=0;i<CHINOIS.length;i++){if(CHINOIS[i].annee===annee)return CHINOIS[i];}
+  return CHINOIS[idx];
 }
 
 var CHAKRAS=[
@@ -453,10 +451,16 @@ function generer(){
   setTimeout(function(){avancer(100,'Votre Miroir de l\'Âme est prêt…');},2100);
 
   setTimeout(function(){
-    var doc=creerDocument(prenom,nom,dateVal,lieu,heure,genre,intention);
-    document.getElementById('doc-sous-titre').textContent='Portrait spirituel de '+prenom+' '+nom;
-    document.getElementById('doc-contenu').innerHTML=doc;
-    go('p-res');
+    try {
+      var doc=creerDocument(prenom,nom,dateVal,lieu,heure,genre,intention);
+      document.getElementById('doc-sous-titre').textContent='Portrait spirituel de '+prenom+' '+nom;
+      document.getElementById('doc-contenu').innerHTML=doc;
+      go('p-res');
+    } catch(e) {
+      document.getElementById('etape-txt').textContent='Une erreur est survenue. Veuillez réessayer.';
+      document.getElementById('barre').style.background='#e07070';
+      console.error('Erreur creerDocument:',e);
+    }
   },2600);
 }
 
@@ -537,11 +541,11 @@ function creerDocument(prenom,nom,dateVal,lieu,heure,genre,intention){
   h+='<h2>Votre Numérologie Sacrée</h2>';
   h+='<p>La numérologie ne lit pas l\'avenir — elle révèle la structure profonde de votre âme, les leçons que vous êtes venu maîtriser et les dons que vous portez naturellement.</p>';
   h+='<h3>Chemin de Vie : '+cv+'</h3>';
-  h+='<p>'+SIG_CHEMIN[cv]||'Votre chemin de vie porte une sagesse unique que vous développez tout au long de votre existence.'+'</p>';
+  h+='<p>'+(SIG_CHEMIN[cv]||'Votre chemin de vie porte une sagesse unique que vous développez tout au long de votre existence.')+'</p>';
   h+='<h3>Nombre d\'Expression : '+ne+'</h3>';
-  h+='<p>Votre nombre d\'expression est le <strong>'+ne+'</strong>. Il <strong>'+SIG_EXPR[ne]||'porte une signification profonde pour votre vie'+'</strong>. C\'est la façon dont vous vous manifestez dans le monde, dont vos talents prennent forme dans votre vie quotidienne et professionnelle.</p>';
+  h+='<p>Votre nombre d\'expression est le <strong>'+ne+'</strong>. Il <strong>'+(SIG_EXPR[ne]||'porte une signification profonde pour votre vie')+'</strong>. C\'est la façon dont vous vous manifestez dans le monde, dont vos talents prennent forme dans votre vie quotidienne et professionnelle.</p>';
   h+='<h3>Nombre de l\'Âme : '+na+'</h3>';
-  h+='<p>Votre nombre de l\'âme est le <strong>'+na+'</strong>. Au plus profond de votre être, votre âme <strong>'+SIG_AME[na]||'aspire à son expression la plus élevée'+'</strong>. Cette aspiration est le fil d\'or qui court sous toutes vos décisions, même celles que vous prenez sans en comprendre le motif.</p>';
+  h+='<p>Votre nombre de l\'âme est le <strong>'+na+'</strong>. Au plus profond de votre être, votre âme <strong>'+(SIG_AME[na]||'aspire à son expression la plus élevée')+'</strong>. Cette aspiration est le fil d\'or qui court sous toutes vos décisions, même celles que vous prenez sans en comprendre le motif.</p>';
 
   h+='<h2>L\'Héritage de votre Nom</h2>';
   var prenomU=prenom.charAt(0).toUpperCase()+prenom.slice(1).toLowerCase();
@@ -601,9 +605,9 @@ function creerDocument(prenom,nom,dateVal,lieu,heure,genre,intention){
     +'</p>';
 
   h+='<h2>Synthèse et Message des Esprits</h2>';
-  var intro=genre==='feminin'?'Vous qui êtes venue':gender==='masculin'?'Vous qui êtes venu':'Vous qui êtes venu'+est;
+  var intro=genre==='feminin'?'Vous qui êtes venue':genre==='masculin'?'Vous qui êtes venu':'Vous qui êtes venu'+est;
   h+='<p>'+intro+' au monde en ce '+jourSem+' '+jour+' '+moisNom+' '+annee+', à '+lieu+', votre âme a choisi avec soin chaque détail de cette incarnation. Elle a choisi vos parents, votre lieu de naissance, votre époque — non par hasard, mais avec une précision d\'orfèvre.</p>';
-  h+='<p>Le chemin de vie '+cv+' que vous portez est celui de '+SIG_CHEMIN[cv].split('.')[0].toLowerCase()+'. L\'arbre celtique '+celt.n+' vous protège de ses racines millénaires. L\'animal du calendrier chinois, le '+chin.animal+' de '+chin.elem+', insuffle en vous '+(chin.q.split(',')[0]).toLowerCase()+'. Et vos esprits gardiens, les '+esp1.nom+' et les '+esp2.nom+', marchent avec vous depuis le début.</p>';
+  h+='<p>Le chemin de vie '+cv+' que vous portez est celui de '+((SIG_CHEMIN[cv]||'la sagesse et de la croissance intérieure').split('.')[0].toLowerCase())+'. L\'arbre celtique '+celt.n+' vous protège de ses racines millénaires. L\'animal du calendrier chinois, le '+chin.animal+' de '+chin.elem+', insuffle en vous '+(chin.q.split(',')[0]).toLowerCase()+'. Et vos esprits gardiens, les '+esp1.nom+' et les '+esp2.nom+', marchent avec vous depuis le début.</p>';
   h+='<p>Tout cela dit une seule et même chose : <strong>vous êtes venu'+est+' ici pour une raison</strong>. Non pas une grande mission abstraite inscrite dans le ciel, mais une façon très concrète et très quotidienne d\'être pleinement vous-même, de donner ce que vous seul pouvez donner.</p>';
   if(intention){
     h+='<p>Vous vous interrogez sur ceci : <em>'+intention+'</em>. Les esprits répondent avec douceur : cette question est en elle-même la réponse. Vous la posez parce que quelque chose en vous sait déjà. Faites confiance à ce premier élan, à cette première image qui vous vient avant que le mental n\'intervienne. C\'est là que vivent vos esprits gardiens — dans ce premier souffle d\'intuition.</p>';
