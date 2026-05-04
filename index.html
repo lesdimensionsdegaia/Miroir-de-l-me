@@ -1,368 +1,356 @@
-import { useState, useEffect, useRef } from "react";
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Votre Miroir de l'Âme — Les Dimensions de Gaïa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--or:#c9a84c;--or-clair:#e8d5a3;--or-pale:#f5edd8;--noir:#0a0705;--text-clair:#f0e6d0;--text-doux:#c8b896;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--noir);color:var(--text-clair);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden;}
+#cv{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+.pg{display:none;position:relative;z-index:1;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:50px 20px;text-align:center;}
+.pg.on{display:flex;}
+/* ORBE */
+.orbe{width:160px;height:160px;margin:0 auto 32px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#6b4c2a,#1a0d02 60%,#0a0705);box-shadow:0 0 40px rgba(201,168,76,.3),0 0 80px rgba(201,168,76,.12),inset 0 0 30px rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;font-size:56px;color:var(--or);text-shadow:0 0 20px rgba(201,168,76,.8);animation:pulse 3s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 40px rgba(201,168,76,.3),0 0 80px rgba(201,168,76,.12);transform:scale(1);}50%{box-shadow:0 0 60px rgba(201,168,76,.5),0 0 100px rgba(201,168,76,.2);transform:scale(1.03);}}
+/* TITRES */
+.titre{font-family:'Cinzel Decorative',serif;font-size:clamp(1.5rem,5vw,2.6rem);color:var(--or);letter-spacing:.05em;text-shadow:0 0 30px rgba(201,168,76,.4);margin-bottom:10px;}
+.sous-titre{font-style:italic;color:var(--text-doux);letter-spacing:.2em;margin-bottom:36px;}
+.titre-page{font-family:'Cinzel Decorative',serif;font-size:clamp(1.2rem,3.5vw,1.8rem);color:var(--or);margin-bottom:10px;}
+/* SEP */
+.sep{width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--or),transparent);margin:22px auto;}
+/* TEXTE */
+.intro{max-width:680px;line-height:1.9;color:var(--or-pale);font-weight:300;margin-bottom:16px;font-size:1.1rem;}
+/* CADRE */
+.cadre{max-width:700px;width:100%;border:1px solid rgba(201,168,76,.25);border-radius:2px;padding:26px 30px;margin:22px auto;background:rgba(30,15,5,.6);position:relative;}
+.cadre::before,.cadre::after{content:'❧';color:var(--or);position:absolute;top:12px;font-size:1.1rem;}
+.cadre::before{left:13px;}.cadre::after{right:13px;transform:scaleX(-1);}
+ul.liste{list-style:none;text-align:left;}
+ul.liste li{color:var(--or-pale);line-height:2.2;font-size:1rem;}
+ul.liste li::before{content:'✦ ';color:var(--or);font-size:.7rem;}
+/* PRIX */
+.prix{display:inline-block;font-family:'Cinzel Decorative',serif;font-size:1.8rem;color:var(--or);border:2px solid var(--or);padding:12px 35px;margin:16px 0 8px;letter-spacing:.1em;}
+/* BOUTONS */
+.btn{display:inline-block;padding:16px 44px;background:linear-gradient(135deg,#7a4f1a,var(--or),#7a4f1a);color:var(--noir);font-family:'Cinzel Decorative',serif;font-size:.9rem;letter-spacing:.12em;border:none;border-radius:1px;cursor:pointer;box-shadow:0 4px 25px rgba(201,168,76,.35);transition:all .3s;margin-top:22px;}
+.btn:hover{box-shadow:0 6px 40px rgba(201,168,76,.6);transform:translateY(-2px);}
+.btn2{display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#3a2a10,#6a4a1a,#3a2a10);color:var(--or-pale);font-family:'Cinzel Decorative',serif;font-size:.78rem;letter-spacing:.1em;border:none;border-radius:1px;cursor:pointer;margin-top:10px;}
+.btn-retour{background:none;border:none;color:var(--text-doux);cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:.95rem;text-decoration:underline;margin-top:14px;}
+.btn-paypal{display:inline-flex;align-items:center;gap:10px;padding:16px 40px;background:#0070ba;color:white;font-family:sans-serif;font-size:1.05rem;text-decoration:none;border-radius:3px;margin:18px 0;transition:all .3s;}
+.btn-paypal:hover{background:#005ea6;transform:translateY(-2px);}
+.btn-dl{display:inline-flex;align-items:center;gap:10px;margin-top:28px;padding:14px 36px;background:transparent;border:1px solid var(--or);color:var(--or);font-family:'Cinzel Decorative',serif;font-size:.82rem;letter-spacing:.12em;cursor:pointer;transition:all .3s;}
+.btn-dl:hover{background:rgba(201,168,76,.1);}
+/* FORM */
+.form-wrap{max-width:640px;width:100%;text-align:left;}
+.label{display:block;font-size:.78rem;letter-spacing:.18em;color:var(--or);text-transform:uppercase;margin-bottom:6px;font-family:'Raleway',sans-serif;}
+.inp{width:100%;background:rgba(20,10,3,.8);border:1px solid rgba(201,168,76,.3);border-radius:1px;color:var(--text-clair);font-family:'Cormorant Garamond',serif;font-size:1.05rem;padding:12px 16px;outline:none;transition:border-color .3s;}
+.inp:focus{border-color:var(--or);}
+.inp::placeholder{color:rgba(200,184,150,.35);font-style:italic;}
+.grp{margin-bottom:20px;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.sep-form{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent);margin:22px 0;}
+.err{color:#e07070;font-size:.88rem;margin-top:6px;font-style:italic;display:none;}
+/* ETAPES */
+.etape{display:flex;gap:18px;background:rgba(30,15,5,.7);border:1px solid rgba(201,168,76,.2);padding:18px 22px;margin-bottom:14px;text-align:left;max-width:560px;width:100%;}
+.etape-n{font-family:'Cinzel Decorative',serif;font-size:1.5rem;color:var(--or);min-width:30px;}
+.etape-t{color:var(--or-pale);line-height:1.7;font-size:.98rem;}
+/* GENERATION */
+.orbe-spin{width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#4a2c0a,#0a0705);border:1px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;font-size:46px;box-shadow:0 0 40px rgba(201,168,76,.2);margin:0 auto 22px;animation:spin 8s linear infinite;}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.barre-wrap{width:280px;height:2px;background:rgba(201,168,76,.15);margin:22px auto;overflow:hidden;}
+.barre{height:100%;background:linear-gradient(90deg,var(--or),var(--or-clair));width:0%;transition:width .5s ease;box-shadow:0 0 10px var(--or);}
+/* DOCUMENT */
+.doc-wrap{max-width:740px;width:100%;background:linear-gradient(165deg,#12090300,#1e0f05,#0f0803);border:1px solid rgba(201,168,76,.2);border-radius:2px;padding:44px 40px;box-shadow:0 0 60px rgba(0,0,0,.8);position:relative;}
+.doc-wrap::before{content:'';position:absolute;top:8px;left:8px;right:8px;bottom:8px;border:1px solid rgba(201,168,76,.07);pointer-events:none;}
+.doc-entete{text-align:center;margin-bottom:36px;padding-bottom:26px;border-bottom:1px solid rgba(201,168,76,.15);}
+.doc-titre{font-family:'Cinzel Decorative',serif;font-size:clamp(1.1rem,3vw,1.5rem);color:var(--or);margin-bottom:8px;}
+.doc-contenu{font-size:1.02rem;line-height:2;color:var(--or-pale);font-weight:300;}
+.doc-contenu h2{font-family:'Cinzel Decorative',serif;font-size:.88rem;color:var(--or);letter-spacing:.12em;margin:38px 0 12px;text-align:center;text-transform:uppercase;}
+.doc-contenu h3{font-size:1.05rem;color:var(--or-clair);font-style:italic;margin:16px 0 6px;}
+.doc-contenu p{margin-bottom:12px;}
+.doc-pied{text-align:center;margin-top:36px;padding-top:26px;border-top:1px solid rgba(201,168,76,.15);font-size:.88rem;color:var(--text-doux);font-style:italic;}
+/* SIGNATURE */
+.signature{margin-top:40px;font-style:italic;font-size:.9rem;color:var(--text-doux);opacity:.7;}
+@media(max-width:600px){.row2{grid-template-columns:1fr;}.doc-wrap{padding:28px 18px;}.cadre{padding:18px;}}
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
 
-const OR = "#c9a84c";
-const OR_PALE = "#f5edd8";
-const OR_CLAIR = "#e8d5a3";
-const NOIR = "#0a0705";
-const TEXT_DOUX = "#c8b896";
-const TEXT_CLAIR = "#f0e6d0";
+<!-- PAGE ACCUEIL -->
+<section class="pg on" id="p-accueil">
+  <div class="orbe">✦</div>
+  <h1 class="titre">Votre Miroir de l'Âme</h1>
+  <p class="sous-titre">Les Dimensions de Gaïa</p>
+  <div class="sep"></div>
+  <p class="intro">Chaque être humain est un univers unique, tissé de fils cosmiques, terrestres et ancestraux. Votre <em>Miroir de l'Âme</em> est un portrait spirituel profond et personnalisé, créé spécialement pour vous, et pour vous seul.</p>
+  <div class="cadre">
+    <ul class="liste">
+      <li>Votre profil selon 5 calendriers sacrés : celtique, chinois, chrétien, maori, maya</li>
+      <li>Votre numérologie complète : chemin de vie, expression et âme</li>
+      <li>L'étymologie sacrée de votre prénom et l'ancêtre porteur de votre nom</li>
+      <li>Vos esprits gardiens de la nature et figures mythologiques associées</li>
+      <li>Votre élément dominant et votre chakra prioritaire à travailler</li>
+      <li>Votre saint chrétien protecteur le plus proche</li>
+      <li>Ce que Bouddha, Jésus, Socrate, Platon, Aristote et Carl Gustav Jung vous diraient</li>
+      <li>Vos dons sociaux et spirituels, et les perturbations à surveiller</li>
+      <li>Une synthèse poétique unique d'environ 5 pages, rien que pour vous</li>
+    </ul>
+  </div>
+  <div class="prix">15 €</div>
+  <p class="intro" style="font-size:.92rem;margin-top:6px;margin-bottom:0;">Un document personnel et unique, à télécharger instantanément.</p>
+  <button class="btn" onclick="go('p-paiement')">✦ Découvrir mon Miroir de l'Âme ✦</button>
+  <p class="signature">Eddy Boussetta · Les Dimensions de Gaïa</p>
+</section>
 
-const styles = {
-  body: {
-    background: NOIR, color: TEXT_CLAIR,
-    fontFamily: "'Georgia', serif", minHeight: "100vh",
-    overflowX: "hidden", position: "relative",
-  },
-  page: { display: "flex", flexDirection: "column", alignItems: "center", padding: "50px 20px", minHeight: "100vh", position: "relative", zIndex: 1 },
-  titrePrincipal: { fontSize: "clamp(1.5rem,5vw,2.6rem)", color: OR, letterSpacing: "0.05em", textAlign: "center", marginBottom: 10, textShadow: `0 0 30px rgba(201,168,76,0.4)` },
-  sousTitre: { fontStyle: "italic", color: TEXT_DOUX, letterSpacing: "0.2em", marginBottom: 40, textAlign: "center" },
-  separateur: { width: 200, height: 1, background: `linear-gradient(90deg,transparent,${OR},transparent)`, margin: "24px auto" },
-  textIntro: { maxWidth: 680, lineHeight: 1.9, color: OR_PALE, fontWeight: 300, marginBottom: 16, textAlign: "center", fontSize: "1.1rem" },
-  cadre: { maxWidth: 700, width: "100%", border: `1px solid rgba(201,168,76,0.25)`, borderRadius: 2, padding: "28px 32px", margin: "24px auto", background: "rgba(30,15,5,0.6)" },
-  listItem: { listStyle: "none", lineHeight: 2.2, color: OR_PALE, fontSize: "1.02rem" },
-  prixBadge: { display: "inline-block", fontSize: "1.8rem", color: OR, border: `2px solid ${OR}`, padding: "12px 35px", margin: "16px 0 8px", letterSpacing: "0.1em" },
-  btnPrincipal: { padding: "16px 44px", background: `linear-gradient(135deg,#7a4f1a,${OR},#7a4f1a)`, color: NOIR, fontFamily: "Georgia,serif", fontSize: "0.95rem", letterSpacing: "0.12em", border: "none", borderRadius: 1, cursor: "pointer", boxShadow: `0 4px 25px rgba(201,168,76,0.35)`, marginTop: 24 },
-  btnPaypal: { display: "inline-flex", alignItems: "center", gap: 10, padding: "16px 40px", background: "#0070ba", color: "white", fontFamily: "sans-serif", fontSize: "1.05rem", textDecoration: "none", borderRadius: 3, margin: "20px 0", border: "none", cursor: "pointer" },
-  btnSecondaire: { padding: "12px 30px", background: "linear-gradient(135deg,#3a2a10,#6a4a1a,#3a2a10)", color: OR_PALE, fontFamily: "Georgia,serif", fontSize: "0.85rem", letterSpacing: "0.1em", border: "none", borderRadius: 1, cursor: "pointer", marginTop: 12 },
-  btnRetour: { background: "none", border: "none", color: TEXT_DOUX, cursor: "pointer", fontFamily: "Georgia,serif", fontSize: "0.95rem", textDecoration: "underline", marginTop: 16 },
-  label: { display: "block", fontSize: "0.78rem", letterSpacing: "0.18em", color: OR, textTransform: "uppercase", marginBottom: 6, fontFamily: "sans-serif" },
-  input: { width: "100%", background: "rgba(20,10,3,0.8)", border: `1px solid rgba(201,168,76,0.3)`, borderRadius: 1, color: TEXT_CLAIR, fontFamily: "Georgia,serif", fontSize: "1.05rem", padding: "12px 16px", outline: "none", boxSizing: "border-box" },
-  champGroupe: { marginBottom: 20 },
-  orbeAnim: { width: 120, height: 120, borderRadius: "50%", background: "radial-gradient(circle at 35% 35%,#4a2c0a,#0a0705)", border: `1px solid rgba(201,168,76,0.3)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 48, boxShadow: `0 0 40px rgba(201,168,76,0.2)`, margin: "0 auto 24px" },
-  barreConteneur: { width: 280, height: 2, background: "rgba(201,168,76,0.15)", margin: "24px auto", overflow: "hidden" },
-  barre: (pct) => ({ height: "100%", background: `linear-gradient(90deg,${OR},${OR_CLAIR})`, width: pct + "%", transition: "width 0.5s ease", boxShadow: `0 0 10px ${OR}` }),
-  document: { maxWidth: 740, width: "100%", background: "linear-gradient(165deg,#12090300,#1e0f05,#0f0803)", border: `1px solid rgba(201,168,76,0.2)`, borderRadius: 2, padding: "44px 40px", boxShadow: "0 0 60px rgba(0,0,0,0.8)" },
-  docTitre: { fontFamily: "Georgia,serif", fontSize: "clamp(1.1rem,3vw,1.5rem)", color: OR, textAlign: "center", marginBottom: 8 },
-  docSousTitre: { fontStyle: "italic", color: TEXT_DOUX, textAlign: "center", fontSize: "1rem" },
-  docContenu: { fontSize: "1.02rem", lineHeight: 2, color: OR_PALE, fontWeight: 300 },
-  btnTelecharger: { display: "inline-flex", alignItems: "center", gap: 10, marginTop: 30, padding: "14px 36px", background: "transparent", border: `1px solid ${OR}`, color: OR, fontFamily: "Georgia,serif", fontSize: "0.85rem", letterSpacing: "0.12em", cursor: "pointer" },
-  erreur: { color: "#e07070", fontSize: "0.88rem", marginTop: 6, fontStyle: "italic" },
-  etape: { display: "flex", gap: 18, background: "rgba(30,15,5,0.7)", border: `1px solid rgba(201,168,76,0.2)`, padding: "18px 22px", marginBottom: 16, textAlign: "left" },
-  etapeNum: { fontFamily: "Georgia,serif", fontSize: "1.5rem", color: OR, minWidth: 32 },
-};
+<!-- PAGE PAIEMENT -->
+<section class="pg" id="p-paiement">
+  <h2 class="titre-page">Étape 1 — Votre contribution</h2>
+  <div class="sep"></div>
+  <p class="intro">Pour recevoir votre <em>Miroir de l'Âme</em>, suivez ces deux étapes simples.</p>
+  <div class="etape">
+    <span class="etape-n">1</span>
+    <div class="etape-t">Réglez <strong style="color:var(--or)">15 €</strong> via PayPal en cliquant sur le bouton ci-dessous.<br><em>Dans la note du paiement, écrivez votre prénom.</em></div>
+  </div>
+  <div class="etape">
+    <span class="etape-n">2</span>
+    <div class="etape-t">Une fois le paiement effectué, revenez ici et cliquez sur <strong style="color:var(--or)">"J'ai payé"</strong>. Utilisez le mot de passe <strong style="color:var(--or)">Divina</strong> pour accéder à votre espace.</div>
+  </div>
+  <a href="https://www.paypal.me/globalenergie/15" target="_blank" class="btn-paypal">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.59 3.025-2.566 6.082-8.558 6.082H9.824l-1.226 7.76h3.397c.458 0 .847-.332.92-.784l.038-.193.733-4.64.047-.258a.932.932 0 0 1 .92-.784h.579c3.753 0 6.693-1.525 7.55-5.932.36-1.845.174-3.387-.56-4.464z"/></svg>
+    Payer 15 € sur PayPal
+  </a>
+  <button class="btn2" onclick="go('p-code')">J'ai payé · Accéder à mon formulaire</button>
+  <button class="btn-retour" onclick="go('p-accueil')">← Retour</button>
+</section>
 
-function Stars() {
-  const canvasRef = useRef(null);
-  useEffect(() => {
-    const c = canvasRef.current; const ctx = c.getContext("2d");
-    let stars = []; let raf;
-    const resize = () => { c.width = window.innerWidth; c.height = window.innerHeight; };
-    const init = () => { stars = Array.from({length:180},()=>({ x:Math.random()*c.width, y:Math.random()*c.height, r:Math.random()*1.1+0.2, speed:Math.random()*0.004+0.001, phase:Math.random()*Math.PI*2 })); };
-    const draw = (t) => { ctx.clearRect(0,0,c.width,c.height); stars.forEach(s=>{ const a=0.25+0.75*(0.5+0.5*Math.sin(t*s.speed*1000+s.phase)); ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fillStyle=`rgba(201,168,76,${a*0.55})`; ctx.fill(); }); raf=requestAnimationFrame(draw); };
-    resize(); init(); window.addEventListener("resize",()=>{resize();init();}); raf=requestAnimationFrame(draw);
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize",resize); };
-  }, []);
-  return <canvas ref={canvasRef} style={{position:"fixed",top:0,left:0,width:"100%",height:"100%",zIndex:0,pointerEvents:"none"}} />;
-}
-
-function OrbePulse({size=180}) {
-  const [scale, setScale] = useState(1);
-  useEffect(()=>{ const id=setInterval(()=>setScale(s=>s===1?1.05:1),1500); return ()=>clearInterval(id); },[]);
-  return (
-    <div style={{width:size,height:size,margin:"0 auto 32px",borderRadius:"50%",background:"radial-gradient(circle at 35% 35%,#6b4c2a,#1a0d02 60%,#0a0705)",boxShadow:`0 0 40px rgba(201,168,76,0.3),0 0 80px rgba(201,168,76,0.12)`,display:"flex",alignItems:"center",justifyContent:"center",transition:"transform 1.5s ease",transform:`scale(${scale})`}}>
-      <span style={{fontSize:size*0.33,color:OR,textShadow:`0 0 20px rgba(201,168,76,0.8)`}}>✦</span>
+<!-- PAGE CODE -->
+<section class="pg" id="p-code">
+  <h2 class="titre-page">Accès à votre espace sacré</h2>
+  <div class="sep"></div>
+  <p class="intro">Entrez le mot de passe transmis après votre paiement.</p>
+  <div style="max-width:360px;width:100%;margin:20px auto;">
+    <div class="grp">
+      <label class="label">Mot de passe</label>
+      <input type="password" class="inp" id="code-inp" placeholder="Votre mot de passe..." onkeydown="if(event.key==='Enter')checkCode()">
+      <p class="err" id="code-err">Code incorrect. Veuillez réessayer.</p>
     </div>
-  );
+    <button class="btn" style="margin-top:8px;width:100%" onclick="checkCode()">✦ Entrer ✦</button>
+  </div>
+  <button class="btn-retour" onclick="go('p-paiement')">← Retour</button>
+</section>
+
+<!-- PAGE FORMULAIRE -->
+<section class="pg" id="p-form" style="justify-content:flex-start;padding-top:50px;">
+  <div class="form-wrap">
+    <h2 class="titre-page" style="text-align:center;margin-bottom:6px;">Votre Portrait Sacré</h2>
+    <p style="text-align:center;font-style:italic;color:var(--text-doux);margin-bottom:28px;">Remplissez ces informations avec soin. Elles forment la trame de votre Miroir de l'Âme.</p>
+    <div class="grp"><label class="label">Prénom</label><input type="text" class="inp" id="f-prenom" placeholder="Votre prénom..."></div>
+    <div class="grp"><label class="label">Nom de famille</label><input type="text" class="inp" id="f-nom" placeholder="Votre nom..."></div>
+    <div class="row2">
+      <div class="grp"><label class="label">Date de naissance</label><input type="date" class="inp" id="f-date"></div>
+      <div class="grp"><label class="label">Heure de naissance</label><input type="time" class="inp" id="f-heure"></div>
+    </div>
+    <div class="grp"><label class="label">Lieu de naissance</label><input type="text" class="inp" id="f-lieu" placeholder="Ville, pays..."></div>
+    <div class="sep-form"></div>
+    <div class="grp">
+      <label class="label">Genre (pour accorder le texte)</label>
+      <select class="inp" id="f-genre" style="cursor:pointer;">
+        <option value="">Choisissez...</option>
+        <option value="féminin">Féminin</option>
+        <option value="masculin">Masculin</option>
+        <option value="neutre">Neutre</option>
+      </select>
+    </div>
+    <div class="grp">
+      <label class="label">Une intention ou une question pour ce moment</label>
+      <textarea class="inp" id="f-intention" rows="3" style="resize:vertical;" placeholder="Que cherchez-vous à comprendre, à traverser, ou à célébrer en ce moment de votre vie ?..."></textarea>
+    </div>
+    <p class="err" id="form-err" style="text-align:center;margin-bottom:12px;">Veuillez remplir au minimum prénom, nom, date et lieu de naissance.</p>
+    <div style="text-align:center;"><button class="btn" onclick="generer()">✦ Révéler mon Miroir de l'Âme ✦</button></div>
+  </div>
+</section>
+
+<!-- PAGE GENERATION -->
+<section class="pg" id="p-gen">
+  <div class="orbe-spin">🌀</div>
+  <p style="font-size:1.1rem;color:var(--or-pale);font-style:italic;margin-bottom:10px;">Les esprits tissent votre portrait…</p>
+  <p id="etape-txt" style="font-size:.88rem;color:var(--text-doux);letter-spacing:.1em;">Consultation des calendriers sacrés…</p>
+  <div class="barre-wrap"><div class="barre" id="barre"></div></div>
+  <p id="gen-err" style="color:#e07070;font-style:italic;margin-top:12px;display:none;"></p>
+</section>
+
+<!-- PAGE RESULTAT -->
+<section class="pg" id="p-res" style="justify-content:flex-start;padding-top:50px;">
+  <div class="doc-wrap" id="doc-miroir">
+    <div class="doc-entete">
+      <p style="font-size:.75rem;letter-spacing:.2em;color:var(--text-doux);margin-bottom:8px;">LES DIMENSIONS DE GAÏA</p>
+      <h1 class="doc-titre">Le Miroir de l'Âme</h1>
+      <p id="doc-sous-titre" style="font-style:italic;color:var(--text-doux);font-size:1rem;"></p>
+    </div>
+    <div class="doc-contenu" id="doc-contenu"></div>
+    <div class="doc-pied">
+      <div class="sep" style="margin:0 auto 14px;"></div>
+      <p>✦ Créé avec amour par Eddy Boussetta · Les Dimensions de Gaïa ✦</p>
+      <p style="margin-top:4px;font-size:.78rem;opacity:.6;">www.lesdimensionsdegaia.com</p>
+    </div>
+  </div>
+  <button class="btn-dl" onclick="telecharger()">⬇ Télécharger mon Miroir de l'Âme (PDF)</button>
+</section>
+
+<script>
+/* ── ÉTOILES ── */
+(function(){
+  var c=document.getElementById('cv'),ctx=c.getContext('2d'),stars=[],raf;
+  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}
+  function init(){stars=[];for(var i=0;i<180;i++)stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.1+.2,sp:Math.random()*.004+.001,ph:Math.random()*Math.PI*2});}
+  function draw(t){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){var a=.25+.75*(.5+.5*Math.sin(t*s.sp*1000+s.ph));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='rgba(201,168,76,'+(a*.55)+')';ctx.fill();});raf=requestAnimationFrame(draw);}
+  resize();init();window.addEventListener('resize',function(){resize();init();});raf=requestAnimationFrame(draw);
+})();
+
+/* ── NAVIGATION ── */
+function go(id){
+  document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');});
+  document.getElementById(id).classList.add('on');
+  window.scrollTo(0,0);
 }
 
-function construirePrompt(data) {
-  const {prenom,nom,date,lieu,heure,genre,intention} = data;
-  const d = new Date(date+"T12:00:00");
-  const jours=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
-  const mois=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
-  return `Tu es Eddy Boussetta, auteur spirituel et guide de la nature, fondateur des Dimensions de Gaïa. Tu crées un "Miroir de l'Âme" : un portrait spirituel profond, unique, poétique et bienveillant.
-
-INFORMATIONS :
-Prénom : ${prenom}
-Nom : ${nom}
-Date de naissance : ${jours[d.getDay()]} ${d.getDate()} ${mois[d.getMonth()]} ${d.getFullYear()}
-Lieu de naissance : ${lieu}
-${heure?"Heure de naissance : "+heure:""}
-${genre?"Genre : "+genre:""}
-${intention?`Intention ou question de vie : "${intention}"`:""}
-
-RÈGLE ABSOLUE : Il est interdit d'écrire un trait d'union entre deux mots. Reformule toujours. Jamais de "bien-être", "arc-en-ciel", "savoir-faire" etc. Écris "bien être", "arc en ciel", "savoir faire". Cette règle est sans exception dans tout le document.
-
-STRUCTURE (titres clairs pour chaque section) :
-
-## L'Étoile de votre Naissance
-Analyse selon 5 calendriers :
-Calendrier celtique (saison, fête, symbolisme)
-Calendrier chinois (animal, élément, qualités)
-Calendrier chrétien (saint ou fête liturgique proche)
-Calendrier maori ou polynésien (nature, mer, ancêtres)
-Calendrier maya (signe du jour, énergie)
-
-## Votre Numérologie Sacrée
-Chemin de vie : additionne tous les chiffres de la date de naissance jusqu'à un seul chiffre (sauf 11, 22, 33 nombres maîtres). Signification profonde.
-Nombre d'expression : valeur des lettres du prénom et nom (A=1,B=2,C=3,D=4,E=5,F=6,G=7,H=8,I=9,J=1,K=2,L=3,M=4,N=5,O=6,P=7,Q=8,R=9,S=1,T=2,U=3,V=4,W=5,X=6,Y=7,Z=8), réduit. Signification.
-Nombre de l'âme : mêmes voyelles uniquement (A,E,I,O,U,Y), réduit. Signification.
-Relie chaque nombre à la personnalité et au chemin de cette personne de façon vivante.
-
-## L'Héritage de votre Nom
-Étymologie du prénom : origines linguistiques et spirituelles.
-Étymologie du nom de famille : origines, ancêtres probables porteurs de ce nom, ce que cet héritage dit de cette âme.
-
-## Vos Esprits Gardiens
-2 à 3 esprits de la nature ou figures mythologiques qui correspondent à cette personne (parmi : Nains, Fées, Ondines, Lutins, Elfes, Dragons, Licornes, Gnomes, Vouivres, Salamandres, Sylphes, Nymphes, Sirènes, Néréides, Dévas, Tritons, Petit Peuple, Trolls, Pégases, Déesse Dana, ou autres figures adaptées). Message et comment les reconnaître dans la vie.
-
-## Votre Élément et Votre Chakra Prioritaire
-Élément dominant (Terre, Eau, Feu, Air ou Éther) et manifestations dans le caractère.
-Le chakra le plus important à travailler : pourquoi ce chakra, signes de déséquilibre, 2 ou 3 pratiques concrètes et poétiques.
-Pierres, plantes et lieux naturels correspondants.
-
-## Votre Saint Chrétien Gardien
-Le saint chrétien qui résonne le plus avec cette personne selon sa date de naissance, son prénom et son chemin de vie. Histoire, symbolique, message pour cette âme.
-
-## Ce que les Grands Sages vous diraient
-Ce que chacun de ces six figures dirait personnellement et directement à cette personne :
-Bouddha
-Jésus de Nazareth
-Socrate
-Platon
-Aristote
-Carl Gustav Jung
-
-## Vos Dons et Votre Chemin de Vie
-Dons sociaux (qualités relationnelles, rayonnement) et dons spirituels (sensibilité, facultés intuitives).
-Perturbations à surveiller : pièges sociaux (relations toxiques, comparaison, isolement) et pièges spirituels (ego spirituel, fuite du réel, dépendance aux signes). Formulé comme un avertissement aimant et protecteur.
-
-## Synthèse et Message des Esprits
-Un texte poétique d'une page entière reliant tous les fils. Si une intention a été partagée, y répondre avec sagesse. Conclusion lumineuse et très spécifique à cette personne.
-
-STYLE : Poétique, spirituel, chaleureux, profond. Vouvoiement respectueux. Précis et incarné. Commencer directement par le contenu. Aucun trait d'union entre deux mots dans tout le texte.`;
+/* ── CODE ── */
+function checkCode(){
+  var v=document.getElementById('code-inp').value.trim();
+  var e=document.getElementById('code-err');
+  if(v.toLowerCase()==='divina'){e.style.display='none';go('p-form');}
+  else{e.style.display='block';}
 }
 
-function formaterTexte(texte) {
-  const propre = texte.replace(/([a-zA-ZÀ-ÿ])-([a-zA-ZÀ-ÿ])/g,"$1 $2");
-  return propre.split("\n").map((ligne, i) => {
-    if (/^## /.test(ligne)) return <h2 key={i} style={{fontFamily:"Georgia,serif",fontSize:"0.92rem",color:OR,letterSpacing:"0.12em",margin:"38px 0 12px",textAlign:"center",textTransform:"uppercase"}}>{ligne.replace(/^## /,"")}</h2>;
-    if (/^### /.test(ligne)) return <h3 key={i} style={{color:OR_CLAIR,fontStyle:"italic",margin:"16px 0 6px",fontSize:"1.05rem"}}>{ligne.replace(/^### /,"")}</h3>;
-    if (ligne.trim()==="") return <br key={i}/>;
-    const html = ligne.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
-    return <p key={i} style={{marginBottom:10}} dangerouslySetInnerHTML={{__html:html}}/>;
+/* ── DONNÉES ── */
+var userData={};
+
+/* ── GÉNÉRATION ── */
+function generer(){
+  var prenom=document.getElementById('f-prenom').value.trim();
+  var nom=document.getElementById('f-nom').value.trim();
+  var date=document.getElementById('f-date').value;
+  var lieu=document.getElementById('f-lieu').value.trim();
+  var heure=document.getElementById('f-heure').value;
+  var genre=document.getElementById('f-genre').value;
+  var intention=document.getElementById('f-intention').value.trim();
+  if(!prenom||!nom||!date||!lieu){document.getElementById('form-err').style.display='block';return;}
+  document.getElementById('form-err').style.display='none';
+  userData={prenom:prenom,nom:nom,date:date,lieu:lieu,heure:heure,genre:genre,intention:intention};
+  go('p-gen');
+
+  var etapes=["Consultation des calendriers sacrés…","Calcul de votre numérologie…","Recherche de vos esprits gardiens…","Étymologie de votre nom…","Identification de votre chakra prioritaire…","Ce que les grands sages vous diraient…","Analyse de vos dons et perturbations…","Tissage de votre synthèse poétique…"];
+  var idx=0;
+  document.getElementById('barre').style.width='0%';
+  document.getElementById('gen-err').style.display='none';
+  var iv=setInterval(function(){
+    idx=Math.min(idx+1,etapes.length-1);
+    document.getElementById('etape-txt').textContent=etapes[idx];
+    document.getElementById('barre').style.width=Math.round((idx+1)/etapes.length*85)+'%';
+  },3200);
+
+  var d=new Date(date+'T12:00:00');
+  var jours=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+  var mois=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+  var prompt="Tu es Eddy Boussetta, auteur spirituel et guide de la nature, fondateur des Dimensions de Gaïa. Tu crées un \"Miroir de l'Âme\" : un portrait spirituel profond, unique, poétique et bienveillant.\n\n"
+    +"INFORMATIONS :\n"
+    +"Prénom : "+prenom+"\n"
+    +"Nom : "+nom+"\n"
+    +"Date de naissance : "+jours[d.getDay()]+" "+d.getDate()+" "+mois[d.getMonth()]+" "+d.getFullYear()+"\n"
+    +"Lieu de naissance : "+lieu+"\n"
+    +(heure?"Heure de naissance : "+heure+"\n":"")
+    +(genre?"Genre : "+genre+"\n":"")
+    +(intention?"Intention ou question de vie : \""+intention+"\"\n":"")+"\n"
+    +"RÈGLE ABSOLUE : Il est interdit d'écrire un trait d'union entre deux mots. Reformule toujours. Jamais de bien-être, arc-en-ciel, savoir-faire etc. Écris bien être, arc en ciel, savoir faire. Sans exception dans tout le document.\n\n"
+    +"STRUCTURE (titres ## pour chaque section) :\n\n"
+    +"## L'Étoile de votre Naissance\n"
+    +"Analyse selon 5 calendriers : celtique (saison, fête, symbolisme), chinois (animal, élément, qualités), chrétien (saint ou fête liturgique proche), maori ou polynésien (nature, mer, ancêtres), maya (signe du jour, énergie).\n\n"
+    +"## Votre Numérologie Sacrée\n"
+    +"Chemin de vie : additionne tous les chiffres de la date de naissance jusqu'à un seul chiffre (sauf 11, 22, 33 nombres maîtres). Signification profonde.\n"
+    +"Nombre d'expression : valeur des lettres du prénom et nom complet (A=1,B=2,C=3,D=4,E=5,F=6,G=7,H=8,I=9,J=1,K=2,L=3,M=4,N=5,O=6,P=7,Q=8,R=9,S=1,T=2,U=3,V=4,W=5,X=6,Y=7,Z=8), réduit. Signification.\n"
+    +"Nombre de l'âme : voyelles uniquement (A,E,I,O,U,Y), réduit. Signification.\n"
+    +"Relie chaque nombre à la personnalité de cette personne de façon vivante.\n\n"
+    +"## L'Héritage de votre Nom\n"
+    +"Étymologie du prénom : origines linguistiques et spirituelles.\n"
+    +"Étymologie du nom de famille : origines, ancêtres probables porteurs de ce nom.\n\n"
+    +"## Vos Esprits Gardiens\n"
+    +"2 à 3 esprits de la nature ou figures mythologiques correspondant à cette personne (parmi : Nains, Fées, Ondines, Lutins, Elfes, Dragons, Licornes, Gnomes, Vouivres, Salamandres, Sylphes, Nymphes, Sirènes, Néréides, Dévas, Tritons, Petit Peuple, Trolls, Pégases, Déesse Dana, ou autres). Message et comment les reconnaître dans la vie.\n\n"
+    +"## Votre Élément et Votre Chakra Prioritaire\n"
+    +"Élément dominant (Terre, Eau, Feu, Air ou Éther) et manifestations dans le caractère.\n"
+    +"Le chakra le plus important à travailler : pourquoi ce chakra, signes de déséquilibre, 2 ou 3 pratiques concrètes.\n"
+    +"Pierres, plantes et lieux naturels correspondants.\n\n"
+    +"## Votre Saint Chrétien Gardien\n"
+    +"Le saint chrétien qui résonne le plus avec cette personne selon sa date de naissance, son prénom et son chemin de vie. Histoire, symbolique, message pour cette âme.\n\n"
+    +"## Ce que les Grands Sages vous diraient\n"
+    +"Ce que chacun de ces six figures dirait personnellement et directement à cette personne : Bouddha, Jésus de Nazareth, Socrate, Platon, Aristote, Carl Gustav Jung.\n\n"
+    +"## Vos Dons et Votre Chemin de Vie\n"
+    +"Dons sociaux (qualités relationnelles, rayonnement) et dons spirituels (sensibilité, facultés intuitives).\n"
+    +"Perturbations à surveiller : pièges sociaux et pièges spirituels. Formulé comme un avertissement aimant et protecteur.\n\n"
+    +"## Synthèse et Message des Esprits\n"
+    +"Un texte poétique d'une page entière reliant tous les fils. Si une intention a été partagée, y répondre avec sagesse. Conclusion lumineuse et très spécifique à cette personne.\n\n"
+    +"STYLE : Poétique, spirituel, chaleureux, profond. Vouvoiement respectueux. Précis et incarné. Commencer directement par le contenu. Aucun trait d'union entre deux mots dans tout le texte.";
+
+  fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",
+    headers:{"Content-Type":"application/json","anthropic-dangerous-direct-browser-access":"true"},
+    body:JSON.stringify({model:"claude-opus-4-5",max_tokens:5000,messages:[{role:"user",content:prompt}]})
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    clearInterval(iv);
+    if(data.content&&data.content[0]&&data.content[0].text){
+      document.getElementById('barre').style.width='100%';
+      setTimeout(function(){afficher(prenom,nom,data.content[0].text);},600);
+    } else {
+      document.getElementById('gen-err').textContent="Une erreur s'est produite. Veuillez réessayer.";
+      document.getElementById('gen-err').style.display='block';
+    }
+  })
+  .catch(function(e){
+    clearInterval(iv);
+    document.getElementById('gen-err').textContent="Erreur de connexion. Veuillez réessayer.";
+    document.getElementById('gen-err').style.display='block';
   });
 }
 
-export default function App() {
-  const [page, setPage] = useState("accueil");
-  const [code, setCode] = useState("");
-  const [errCode, setErrCode] = useState(false);
-  const [form, setForm] = useState({prenom:"",nom:"",date:"",lieu:"",heure:"",genre:"",intention:""});
-  const [errForm, setErrForm] = useState(false);
-  const [progression, setProgression] = useState(0);
-  const [etapeTexte, setEtapeTexte] = useState("Consultation des calendriers sacrés…");
-  const [resultat, setResultat] = useState("");
-  const [errGen, setErrGen] = useState("");
-  const donnees = useRef({});
-
-  const etapes = [
-    "Consultation des calendriers sacrés…",
-    "Calcul de votre numérologie…",
-    "Recherche de vos esprits gardiens…",
-    "Étymologie de votre nom…",
-    "Identification de votre chakra prioritaire…",
-    "Ce que les grands sages vous diraient…",
-    "Analyse de vos dons et perturbations…",
-    "Tissage de votre synthèse poétique…",
-  ];
-
-  const allerPage = (p) => { setPage(p); window.scrollTo(0,0); };
-
-  const verifierCode = () => {
-    if (code.trim().toLowerCase()==="divina") { setErrCode(false); allerPage("formulaire"); }
-    else setErrCode(true);
-  };
-
-  const generer = async () => {
-    if (!form.prenom||!form.nom||!form.date||!form.lieu) { setErrForm(true); return; }
-    setErrForm(false);
-    donnees.current = {...form};
-    allerPage("generation");
-    setProgression(0); setErrGen("");
-    let idx = 0;
-    const interval = setInterval(()=>{
-      idx = Math.min(idx+1, etapes.length-1);
-      setEtapeTexte(etapes[idx]);
-      setProgression(Math.round((idx+1)/etapes.length*85));
-    },3200);
-    try {
-      const prompt = construirePrompt(form);
-      const response = await fetch("https://api.anthropic.com/v1/messages",{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
-          model:"claude-sonnet-4-20250514",
-          max_tokens:5000,
-          messages:[{role:"user",content:prompt}]
-        })
-      });
-      const data = await response.json();
-      clearInterval(interval);
-      if (data.content&&data.content[0]&&data.content[0].text) {
-        setProgression(100);
-        setTimeout(()=>{ setResultat(data.content[0].text); allerPage("resultat"); },600);
-      } else {
-        setErrGen("Une erreur s'est produite. Veuillez réessayer.");
-        clearInterval(interval);
-      }
-    } catch(e) {
-      clearInterval(interval);
-      setErrGen("Erreur de connexion. Veuillez réessayer.");
-    }
-  };
-
-  const telecharger = () => {
-    const {prenom,nom} = donnees.current;
-    const contenu = document.getElementById("doc-miroir").innerHTML;
-    const w = window.open("","_blank");
-    w.document.write(`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Miroir de l Ame ${prenom} ${nom}</title>
-    <style>body{font-family:Georgia,serif;color:#1a0d02;background:#fdf8f0;padding:40px;max-width:780px;margin:auto}h1{color:#7a4f1a;font-size:1.7rem;text-align:center}h2{color:#7a4f1a;font-size:0.9rem;text-align:center;margin:32px 0 10px;letter-spacing:.1em;text-transform:uppercase}h3{color:#5a3a0a;font-style:italic;margin:16px 0 6px}p{line-height:2;font-size:1.02rem;font-weight:300;color:#2e1e0f;margin-bottom:10px}.doc-entete{text-align:center;padding-bottom:18px;border-bottom:2px solid #c9a84c;margin-bottom:28px}.doc-pied{text-align:center;margin-top:36px;padding-top:18px;border-top:2px solid #c9a84c;font-style:italic;color:#7a5a2a;font-size:.88rem}strong{color:#5a3a0a;font-weight:600}</style>
-    </head><body>${contenu}</body></html>`);
-    w.document.close();
-    w.onload = ()=>setTimeout(()=>w.print(),600);
-  };
-
-  return (
-    <div style={styles.body}>
-      <Stars/>
-
-      {/* ACCUEIL */}
-      {page==="accueil" && (
-        <div style={{...styles.page,justifyContent:"center",textAlign:"center"}}>
-          <OrbePulse/>
-          <h1 style={styles.titrePrincipal}>Votre Miroir de l'Âme</h1>
-          <p style={styles.sousTitre}>Les Dimensions de Gaïa</p>
-          <div style={styles.separateur}/>
-          <p style={styles.textIntro}>Chaque être humain est un univers unique, tissé de fils cosmiques, terrestres et ancestraux. Votre <em>Miroir de l'Âme</em> est un portrait spirituel profond et personnalisé, créé spécialement pour vous, et pour vous seul.</p>
-          <div style={styles.cadre}>
-            <ul style={{padding:0}}>
-              {["Votre profil selon 5 calendriers sacrés (celtique, chinois, chrétien, maori, maya)","Votre numérologie complète : chemin de vie, expression et âme","L'étymologie sacrée de votre prénom et l'ancêtre porteur de votre nom","Vos esprits gardiens de la nature et figures mythologiques associées","Votre élément dominant et votre chakra prioritaire à travailler","Votre saint chrétien protecteur le plus proche","Ce que Bouddha, Jésus, Socrate, Platon, Aristote et Carl Gustav Jung vous diraient","Vos dons sociaux et spirituels, et les perturbations à surveiller","Une synthèse poétique unique d'environ 5 pages, rien que pour vous"].map((item,i)=>
-                <li key={i} style={styles.listItem}><span style={{color:OR,fontSize:"0.7rem"}}>✦ </span>{item}</li>
-              )}
-            </ul>
-          </div>
-          <div style={styles.prixBadge}>15 €</div>
-          <p style={{...styles.textIntro,fontSize:"0.92rem",marginTop:6,marginBottom:0}}>Un document personnel et unique, à télécharger instantanément.</p>
-          <button style={styles.btnPrincipal} onClick={()=>allerPage("paiement")}>✦ Découvrir mon Miroir de l'Âme ✦</button>
-          <p style={{marginTop:44,fontStyle:"italic",fontSize:"0.9rem",color:TEXT_DOUX,opacity:0.7}}>Eddy Boussetta · Les Dimensions de Gaïa</p>
-        </div>
-      )}
-
-      {/* PAIEMENT */}
-      {page==="paiement" && (
-        <div style={{...styles.page,justifyContent:"center",textAlign:"center"}}>
-          <h2 style={{...styles.titrePrincipal,fontSize:"1.7rem"}}>Étape 1 — Votre contribution</h2>
-          <div style={styles.separateur}/>
-          <p style={styles.textIntro}>Pour recevoir votre <em>Miroir de l'Âme</em>, suivez ces deux étapes simples.</p>
-          <div style={{maxWidth:560,width:"100%"}}>
-            <div style={styles.etape}><span style={styles.etapeNum}>1</span><p style={{color:OR_PALE,lineHeight:1.7,margin:0}}>Réglez <strong style={{color:OR}}>15 €</strong> via PayPal en cliquant sur le bouton ci-dessous.<br/><em>Dans la note du paiement, écrivez votre prénom.</em></p></div>
-            <div style={styles.etape}><span style={styles.etapeNum}>2</span><p style={{color:OR_PALE,lineHeight:1.7,margin:0}}>Une fois le paiement effectué, revenez ici et cliquez sur <strong style={{color:OR}}>"J'ai payé"</strong>. Utilisez le mot de passe <strong style={{color:OR}}>Divina</strong>.</p></div>
-          </div>
-          <a href="https://www.paypal.me/globalenergie/15" target="_blank" rel="noreferrer" style={styles.btnPaypal}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.59 3.025-2.566 6.082-8.558 6.082H9.824l-1.226 7.76h3.397c.458 0 .847-.332.92-.784l.038-.193.733-4.64.047-.258a.932.932 0 0 1 .92-.784h.579c3.753 0 6.693-1.525 7.55-5.932.36-1.845.174-3.387-.56-4.464z"/></svg>
-            Payer 15 € sur PayPal
-          </a>
-          <button style={styles.btnSecondaire} onClick={()=>allerPage("code")}>J'ai payé · Accéder à mon formulaire</button>
-          <button style={styles.btnRetour} onClick={()=>allerPage("accueil")}>← Retour</button>
-        </div>
-      )}
-
-      {/* CODE */}
-      {page==="code" && (
-        <div style={{...styles.page,justifyContent:"center",textAlign:"center"}}>
-          <h2 style={{...styles.titrePrincipal,fontSize:"1.7rem"}}>Accès à votre espace sacré</h2>
-          <div style={styles.separateur}/>
-          <p style={styles.textIntro}>Entrez le mot de passe transmis après votre paiement.</p>
-          <div style={{maxWidth:360,width:"100%",margin:"20px auto"}}>
-            <div style={styles.champGroupe}>
-              <label style={styles.label}>Mot de passe</label>
-              <input type="password" style={styles.input} placeholder="Votre mot de passe..." value={code} onChange={e=>setCode(e.target.value)} onKeyDown={e=>e.key==="Enter"&&verifierCode()}/>
-              {errCode && <p style={styles.erreur}>Code incorrect. Veuillez réessayer.</p>}
-            </div>
-            <button style={{...styles.btnPrincipal,marginTop:8}} onClick={verifierCode}>✦ Entrer ✦</button>
-          </div>
-          <button style={styles.btnRetour} onClick={()=>allerPage("paiement")}>← Retour</button>
-        </div>
-      )}
-
-      {/* FORMULAIRE */}
-      {page==="formulaire" && (
-        <div style={{...styles.page,alignItems:"stretch",maxWidth:660,margin:"0 auto"}}>
-          <h2 style={{...styles.titrePrincipal,fontSize:"1.6rem",marginBottom:6}}>Votre Portrait Sacré</h2>
-          <p style={{textAlign:"center",fontStyle:"italic",color:TEXT_DOUX,marginBottom:30}}>Remplissez ces informations avec soin. Elles forment la trame de votre Miroir de l'Âme.</p>
-          {[["Prénom","prenom","text","Votre prénom..."],["Nom de famille","nom","text","Votre nom..."]].map(([label,field,type,ph])=>(
-            <div key={field} style={styles.champGroupe}>
-              <label style={styles.label}>{label}</label>
-              <input type={type} style={styles.input} placeholder={ph} value={form[field]} onChange={e=>setForm({...form,[field]:e.target.value})}/>
-            </div>
-          ))}
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14}}>
-            <div style={styles.champGroupe}>
-              <label style={styles.label}>Date de naissance</label>
-              <input type="date" style={styles.input} value={form.date} onChange={e=>setForm({...form,date:e.target.value})}/>
-            </div>
-            <div style={styles.champGroupe}>
-              <label style={styles.label}>Heure de naissance</label>
-              <input type="time" style={styles.input} value={form.heure} onChange={e=>setForm({...form,heure:e.target.value})}/>
-            </div>
-          </div>
-          <div style={styles.champGroupe}>
-            <label style={styles.label}>Lieu de naissance</label>
-            <input type="text" style={styles.input} placeholder="Ville, pays..." value={form.lieu} onChange={e=>setForm({...form,lieu:e.target.value})}/>
-          </div>
-          <div style={{width:"100%",height:1,background:`linear-gradient(90deg,transparent,rgba(201,168,76,0.3),transparent)`,margin:"20px 0"}}/>
-          <div style={styles.champGroupe}>
-            <label style={styles.label}>Genre (pour accorder le texte)</label>
-            <select style={{...styles.input,cursor:"pointer"}} value={form.genre} onChange={e=>setForm({...form,genre:e.target.value})}>
-              <option value="">Choisissez...</option>
-              <option value="féminin">Féminin</option>
-              <option value="masculin">Masculin</option>
-              <option value="neutre">Neutre</option>
-            </select>
-          </div>
-          <div style={styles.champGroupe}>
-            <label style={styles.label}>Une intention ou une question pour ce moment</label>
-            <textarea style={{...styles.input,resize:"vertical"}} rows={3} placeholder="Que cherchez-vous à comprendre, à traverser, ou à célébrer en ce moment de votre vie ?..." value={form.intention} onChange={e=>setForm({...form,intention:e.target.value})}/>
-          </div>
-          {errForm && <p style={{...styles.erreur,textAlign:"center",marginBottom:12}}>Veuillez remplir au minimum prénom, nom, date et lieu de naissance.</p>}
-          <div style={{textAlign:"center"}}>
-            <button style={styles.btnPrincipal} onClick={generer}>✦ Révéler mon Miroir de l'Âme ✦</button>
-          </div>
-        </div>
-      )}
-
-      {/* GENERATION */}
-      {page==="generation" && (
-        <div style={{...styles.page,justifyContent:"center",alignItems:"center",textAlign:"center"}}>
-          <div style={{...styles.orbeAnim,animation:"spin 8s linear infinite"}}>🌀</div>
-          <style>{`@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}`}</style>
-          <p style={{fontSize:"1.15rem",color:OR_PALE,fontStyle:"italic",marginBottom:12}}>Les esprits tissent votre portrait…</p>
-          <p style={{fontSize:"0.88rem",color:TEXT_DOUX,letterSpacing:"0.1em"}}>{etapeTexte}</p>
-          <div style={styles.barreConteneur}><div style={styles.barre(progression)}/></div>
-          {errGen && <p style={{...styles.erreur,marginTop:16}}>{errGen}</p>}
-        </div>
-      )}
-
-      {/* RESULTAT */}
-      {page==="resultat" && (
-        <div style={{...styles.page,alignItems:"center"}}>
-          <div id="doc-miroir" style={styles.document}>
-            <div style={{textAlign:"center",marginBottom:36,paddingBottom:28,borderBottom:`1px solid rgba(201,168,76,0.15)`}}>
-              <p style={{fontSize:"0.75rem",letterSpacing:"0.2em",color:TEXT_DOUX,marginBottom:8}}>LES DIMENSIONS DE GAÏA</p>
-              <h1 style={styles.docTitre}>Le Miroir de l'Âme</h1>
-              <p style={styles.docSousTitre}>Portrait spirituel de {donnees.current.prenom} {donnees.current.nom}</p>
-            </div>
-            <div style={styles.docContenu}>{formaterTexte(resultat)}</div>
-            <div style={{textAlign:"center",marginTop:36,paddingTop:28,borderTop:`1px solid rgba(201,168,76,0.15)`,fontSize:"0.88rem",color:TEXT_DOUX,fontStyle:"italic"}}>
-              <div style={{...styles.separateur,margin:"0 auto 16px"}}/>
-              <p>✦ Créé avec amour par Eddy Boussetta · Les Dimensions de Gaïa ✦</p>
-              <p style={{marginTop:4,fontSize:"0.78rem",opacity:0.6}}>www.lesdimensionsdegaia.com</p>
-            </div>
-          </div>
-          <button style={styles.btnTelecharger} onClick={telecharger}>⬇ Télécharger mon Miroir de l'Âme (PDF)</button>
-        </div>
-      )}
-    </div>
-  );
+/* ── AFFICHAGE ── */
+function afficher(prenom,nom,texte){
+  document.getElementById('doc-sous-titre').textContent='Portrait spirituel de '+prenom+' '+nom;
+  // Nettoyage traits d'union résiduels
+  var propre=texte.replace(/([a-zA-ZÀ-ÿ])-([a-zA-ZÀ-ÿ])/g,'$1 $2');
+  var lignes=propre.split('\n');
+  var html='';
+  lignes.forEach(function(l){
+    if(/^## /.test(l)){html+='<h2>'+l.replace(/^## /,'')+'</h2>';}
+    else if(/^### /.test(l)){html+='<h3>'+l.replace(/^### /,'')+'</h3>';}
+    else if(/^\*\*(.+)\*\*$/.test(l.trim())){html+='<h3>'+l.trim().replace(/\*\*/g,'')+'</h3>';}
+    else if(l.trim()===''){html+='</p><p>';}
+    else{html+=l.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')+' ';}
+  });
+  document.getElementById('doc-contenu').innerHTML='<p>'+html+'</p>';
+  go('p-res');
 }
+
+/* ── TÉLÉCHARGEMENT ── */
+function telecharger(){
+  var contenu=document.getElementById('doc-miroir').innerHTML;
+  var w=window.open('','_blank');
+  w.document.write('<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Miroir de lAme</title>'
+    +'<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">'
+    +'<style>body{font-family:"Cormorant Garamond",serif;color:#1a0d02;background:#fdf8f0;padding:40px;max-width:780px;margin:auto;}'
+    +'h1{font-family:"Cinzel Decorative",serif;color:#7a4f1a;font-size:1.7rem;text-align:center;}'
+    +'h2{font-family:"Cinzel Decorative",serif;color:#7a4f1a;font-size:.88rem;text-align:center;margin:32px 0 10px;letter-spacing:.1em;text-transform:uppercase;}'
+    +'h3{color:#5a3a0a;font-style:italic;margin:16px 0 6px;}'
+    +'p{line-height:2;font-size:1.02rem;font-weight:300;color:#2e1e0f;margin-bottom:10px;}'
+    +'.doc-entete{text-align:center;padding-bottom:18px;border-bottom:2px solid #c9a84c;margin-bottom:26px;}'
+    +'.doc-pied{text-align:center;margin-top:34px;padding-top:18px;border-top:2px solid #c9a84c;font-style:italic;color:#7a5a2a;font-size:.86rem;}'
+    +'strong{color:#5a3a0a;font-weight:600;}'
+    +'</style></head><body>'+contenu+'</body></html>');
+  w.document.close();
+  w.onload=function(){setTimeout(function(){w.print();},600);};
+}
+</script>
+</body>
+</html>
