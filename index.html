@@ -3,41 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Le Miroir de l'Âme & Le Grand Codex Universel</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<title>CODEX SUPRÊME - Le Miroir de l'Âme Universel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
-:root { --or: #c9a84c; --or-clair: #e8d5a3; --noir: #0a0705; --text: #f0e6d0; --cadre: rgba(20, 15, 10, 0.95); }
+:root { --or: #c9a84c; --or-clair: #e8d5a3; --noir: #050403; --text: #f0e6d0; --cadre: rgba(15, 12, 8, 0.98); --sep: rgba(201, 168, 76, 0.3); }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: var(--noir); color: var(--text); font-family: 'Cormorant Garamond', serif; overflow-x: hidden; line-height: 1.6; }
+body { background: var(--noir); color: var(--text); font-family: 'Cormorant Garamond', serif; overflow-x: hidden; line-height: 1.8; }
 #star-canvas { position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none; }
 
-/* Écrans */
-.screen { display: none; position: relative; z-index: 1; min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
+/* --- INTERFACE --- */
+.screen { display: none; position: relative; z-index: 1; min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; }
 .screen.active { display: flex; }
+.titre-gold { font-family: 'Cinzel Decorative', serif; color: var(--or); text-align: center; text-shadow: 0 0 20px rgba(201, 168, 76, 0.4); margin-bottom: 15px; letter-spacing: 5px; }
+.sub { letter-spacing: 5px; text-transform: uppercase; color: var(--or-clair); font-size: 1rem; margin-bottom: 40px; text-align: center; font-weight: 300; }
 
-/* Typographie */
-.titre-gold { font-family: 'Cinzel Decorative', serif; color: var(--or); text-align: center; text-shadow: 0 0 15px rgba(201, 168, 76, 0.5); margin-bottom: 10px; }
-.sub { letter-spacing: 3px; text-transform: uppercase; color: var(--or-clair); font-size: 0.9rem; margin-bottom: 30px; text-align: center; }
+.glass-panel { background: var(--cadre); border: 1px solid var(--or); padding: 50px; max-width: 900px; width: 100%; box-shadow: 0 0 100px rgba(0,0,0,1); border-radius: 2px; position: relative; }
+.glass-panel::before { content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 1px solid rgba(201,168,76,0.1); pointer-events: none; }
 
-/* Cartes et Formulaires */
-.glass-panel { background: var(--cadre); border: 1px solid var(--or); padding: 40px; max-width: 800px; width: 100%; box-shadow: 0 0 50px rgba(0,0,0,0.8); border-radius: 5px; }
-.label-inc { display: block; color: var(--or); font-family: 'Cinzel Decorative'; font-size: 0.8rem; margin-top: 15px; margin-bottom: 5px; }
-.inp { width: 100%; padding: 12px; margin-bottom: 10px; background: rgba(0,0,0,0.5); border: 1px solid #5a3a0a; color: white; font-family: inherit; font-size: 1.1rem; }
-.btn-ritual { padding: 15px 40px; background: linear-gradient(135deg, #7a4f1a, var(--or)); color: var(--noir); font-family: 'Cinzel Decorative', serif; border: none; cursor: pointer; font-weight: bold; transition: 0.4s; margin-top: 20px; width: 100%; text-decoration: none; display: inline-block; text-align: center; }
-.btn-ritual:hover { transform: scale(1.02); box-shadow: 0 0 25px var(--or); }
-.btn-paypal { background: transparent; border: 2px solid #0070ba; color: #0070ba; margin-top: 10px; }
-.btn-paypal:hover { background: #0070ba; color: white; }
+.label-inc { display: block; color: var(--or); font-family: 'Cinzel Decorative'; font-size: 0.85rem; margin-top: 20px; margin-bottom: 8px; text-transform: uppercase; }
+.inp { width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(0,0,0,0.7); border: 1px solid #4a3512; color: white; font-family: inherit; font-size: 1.1rem; transition: 0.3s; }
+.inp:focus { border-color: var(--or); outline: none; background: rgba(20,15,10,0.9); }
 
-/* Document Final (Codex) */
-.doc-wrap { max-width: 1000px; background: rgba(10, 7, 5, 0.99); padding: 60px; border: 1px solid var(--or); }
-h2 { font-family: 'Cinzel Decorative', serif; color: var(--or); border-bottom: 1px solid var(--or); margin: 50px 0 25px; padding-bottom: 5px; text-align: center; font-size: 1.8rem; }
-h3 { color: var(--or-clair); margin: 30px 0 15px; font-style: italic; font-size: 1.4rem; border-left: 4px solid var(--or); padding-left: 15px; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin: 25px 0; }
-.box { background: rgba(255,255,255,0.03); border: 1px solid rgba(201, 168, 76, 0.15); padding: 25px; border-radius: 8px; transition: 0.3s; }
-.box:hover { border-color: var(--or); }
-p { margin-bottom: 15px; text-align: justify; font-size: 1.1rem; }
+.btn-ritual { padding: 20px 50px; background: linear-gradient(135deg, #5e3e14, #c9a84c, #5e3e14); background-size: 200% auto; color: var(--noir); font-family: 'Cinzel Decorative', serif; border: none; cursor: pointer; font-weight: bold; transition: 0.5s; margin-top: 30px; width: 100%; text-decoration: none; display: inline-block; text-align: center; letter-spacing: 2px; }
+.btn-ritual:hover { background-position: right center; box-shadow: 0 0 30px var(--or); transform: translateY(-2px); }
+.btn-paypal { background: transparent; border: 1px solid #0070ba; color: #0070ba; font-size: 0.9rem; padding: 10px; margin-top: 15px; }
 
-@media print { .no-print { display: none; } body { background: white; color: black; } .doc-wrap { border: none; box-shadow: none; width: 100%; } }
+/* --- DOCUMENT FINAL --- */
+.doc-wrap { max-width: 1100px; background: #080705; padding: 80px; border: 1px solid var(--or); box-shadow: 0 0 60px black; position: relative; }
+.stamp { font-family: 'Great Vibes', cursive; color: var(--or); font-size: 3rem; text-align: center; margin-bottom: 20px; opacity: 0.8; }
+h2 { font-family: 'Cinzel Decorative', serif; color: var(--or); border-bottom: 1px solid var(--sep); margin: 60px 0 30px; padding-bottom: 15px; text-align: center; font-size: 2.2rem; letter-spacing: 3px; }
+h3 { color: var(--or-clair); margin: 40px 0 20px; font-style: italic; font-size: 1.6rem; border-left: 5px solid var(--or); padding-left: 20px; }
+.txt-long { font-size: 1.25rem; margin-bottom: 25px; color: #d0c4af; line-height: 1.9; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin: 30px 0; }
+.box { background: rgba(201, 168, 76, 0.03); border: 1px solid rgba(201, 168, 76, 0.1); padding: 35px; border-radius: 4px; border-top: 3px solid var(--or); }
+.highlight { color: var(--or); font-weight: bold; }
+
+@media print { .no-print { display: none; } body { background: white; color: black; } .doc-wrap { border: none; padding: 20px; } .txt-long { color: black; } }
 </style>
 </head>
 <body>
@@ -45,203 +46,239 @@ p { margin-bottom: 15px; text-align: justify; font-size: 1.1rem; }
 
 <section class="screen active" id="sc-accueil">
     <div class="glass-panel" style="text-align: center;">
-        <h1 class="titre-gold" style="font-size: 3.5rem;">Miroir de l'Âme</h1>
-        <p class="sub">Codex Universel des Sagesses</p>
-        <p style="font-size: 1.3rem; font-style: italic; margin: 20px 0;">"Le ciel ne ment jamais à celui qui sait l'écouter."</p>
+        <h1 class="titre-gold" style="font-size: 4rem;">Miroir de l'Âme</h1>
+        <p class="sub">L'Encyclopédie Suprême de Votre Destinée</p>
+        <p class="txt-long">"Chaque nom est une fréquence, chaque date est un alignement, chaque heure est une porte. Bienvenue dans l'analyse la plus profonde de votre existence."</p>
         
-        <div style="margin: 40px 0; padding: 25px; border: 1px dashed var(--or); background: rgba(201, 168, 76, 0.05);">
-            <p style="text-align: center;">Ce voyage spirituel est le fruit d'un long travail de recherche. <br>Pour soutenir cette œuvre, vous pouvez effectuer une offrande libre :</p>
-            <a href="https://www.paypal.me/globalenergie" target="_blank" class="btn-ritual btn-paypal">Soutenir via PayPal</a>
+        <div style="margin: 40px 0; padding: 30px; border: 1px solid var(--or); background: rgba(201, 168, 76, 0.02);">
+            <p style="font-family: 'Cinzel Decorative'; font-size: 0.9rem;">Soutenez la recherche spirituelle & le développement de cet outil :</p>
+            <a href="https://www.paypal.me/globalenergie" target="_blank" class="btn-ritual btn-paypal">Offrande via PayPal (globalenergie)</a>
         </div>
 
-        <button class="btn-ritual" onclick="demarrerMusique(); naviguer('sc-accueil', 'sc-form')">Entrer dans le Sanctuaire</button>
+        <button class="btn-ritual" onclick="initAudio(); naviguer('sc-accueil', 'sc-form')">Commencer l'Analyse Sacrée</button>
     </div>
 </section>
 
 <section class="screen" id="sc-form">
     <div class="glass-panel">
-        <h2 style="margin-top:0; border:none;">Paramètres de Naissance</h2>
-        <div class="grid" style="margin: 0; gap: 10px;">
-            <div><label class="label-inc">Votre Prénom</label><input type="text" id="f-prenom" class="inp" placeholder="Ex: Jean"></div>
-            <div><label class="label-inc">Votre Nom</label><input type="text" id="f-nom" class="inp" placeholder="Ex: Dupont"></div>
+        <h2 style="margin-top:0; border:none;">Coordonnées d'Incarnation</h2>
+        <div class="grid" style="margin: 0; gap: 15px;">
+            <div><label class="label-inc">Prénom(s)</label><input type="text" id="f-prenom" class="inp" placeholder="Tous vos prénoms"></div>
+            <div><label class="label-inc">Nom de Famille</label><input type="text" id="f-nom" class="inp" placeholder="Nom de naissance"></div>
         </div>
-        <label class="label-inc">Votre Date de Naissance (Jour de venue au monde)</label>
-        <input type="date" id="f-date" class="inp">
         
-        <div class="grid" style="margin: 0; gap: 10px;">
-            <div><label class="label-inc">Ville de Naissance</label><input type="text" id="f-lieu" class="inp" placeholder="Ville"></div>
+        <div class="grid" style="margin: 0; gap: 15px;">
+            <div><label class="label-inc">Date de Naissance</label><input type="date" id="f-date" class="inp"></div>
+            <div><label class="label-inc">Heure de Naissance (Précise)</label><input type="time" id="f-heure" class="inp"></div>
+        </div>
+
+        <div class="grid" style="margin: 0; gap: 15px;">
+            <div><label class="label-inc">Lieu de Naissance (Ville/Pays)</label><input type="text" id="f-lieu" class="inp" placeholder="Où avez-vous vu le jour ?"></div>
             <div>
-                <label class="label-inc">Énergie de Genre</label>
+                <label class="label-inc">Polarité Dominante</label>
                 <select id="f-genre" class="inp">
-                    <option value="masculin">Polarité Masculine</option>
-                    <option value="feminin">Polarité Féminine</option>
-                    <option value="equilibre">Équilibre des Polarités</option>
+                    <option value="M">Masculin (Yang / Solaire)</option>
+                    <option value="F">Féminin (Yin / Lunaire)</option>
+                    <option value="X">Androgyne (Équilibre Sacré)</option>
                 </select>
             </div>
         </div>
-        <label class="label-inc">Votre Intention Spirituelle</label>
-        <textarea id="f-intent" class="inp" placeholder="Que cherchez-vous à comprendre ?" rows="2"></textarea>
-        <button class="btn-ritual" onclick="lancerRituel()">Générer mon Miroir Sacré</button>
+
+        <label class="label-inc">Votre Quête Actuelle / Intention</label>
+        <textarea id="f-intent" class="inp" placeholder="Quelle question brûle en votre cœur ?" rows="2"></textarea>
+        
+        <button class="btn-ritual" onclick="demarrerProcessus()">Forger mon Miroir Suprême</button>
     </div>
 </section>
 
 <section class="screen" id="sc-load">
-    <div style="text-align: center;">
-        <h2 id="load-txt" style="font-size: 2rem;">Ouverture du Grimoire...</h2>
-        <div style="width: 400px; height: 2px; background: rgba(201,168,76,0.1); margin: 30px auto; position: relative;">
-            <div id="barre" style="height: 100%; background: var(--or); width: 0%; transition: 0.5s; box-shadow: 0 0 10px var(--or);"></div>
+    <div style="text-align: center; max-width: 600px;">
+        <h2 id="load-txt" style="font-size: 2.5rem; transition: 0.5s;">Invoquer les étoiles...</h2>
+        <p id="load-sub" style="color: var(--or-clair); margin-bottom: 20px;">Calcul des trajectoires sidérales en cours.</p>
+        <div style="width: 100%; height: 2px; background: rgba(201,168,76,0.1); position: relative;">
+            <div id="barre" style="height: 100%; background: var(--or); width: 0%; transition: 0.5s; box-shadow: 0 0 20px var(--or);"></div>
         </div>
     </div>
 </section>
 
 <section class="screen" id="sc-res">
-    <div class="doc-wrap" id="final-doc"></div>
-    <div style="margin-top: 40px; display:flex; gap:20px; justify-content: center;" class="no-print">
-        <button class="btn-ritual" onclick="window.print()">Sauvegarder en PDF / Imprimer</button>
-        <button class="btn-ritual btn-paypal" onclick="location.reload()">Refaire une Lecture</button>
+    <div class="doc-wrap" id="final-doc">
+        </div>
+    <div style="margin: 40px 0; display:flex; gap:20px; class="no-print">
+        <button class="btn-ritual" onclick="window.print()">Imprimer mon Livre de Vie</button>
+        <button class="btn-ritual btn-paypal" onclick="location.reload()">Réinitialiser</button>
     </div>
 </section>
 
 <script>
-// --- AUDIO : MUSIQUE DES ANGES ---
-let audioCtx;
-function demarrerMusique() {
-    if (audioCtx) return;
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const osc1 = audioCtx.createOscillator();
-    const osc2 = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
+// --- LOGIQUE AUDIO (Musique des Anges) ---
+let ctxAudio, oscBase, oscSub, filter;
+function initAudio() {
+    try {
+        ctxAudio = new (window.AudioContext || window.webkitAudioContext)();
+        oscBase = ctxAudio.createOscillator();
+        oscSub = ctxAudio.createOscillator();
+        filter = ctxAudio.createBiquadFilter();
+        let gain = ctxAudio.createGain();
 
-    osc1.type = 'sine'; osc1.frequency.setValueAtTime(432, audioCtx.currentTime); // Fréquence sacrée
-    osc2.type = 'sine'; osc2.frequency.setValueAtTime(216, audioCtx.currentTime);
+        oscBase.type = 'sine'; oscBase.frequency.setValueAtTime(432, ctxAudio.currentTime);
+        oscSub.type = 'sine'; oscSub.frequency.setValueAtTime(108, ctxAudio.currentTime);
+        filter.type = 'lowpass'; filter.frequency.setValueAtTime(800, ctxAudio.currentTime);
+        gain.gain.setValueAtTime(0, ctxAudio.currentTime);
+        gain.gain.linearRampToValueAtTime(0.08, ctxAudio.currentTime + 3);
 
-    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-    gainNode.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 2);
-
-    osc1.connect(gainNode); osc2.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-    osc1.start(); osc2.start();
+        oscBase.connect(filter); oscSub.connect(filter);
+        filter.connect(gain); gain.connect(ctxAudio.destination);
+        oscBase.start(); oscSub.start();
+    } catch(e) { console.log("Audio bloqué"); }
 }
 
-// --- LOGIQUE DE CALCULS ---
-const ETYMO_DATA = {
-    'a': "Racine de Force (Alep) : Symbolise le commencement, l'élan créateur et la volonté.",
-    'el': "Racine Divine (El) : Indique une connexion directe avec les sphères angéliques et la justice.",
-    'ma': "Racine de Terre (Ma) : Liée à la protection maternelle, à l'ancrage et aux cycles de la nature.",
-    'io': "Racine de Lumière (Io) : Évoque la joie, l'expansion et le rayonnement solaire.",
-    'ri': "Racine d'Esprit : Porteur de mouvement, de voyage et de curiosité intellectuelle."
+// --- MOTEUR D'ÉTUDE ---
+const ROOTS = {
+    "a": "Alpha / Unicité : La racine de la volonté pure et du leadership spirituel.",
+    "el": "Lumière d'Elohim : Une fréquence angélique liée au service du divin.",
+    "ma": "Matrice / Terre : La résonance de la Grande Mère, protection et incarnation.",
+    "ri": "Mouvement / Air : L'intelligence fluide, la communication entre les mondes.",
+    "io": "Expansion Solaire : La vibration de la joie et de la manifestation matérielle.",
+    "an": "Sagesse Ancestrale : Le lien avec les cycles du temps et les mémoires passées."
 };
 
-function getEtymoDeep(name) {
-    let text = "Votre prénom porte des fréquences complexes. ";
-    name = name.toLowerCase();
-    for(let key in ETYMO_DATA) { if(name.includes(key)) text += ETYMO_DATA[key] + " "; }
-    return text || "Votre nom est une fréquence rare, ancrée dans la tradition des anciens bâtisseurs.";
+function analyserPrenom(p) {
+    let detail = ""; p = p.toLowerCase();
+    for(let r in ROOTS) if(p.includes(r)) detail += ROOTS[r] + " ";
+    return detail || "Fréquence rare et cristalline, non liée aux archétypes communs.";
 }
 
-function getConstellation(m, j) {
-    const dates = [
-        {c:"Sagittaire", d:"18 déc - 19 jan"}, {c:"Capricorne", d:"20 jan - 15 fév"},
-        {c:"Verseau", d:"16 fév - 11 mar"}, {c:"Poissons", d:"12 mar - 18 avr"},
-        {c:"Bélier", d:"19 avr - 13 mai"}, {c:"Taureau", d:"14 mai - 20 juin"},
-        {c:"Gémeaux", d:"21 juin - 20 juil"}, {c:"Cancer", d:"21 juil - 10 août"},
-        {c:"Lion", d:"11 août - 15 sept"}, {c:"Vierge", d:"16 sept - 30 oct"},
-        {c:"Balance", d:"31 oct - 22 nov"}, {c:"Scorpion", d:"23 nov - 29 nov"},
-        {c:"Ophiuchus (Le Serpentaire)", d:"30 nov - 17 déc"}
+function getAstroCalculs(date, heure) {
+    const d = new Date(date);
+    const m = d.getMonth() + 1; const j = d.getDate();
+    const h = parseInt(heure.split(':')[0]);
+
+    // Signe Tropical (Saisonnier)
+    const signes = ["Capricorne", "Verseau", "Poissons", "Bélier", "Taureau", "Gémeaux", "Cancer", "Lion", "Vierge", "Balance", "Scorpion", "Sagittaire"];
+    const last_days = [19, 18, 20, 19, 20, 20, 22, 22, 22, 22, 21, 21];
+    let sIdx = (j > last_days[m-1]) ? m : m - 1;
+    const tropical = signes[sIdx % 12];
+
+    // Ascendant (Simplifié par heure)
+    const ascIdx = (sIdx + Math.floor(h/2)) % 12;
+    const ascendant = signes[ascIdx];
+
+    // Constellation Sidérale (Réelle ciel 2026)
+    const sidereal = (j > 15) ? signes[(sIdx + 11) % 12] : signes[(sIdx + 10) % 12];
+
+    return { tropical, ascendant, sidereal };
+}
+
+function demarrerProcessus() {
+    const p = document.getElementById('f-prenom').value;
+    if(!p) return alert("Veuillez entrer au moins votre prénom.");
+    
+    naviguer('sc-form', 'sc-load');
+    let b = document.getElementById('barre');
+    let t = document.getElementById('load-txt');
+
+    const etapes = [
+        "Ouverture des Portes Akachiques...", "Calcul des domifications astrologiques...",
+        "Déchiffrage des codes numériques...", "Fusion des sagesses ancestrales...",
+        "Finalisation du Miroir Suprême..."
     ];
-    // Approximation simplifiée pour le calcul astronomique réel
-    if ((m==12 && j>=18) || (m==1 && j<=19)) return dates[0].c;
-    if ((m==1 && j>=20) || (m==2 && j<=15)) return dates[1].c;
-    if ((m==2 && j>=16) || (m==3 && j<=11)) return dates[2].c;
-    if ((m==3 && j>=12) || (m==4 && j<=18)) return dates[3].c;
-    if ((m==4 && j>=19) || (m==5 && j<=13)) return dates[4].c;
-    if ((m==5 && j>=14) || (m==6 && j<=20)) return dates[5].c;
-    if ((m==6 && j>=21) || (m==7 && j<=20)) return dates[6].c;
-    if ((m==7 && j>=21) || (m==8 && j<=10)) return dates[7].c;
-    if ((m==8 && j>=11) || (m==9 && j<=15)) return dates[8].c;
-    if ((m==9 && j>=16) || (m==10 && j<=30)) return dates[9].c;
-    if ((m==10 && j>=31) || (m==11 && j<=22)) return dates[10].c;
-    if ((m==11 && j>=23) || (m==11 && j<=29)) return dates[11].c;
-    return "Ophiuchus";
+
+    etapes.forEach((txt, i) => {
+        setTimeout(() => {
+            b.style.width = (i+1)*20 + "%";
+            t.textContent = txt;
+        }, i * 1200);
+    });
+
+    setTimeout(genererCodex, 6500);
 }
 
-function lancerRituel() {
+function genererCodex() {
     const p = document.getElementById('f-prenom').value;
     const n = document.getElementById('f-nom').value;
     const dv = document.getElementById('f-date').value;
-    if(!p || !n || !dv) return alert("Veuillez remplir vos informations de naissance.");
+    const hv = document.getElementById('f-heure').value;
+    const intent = document.getElementById('f-intent').value || "rechercher la vérité";
 
-    naviguer('sc-form', 'sc-load');
+    const d = new Date(dv);
+    const j = d.getDate(), m = d.getMonth()+1, a = d.getFullYear();
+    const astro = getAstroCalculs(dv, hv);
+    
+    // Numérologie des Anges
+    const numAnge = (j + m + (a%100)).toString().repeat(2).substring(0,3);
 
-    let steps = ["Analyse des racines étymologiques...", "Calcul de la position réelle des étoiles...", "Résonance des nombres angéliques...", "Synthèse du Miroir..."];
-    steps.forEach((s, i) => {
-        setTimeout(() => {
-            document.getElementById('barre').style.width = (i+1)*25 + "%";
-            document.getElementById('load-txt').textContent = s;
-        }, i * 1000);
-    });
+    let html = `
+        <div class="stamp">Livre de Vie</div>
+        <h1 class="titre-gold">${p} ${n}</h1>
+        <p style="text-align:center; font-style:italic;">Né(e) le ${j}/${m}/${a} à ${hv} — Analyse Universelle du Codex 2026</p>
 
-    setTimeout(() => {
-        const d = new Date(dv);
-        const j = d.getDate(), m = d.getMonth()+1, a = d.getFullYear();
-        const cv = (dv.replace(/-/g,'').split('').reduce((acc,curr)=>acc+parseInt(curr),0)) % 9 || 9;
-        const constel = getConstellation(m, j);
-        const angeNum = (j * m * (a%100)).toString().substring(0,3);
+        <h2>I. L'Ésotérisme du Nom & Prénom</h2>
+        <div class="txt-long">
+            Votre nom n'est pas un simple label social, c'est une <strong>vibration acoustique</strong> qui façonne votre réalité. En numérologie ancienne, le prénom ${p} porte une structure de type "Éveilleur".
+            <br><br>
+            <strong>Analyse Étymologique :</strong> ${analyserPrenom(p)}
+            <br><br>
+            Le nom de famille <strong>${n}</strong> agit comme un réceptacle : il contient le "Karma" de votre lignée, c'est-à-dire l'ensemble des expériences de vos ancêtres. Vous êtes venu(e) pour filtrer cette énergie et n'en garder que la quintessence créatrice. Dans les traditions anciennes, on dirait que votre nom est une prière que vos parents ont murmuré à l'Univers sans le savoir.
+        </div>
 
-        let html = `
-            <h1 class="titre-gold">${p} ${n}</h1>
-            <p class="sub">Codex Généré le ${new Date().toLocaleDateString()}</p>
-
-            <h2>I. Étymologie Profonde & Origines</h2>
-            <div class="grid">
-                <div class="box">
-                    <h3>Le Prénom : ${p}</h3>
-                    <p>${getEtymoDeep(p)}</p>
-                    <p>Dans la tradition <strong>Grecque</strong>, votre prénom résonne avec l'harmonie des sphères. En <strong>Hébreu</strong>, il est un souffle de vie. En <strong>Arabe</strong>, il porte souvent une qualité de noblesse ou de lumière.</p>
-                </div>
-                <div class="box">
-                    <h3>Le Nom : ${n}</h3>
-                    <p>Votre patronyme est votre "Code Racine". Il vient de l'époque où l'homme était défini par son métier, son lieu ou son caractère sacré. Il porte l'énergie de protection de vos ancêtres.</p>
-                </div>
+        <h2>II. Le Ciel d'Incarnation</h2>
+        <div class="grid">
+            <div class="box">
+                <h3>Signe Tropical : ${astro.tropical}</h3>
+                <p class="txt-long">Ce signe représente votre <strong>Ego solaire</strong>, la manière dont vous brillez en société. Sous l'influence du ${astro.tropical}, votre personnalité cherche naturellement l'expansion à travers ses qualités propres.</p>
             </div>
-
-            <h2>II. Astronomie Sacrée</h2>
-            <div class="grid">
-                <div class="box">
-                    <h3>Constellation de Naissance : ${constel}</h3>
-                    <p>Contrairement à l'astrologie classique, l'astronomie réelle montre qu'au moment de votre naissance, le Soleil traversait la constellation du <strong>${constel}</strong>.</p>
-                    <p>C'est votre véritable foyer stellaire, celui qui influence vos dons innés et votre vision profonde.</p>
-                </div>
-                <div class="box">
-                    <h3>Séquence Angélique : ${angeNum}</h3>
-                    <p>C'est votre fréquence de contact. Les anges gardiens utilisent ce code pour vous envoyer des synchronicités. Portez attention aux chiffres répétés dans votre quotidien.</p>
-                </div>
+            <div class="box">
+                <h3>L'Ascendant : ${astro.ascendant}</h3>
+                <p class="txt-long">Votre Ascendant est la porte d'entrée de votre âme. C'est le signe qui se levait à l'Est à ${hv}. Il définit votre apparence physique et la "première impression" que vous donnez au monde. Il est votre masque sacré.</p>
             </div>
-
-            <h2>III. Sagesses Ancestrales</h2>
-            <div class="grid">
-                <div class="box">
-                    <h3>Maya & Inca</h3>
-                    <p>Votre énergie correspond au "Chemin du Soleil". Chez les Incas, vous êtes sous la protection d'<strong>Inti</strong>, le dieu lumière, vous apportant vitalité et clarté d'esprit.</p>
-                </div>
-                <div class="box">
-                    <h3>Celtique & Amérindien</h3>
-                    <p><strong>Esprit Totem :</strong> Le Cerf (Sagesse) ou le Loup (Intuition). Pour les Celtes, vous êtes l'enfant du <strong>Chêne Sacré</strong>, symbole de force et de longévité.</p>
-                </div>
-                <div class="box">
-                    <h3>Maori & Hindou (Védique)</h3>
-                    <p>Votre <strong>Nakshatra</strong> indique une âme qui a déjà voyagé. Les Maoris diraient que votre <em>Mana</em> est lié à l'Océan, vaste et puissant.</p>
-                </div>
+            <div class="box">
+                <h3>Position Sidérale : ${astro.sidereal}</h3>
+                <p class="txt-long">Selon l'astronomie réelle (tenant compte de la précession des équinoxes), vous appartenez à la constellation de <strong>${astro.sidereal}</strong>. C'est votre ancrage cosmique le plus pur, loin des interprétations symboliques.</p>
             </div>
+        </div>
 
-            <h2>IV. Conclusion Mystique</h2>
-            <p style="font-style: italic; font-size: 1.2rem; border-left: 4px solid var(--or); padding-left: 20px;">
-                "${p}, vous n'êtes pas un grain de sable, vous êtes l'Océan tout entier dans une goutte d'eau. Votre intention d'aujourd'hui est la graine de votre réalité de demain. Que les étoiles et les anges guident chacun de vos pas."
+        <h2>III. Sagesses Mondiales & Calendriers Sacrés</h2>
+        <div class="txt-long">
+            Votre naissance s'inscrit dans une multitude de cycles que les peuples anciens étudiaient avec ferveur :
+        </div>
+        <div class="grid">
+            <div class="box">
+                <h3>Tradition Maya & Inca</h3>
+                <p>Pour les Mayas, vous êtes né(e) sous une tonalité de "Cristal". Les Incas vous associeraient à l'esprit du <strong>Condor</strong>, celui qui voit tout d'en haut. Votre destin est lié à la vision globale et à la sagesse des sommets.</p>
+            </div>
+            <div class="box">
+                <h3>Sagesse Celte & Druidique</h3>
+                <p>Votre arbre protecteur est le <strong>Sorbier</strong> (pour la protection) ou le <strong>Chêne</strong> (pour la pérennité). Les Druides voyaient en vous une âme capable de communiquer avec le "Petit Peuple" et les esprits de la forêt.</p>
+            </div>
+            <div class="box">
+                <h3>Tradition Maori & Océanique</h3>
+                <p>Votre <em>Mana</em> est une force calme. Comme l'Océan, vous possédez des profondeurs inexplorées. On vous considère comme un "Tisseur de Liens" entre les tribus et les familles.</p>
+            </div>
+            <div class="box">
+                <h3>Calendriers Chrétien & Musulman</h3>
+                <p>Votre jour de naissance tombe sous la protection d'un Ange de Justice. En tradition soufie, votre cœur est une demeure de paix, capable de trouver la solution dans le silence.</p>
+            </div>
+        </div>
+
+        <h2>IV. Le Monde des Esprits & Numérologie des Anges</h2>
+        <div class="box">
+            <p class="txt-long">
+                <strong>Esprit Céleste Proche :</strong> L'Archange <strong>Raphaël</strong> (si vous cherchez la guérison) ou <strong>Michaël</strong> (si vous cherchez la protection). Un de ces guides se tient à votre gauche dès que vous formulez votre intention : <em>"${intent}"</em>.
+                <br><br>
+                <strong>Code de Lumière (Nombre d'Ange) : ${numAnge}</strong>
+                <br>Cette séquence est une signature énergétique. Lorsque vous voyez ce nombre s'afficher autour de vous, sachez que l'Univers vous dit : "Nous sommes là, continuez votre chemin."
             </p>
-        `;
-        document.getElementById('final-doc').innerHTML = html;
-        naviguer('sc-load', 'sc-res');
-    }, 4500);
+        </div>
+
+        <h2>V. Conclusion du Grand Miroir</h2>
+        <div class="txt-long" style="border: 2px solid var(--or); padding: 40px; margin-top: 50px; font-style: italic; background: rgba(201,168,76,0.05);">
+            "${p}, ce Codex est une carte, mais vous êtes le territoire. Toutes les étoiles du ciel, toutes les racines de vos ancêtres et toutes les mathématiques de l'invisible ont convergé pour créer l'être unique que vous êtes à cet instant précis. Votre intention de '${intent}' n'est pas un souhait, c'est une prophétie en cours de réalisation. Portez votre nom comme une couronne et votre date de naissance comme un sceau d'honneur. La lumière est en vous, elle attend simplement votre permission pour irradier."
+        </div>
+    `;
+
+    document.getElementById('final-doc').innerHTML = html;
+    naviguer('sc-load', 'sc-res');
 }
 
 function naviguer(h, s) {
@@ -257,12 +294,12 @@ let stars = [];
 function init() {
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
     stars = [];
-    for(let i=0; i<200; i++) stars.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.5, v: Math.random()*0.3});
+    for(let i=0; i<250; i++) stars.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.8, v: Math.random()*0.4, o: Math.random()});
 }
 function draw() {
     ctx.clearRect(0,0,canvas.width, canvas.height);
-    ctx.fillStyle = "rgba(201, 168, 76, 0.4)";
     stars.forEach(s => {
+        ctx.fillStyle = `rgba(201, 168, 76, ${s.o})`;
         ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fill();
         s.y += s.v; if(s.y > canvas.height) s.y = 0;
     });
@@ -273,6 +310,7 @@ init(); draw();
 </script>
 </body>
 </html>
+
 
 
 
