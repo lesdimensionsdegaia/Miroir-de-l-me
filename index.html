@@ -36,7 +36,6 @@ h3 { color: var(--or-clair); margin: 40px 0 20px; font-style: italic; font-size:
 .txt-long { font-size: 1.25rem; margin-bottom: 25px; color: #d0c4af; line-height: 1.9; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin: 30px 0; }
 .box { background: rgba(201, 168, 76, 0.03); border: 1px solid rgba(201, 168, 76, 0.1); padding: 35px; border-radius: 4px; border-top: 3px solid var(--or); }
-.highlight { color: var(--or); font-weight: bold; }
 
 @media print { .no-print { display: none; } body { background: white; color: black; } .doc-wrap { border: none; padding: 20px; } .txt-long { color: black; } }
 </style>
@@ -55,7 +54,7 @@ h3 { color: var(--or-clair); margin: 40px 0 20px; font-style: italic; font-size:
             <a href="https://www.paypal.me/globalenergie" target="_blank" class="btn-ritual btn-paypal">Offrande via PayPal (globalenergie)</a>
         </div>
 
-        <button class="btn-ritual" onclick="initAudio(); naviguer('sc-accueil', 'sc-form')">Commencer l'Analyse Sacrée</button>
+        <button class="btn-ritual" onclick="naviguer('sc-accueil', 'sc-form')">Commencer l'Analyse Sacrée</button>
     </div>
 </section>
 
@@ -68,12 +67,12 @@ h3 { color: var(--or-clair); margin: 40px 0 20px; font-style: italic; font-size:
         </div>
         
         <div class="grid" style="margin: 0; gap: 15px;">
-            <div><label class="label-inc">Date de Naissance</label><input type="date" id="f-date" class="inp"></div>
+            <div><label class="label-inc">Date de Naissance (Jour/Mois/Année)</label><input type="date" id="f-date" class="inp"></div>
             <div><label class="label-inc">Heure de Naissance (Précise)</label><input type="time" id="f-heure" class="inp"></div>
         </div>
 
         <div class="grid" style="margin: 0; gap: 15px;">
-            <div><label class="label-inc">Lieu de Naissance (Ville/Pays)</label><input type="text" id="f-lieu" class="inp" placeholder="Où avez-vous vu le jour ?"></div>
+            <div><label class="label-inc">Lieu de Naissance</label><input type="text" id="f-lieu" class="inp" placeholder="Ville et Pays"></div>
             <div>
                 <label class="label-inc">Polarité Dominante</label>
                 <select id="f-genre" class="inp">
@@ -102,72 +101,45 @@ h3 { color: var(--or-clair); margin: 40px 0 20px; font-style: italic; font-size:
 </section>
 
 <section class="screen" id="sc-res">
-    <div class="doc-wrap" id="final-doc">
-        </div>
-    <div style="margin: 40px 0; display:flex; gap:20px; class="no-print">
+    <div class="doc-wrap" id="final-doc"></div>
+    <div style="margin: 40px 0; display:flex; gap:20px; justify-content: center;" class="no-print">
         <button class="btn-ritual" onclick="window.print()">Imprimer mon Livre de Vie</button>
         <button class="btn-ritual btn-paypal" onclick="location.reload()">Réinitialiser</button>
     </div>
 </section>
 
 <script>
-// --- LOGIQUE AUDIO (Musique des Anges) ---
-let ctxAudio, oscBase, oscSub, filter;
-function initAudio() {
-    try {
-        ctxAudio = new (window.AudioContext || window.webkitAudioContext)();
-        oscBase = ctxAudio.createOscillator();
-        oscSub = ctxAudio.createOscillator();
-        filter = ctxAudio.createBiquadFilter();
-        let gain = ctxAudio.createGain();
-
-        oscBase.type = 'sine'; oscBase.frequency.setValueAtTime(432, ctxAudio.currentTime);
-        oscSub.type = 'sine'; oscSub.frequency.setValueAtTime(108, ctxAudio.currentTime);
-        filter.type = 'lowpass'; filter.frequency.setValueAtTime(800, ctxAudio.currentTime);
-        gain.gain.setValueAtTime(0, ctxAudio.currentTime);
-        gain.gain.linearRampToValueAtTime(0.08, ctxAudio.currentTime + 3);
-
-        oscBase.connect(filter); oscSub.connect(filter);
-        filter.connect(gain); gain.connect(ctxAudio.destination);
-        oscBase.start(); oscSub.start();
-    } catch(e) { console.log("Audio bloqué"); }
-}
-
 // --- MOTEUR D'ÉTUDE ---
 const ROOTS = {
-    "a": "Alpha / Unicité : La racine de la volonté pure et du leadership spirituel.",
-    "el": "Lumière d'Elohim : Une fréquence angélique liée au service du divin.",
-    "ma": "Matrice / Terre : La résonance de la Grande Mère, protection et incarnation.",
-    "ri": "Mouvement / Air : L'intelligence fluide, la communication entre les mondes.",
-    "io": "Expansion Solaire : La vibration de la joie et de la manifestation matérielle.",
-    "an": "Sagesse Ancestrale : Le lien avec les cycles du temps et les mémoires passées."
+    "a": "Alpha / Unicité : Racine de la volonté pure et du leadership spirituel originel.",
+    "el": "Lumière d'Elohim : Fréquence angélique sacrée liée au service du divin et de la vérité.",
+    "ma": "Matrice / Terre : Résonance de la Grande Mère, symbole de protection, d'ancrage et d'incarnation.",
+    "ri": "Mouvement / Air : Intelligence fluide, capacité de communication entre les mondes visibles et invisibles.",
+    "io": "Expansion Solaire : Vibration de la joie manifeste, de la création et du rayonnement personnel.",
+    "an": "Sagesse Ancestrale : Lien puissant avec les cycles du temps et les mémoires cellulaires passées.",
+    "th": "Équilibre Sacré : Recherche de la justice, de la structure et de la vérité intérieure.",
+    "ie": "Intuition de l'Âme : Sensibilité accrue aux énergies subtiles et aux rêves prémonitoires."
 };
 
 function analyserPrenom(p) {
     let detail = ""; p = p.toLowerCase();
-    for(let r in ROOTS) if(p.includes(r)) detail += ROOTS[r] + " ";
-    return detail || "Fréquence rare et cristalline, non liée aux archétypes communs.";
+    for(let r in ROOTS) if(p.includes(r)) detail += "<li>" + ROOTS[r] + "</li>";
+    return detail ? "<ul>" + detail + "</ul>" : "Une fréquence rare et cristalline, non liée aux archétypes communs, indiquant une âme pionnière.";
 }
 
 function getAstroCalculs(date, heure) {
     const d = new Date(date);
     const m = d.getMonth() + 1; const j = d.getDate();
-    const h = parseInt(heure.split(':')[0]);
+    const h = heure ? parseInt(heure.split(':')[0]) : 12;
 
-    // Signe Tropical (Saisonnier)
     const signes = ["Capricorne", "Verseau", "Poissons", "Bélier", "Taureau", "Gémeaux", "Cancer", "Lion", "Vierge", "Balance", "Scorpion", "Sagittaire"];
     const last_days = [19, 18, 20, 19, 20, 20, 22, 22, 22, 22, 21, 21];
     let sIdx = (j > last_days[m-1]) ? m : m - 1;
     const tropical = signes[sIdx % 12];
-
-    // Ascendant (Simplifié par heure)
     const ascIdx = (sIdx + Math.floor(h/2)) % 12;
-    const ascendant = signes[ascIdx];
-
-    // Constellation Sidérale (Réelle ciel 2026)
     const sidereal = (j > 15) ? signes[(sIdx + 11) % 12] : signes[(sIdx + 10) % 12];
 
-    return { tropical, ascendant, sidereal };
+    return { tropical, ascendant: signes[ascIdx], sidereal };
 }
 
 function demarrerProcessus() {
@@ -178,20 +150,16 @@ function demarrerProcessus() {
     let b = document.getElementById('barre');
     let t = document.getElementById('load-txt');
 
-    const etapes = [
-        "Ouverture des Portes Akachiques...", "Calcul des domifications astrologiques...",
-        "Déchiffrage des codes numériques...", "Fusion des sagesses ancestrales...",
-        "Finalisation du Miroir Suprême..."
-    ];
+    const etapes = ["Ouverture des Portes Akachiques...", "Calcul des domifications astrologiques...", "Déchiffrage des codes numériques...", "Fusion des sagesses ancestrales...", "Finalisation du Miroir Suprême..."];
 
     etapes.forEach((txt, i) => {
         setTimeout(() => {
             b.style.width = (i+1)*20 + "%";
             t.textContent = txt;
-        }, i * 1200);
+        }, i * 1000);
     });
 
-    setTimeout(genererCodex, 6500);
+    setTimeout(genererCodex, 5500);
 }
 
 function genererCodex() {
@@ -204,8 +172,6 @@ function genererCodex() {
     const d = new Date(dv);
     const j = d.getDate(), m = d.getMonth()+1, a = d.getFullYear();
     const astro = getAstroCalculs(dv, hv);
-    
-    // Numérologie des Anges
     const numAnge = (j + m + (a%100)).toString().repeat(2).substring(0,3);
 
     let html = `
@@ -215,65 +181,63 @@ function genererCodex() {
 
         <h2>I. L'Ésotérisme du Nom & Prénom</h2>
         <div class="txt-long">
-            Votre nom n'est pas un simple label social, c'est une <strong>vibration acoustique</strong> qui façonne votre réalité. En numérologie ancienne, le prénom ${p} porte une structure de type "Éveilleur".
+            Votre nom n'est pas un simple label social, c'est une <strong>vibration acoustique</strong> qui façonne votre réalité. En numérologie ancienne, le prénom <strong>${p}</strong> est le "Verbe" de votre incarnation.
             <br><br>
-            <strong>Analyse Étymologique :</strong> ${analyserPrenom(p)}
-            <br><br>
-            Le nom de famille <strong>${n}</strong> agit comme un réceptacle : il contient le "Karma" de votre lignée, c'est-à-dire l'ensemble des expériences de vos ancêtres. Vous êtes venu(e) pour filtrer cette énergie et n'en garder que la quintessence créatrice. Dans les traditions anciennes, on dirait que votre nom est une prière que vos parents ont murmuré à l'Univers sans le savoir.
+            <strong>Analyse des Racines Étymologiques :</strong><br>
+            ${analyserPrenom(p)}
+            <br>
+            Le nom de famille <strong>${n}</strong> agit comme un réceptacle : il contient le "Karma" de votre lignée. Vous êtes l'aboutissement de générations d'expériences. En portant ce nom, vous avez accepté la mission de transmuter les mémoires de vos ancêtres pour libérer une nouvelle lumière dans votre arbre généalogique.
         </div>
 
-        <h2>II. Le Ciel d'Incarnation</h2>
+        <h2>II. Le Ciel d'Incarnation & Cosmologie</h2>
         <div class="grid">
             <div class="box">
                 <h3>Signe Tropical : ${astro.tropical}</h3>
-                <p class="txt-long">Ce signe représente votre <strong>Ego solaire</strong>, la manière dont vous brillez en société. Sous l'influence du ${astro.tropical}, votre personnalité cherche naturellement l'expansion à travers ses qualités propres.</p>
+                <p class="txt-long">Ce signe définit votre <strong>Ego solaire</strong>. C'est la force qui vous pousse à agir et la manière dont vous exprimez votre créativité. Sous l'égide du ${astro.tropical}, votre âme a choisi une voie de réalisation spécifique pour cette vie.</p>
             </div>
             <div class="box">
                 <h3>L'Ascendant : ${astro.ascendant}</h3>
-                <p class="txt-long">Votre Ascendant est la porte d'entrée de votre âme. C'est le signe qui se levait à l'Est à ${hv}. Il définit votre apparence physique et la "première impression" que vous donnez au monde. Il est votre masque sacré.</p>
+                <p class="txt-long">Calculé selon votre heure précise (${hv}), l'Ascendant est votre "Moi" extérieur. C'est la porte par laquelle vous entrez en contact avec le monde. Il influence votre vitalité physique et votre tempérament immédiat.</p>
             </div>
             <div class="box">
                 <h3>Position Sidérale : ${astro.sidereal}</h3>
-                <p class="txt-long">Selon l'astronomie réelle (tenant compte de la précession des équinoxes), vous appartenez à la constellation de <strong>${astro.sidereal}</strong>. C'est votre ancrage cosmique le plus pur, loin des interprétations symboliques.</p>
+                <p class="txt-long">Selon l'astronomie réelle (tenant compte de la précession des équinoxes), vous êtes lié(e) à la constellation du <strong>${astro.sidereal}</strong>. C'est votre ancrage galactique le plus pur, votre signature stellaire originelle.</p>
             </div>
         </div>
 
-        <h2>III. Sagesses Mondiales & Calendriers Sacrés</h2>
-        <div class="txt-long">
-            Votre naissance s'inscrit dans une multitude de cycles que les peuples anciens étudiaient avec ferveur :
-        </div>
+        <h2>III. Sagesses Mondiales & Traditions Ancestrales</h2>
         <div class="grid">
             <div class="box">
-                <h3>Tradition Maya & Inca</h3>
-                <p>Pour les Mayas, vous êtes né(e) sous une tonalité de "Cristal". Les Incas vous associeraient à l'esprit du <strong>Condor</strong>, celui qui voit tout d'en haut. Votre destin est lié à la vision globale et à la sagesse des sommets.</p>
+                <h3>Héritage Maya & Inca</h3>
+                <p class="txt-long">Pour les Mayas, votre naissance s'inscrit dans un "Kin" particulier. Les Incas vous verraient comme un enfant d'Inti (le Soleil), investi d'une mission de clarté. Vous avez la capacité de voir au-delà des apparences, tel le Condor des Andes.</p>
             </div>
             <div class="box">
                 <h3>Sagesse Celte & Druidique</h3>
-                <p>Votre arbre protecteur est le <strong>Sorbier</strong> (pour la protection) ou le <strong>Chêne</strong> (pour la pérennité). Les Druides voyaient en vous une âme capable de communiquer avec le "Petit Peuple" et les esprits de la forêt.</p>
+                <p class="txt-long">Votre énergie est liée aux forces de la nature sauvage. Dans l'alphabet des arbres (Ogham), vous êtes sous la protection des arbres maîtres. Votre esprit est celui d'un gardien de la connaissance ancienne, capable de régénérer ce qui est flétri.</p>
             </div>
             <div class="box">
                 <h3>Tradition Maori & Océanique</h3>
-                <p>Votre <em>Mana</em> est une force calme. Comme l'Océan, vous possédez des profondeurs inexplorées. On vous considère comme un "Tisseur de Liens" entre les tribus et les familles.</p>
+                <p class="txt-long">Votre <em>Mana</em> est une puissance qui émane de votre intégrité. Comme les navigateurs polynésiens, vous possédez une boussole intérieure qui vous permet de traverser les tempêtes émotionnelles sans jamais perdre votre cap.</p>
             </div>
             <div class="box">
-                <h3>Calendriers Chrétien & Musulman</h3>
-                <p>Votre jour de naissance tombe sous la protection d'un Ange de Justice. En tradition soufie, votre cœur est une demeure de paix, capable de trouver la solution dans le silence.</p>
+                <h3>Sagesse Musulmane & Védique</h3>
+                <p class="txt-long">En Inde, votre <em>Dharma</em> appelle à l'équilibre. Dans la tradition soufie, on dirait que votre âme est un miroir qui ne demande qu'à être poli pour refléter la beauté du monde. Votre baraka réside dans votre générosité de cœur.</p>
             </div>
         </div>
 
-        <h2>IV. Le Monde des Esprits & Numérologie des Anges</h2>
+        <h2>IV. Le Monde Invisible & Nombres Angéliques</h2>
         <div class="box">
             <p class="txt-long">
-                <strong>Esprit Céleste Proche :</strong> L'Archange <strong>Raphaël</strong> (si vous cherchez la guérison) ou <strong>Michaël</strong> (si vous cherchez la protection). Un de ces guides se tient à votre gauche dès que vous formulez votre intention : <em>"${intent}"</em>.
+                <strong>Numérologie des Anges : ${numAnge}</strong><br>
+                Cette séquence numérique est votre "Fréquence de Rappel". Lorsque vous croisez ces chiffres (heures miroirs, plaques, reçus), l'Univers vous confirme que vous êtes aligné(e). C'est le signal que vos guides spirituels soutiennent votre intention actuelle : <em>"${intent}"</em>.
                 <br><br>
-                <strong>Code de Lumière (Nombre d'Ange) : ${numAnge}</strong>
-                <br>Cette séquence est une signature énergétique. Lorsque vous voyez ce nombre s'afficher autour de vous, sachez que l'Univers vous dit : "Nous sommes là, continuez votre chemin."
+                <strong>Guides de Lumière :</strong> L'Archange de votre rayon de naissance veille sur votre paix intérieure. Il vous invite à écouter les messages subtils qui vous parviennent à travers vos rêves et vos intuitions soudaines.
             </p>
         </div>
 
         <h2>V. Conclusion du Grand Miroir</h2>
         <div class="txt-long" style="border: 2px solid var(--or); padding: 40px; margin-top: 50px; font-style: italic; background: rgba(201,168,76,0.05);">
-            "${p}, ce Codex est une carte, mais vous êtes le territoire. Toutes les étoiles du ciel, toutes les racines de vos ancêtres et toutes les mathématiques de l'invisible ont convergé pour créer l'être unique que vous êtes à cet instant précis. Votre intention de '${intent}' n'est pas un souhait, c'est une prophétie en cours de réalisation. Portez votre nom comme une couronne et votre date de naissance comme un sceau d'honneur. La lumière est en vous, elle attend simplement votre permission pour irradier."
+            "${p}, ce Codex est bien plus qu'une analyse, c'est un rappel de votre divinité. Toutes les étoiles, toutes les lignées et tous les nombres ont conspiré pour que vous soyez ici, à cet instant précis. Votre quête — <strong>'${intent}'</strong> — est déjà entendue par la Source. Portez votre nom avec la noblesse d'un roi ou d'une reine de son propre destin. La lumière que vous cherchez n'est pas au bout du chemin, elle est le chemin lui-même."
         </div>
     `;
 
@@ -310,6 +274,9 @@ init(); draw();
 </script>
 </body>
 </html>
+
+```
+
 
 
 
